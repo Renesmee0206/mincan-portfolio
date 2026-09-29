@@ -3,7 +3,12 @@
 环境艺术设计 / 视觉艺术设计 / 概念艺术设计 —— 单页作品集网站。
 技术栈：React 18 + Vite，零 UI 依赖，滚动动效全部手写；**PC 优先，版心 1700px**。
 
-线上地址（部署完成后）：`https://<你的用户名>.github.io/<仓库名>/`
+线上地址：
+
+- GitHub Pages：`https://renesmee0206.github.io/mincan-portfolio/`
+- 国内正式站（腾讯云 EdgeOne Pages）：见控制台里的 `xxx.edgeone.app` 域名
+
+> 两个站点的配置、差异、踩过的坑和日常更新流程，都记在 **[`DEPLOY.md`](DEPLOY.md)** 里。
 
 ---
 
@@ -16,6 +21,7 @@
 | `03-页面截图/` | 7 张页面效果图（首页 / 个人经历 / 精选项目 / 项目详情 / 成果集锦 / 联系方式 / 视频页） |
 | `04-原片备份/` | 视频原片与更新前的版本，**不会上传** GitHub（`.gitignore` 已排除） |
 | `说明-先看我.md` | 面向你的中文说明（怎么看、怎么改） |
+| `DEPLOY.md` | 部署与更新手册：两个站点各自怎么配的、怎么更新、出问题怎么查、怎么回退 |
 | `作品集.pptx` `作品集2.pptx` `简历闵灿.pdf` | 原始素材，同样不会上传 GitHub |
 
 ---
@@ -89,6 +95,9 @@ git push
 ```
 
 推送完成后 GitHub Actions 会自动重新发布，大约 30 秒。也可以在 Actions 页面点 `Run workflow` 手动发布。
+
+> 国内那个腾讯云站点也会同时自动重新部署（约 1–3 分钟），前提是上一步的 `build-preview.mjs` 已经跑过——
+> 它和 GitHub Pages 的内容来源不同，细节见 **[`DEPLOY.md`](DEPLOY.md)**。
 
 ---
 
