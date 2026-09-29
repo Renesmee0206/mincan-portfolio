@@ -1,0 +1,18 @@
+# ===== 不上传到 GitHub 的内容 =====
+
+# 依赖与缓存（别人拉下来后自己 pnpm install 就行）
+node_modules/
+.cache/
+dist/
+
+# 体积大 / 含个人信息的原件，网站用不到
+作品集.pptx
+作品集2.pptx
+简历闵灿.pdf
+04-原片备份/
+
+# 系统与编辑器产生的垃圾
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log

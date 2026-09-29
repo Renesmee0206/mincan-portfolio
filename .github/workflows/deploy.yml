@@ -1,0 +1,34 @@
+name: 发布网站到 GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # 也可以在 Actions 页面手动点一下重新发布
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/configure-pages@v5
+
+      # 直接发布「01-网站预览」这个文件夹（已经打好包、自带图片和视频，不需要再构建）
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: 01-网站预览
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
