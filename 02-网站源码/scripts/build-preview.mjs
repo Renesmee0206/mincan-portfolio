@@ -78,13 +78,25 @@ await esbuild.build({
 
 // 路径改写：预览文件夹里的资源全部用相对路径。
 // 视频要放在最前面处理，否则会被后面的 /media/ 规则先改写掉。
-const videoFiles = ['video-juyi.mp4', 'video-cruise.mp4', 'hero-loop.mp4']
+const videoFiles = ['video-juyi.mp4', 'video-cruise.mp4', 'intro-open.mp4']
 let code = fs.readFileSync(tmpBundle, 'utf8')
 for (const file of videoFiles) {
   code = code.split('"/media/' + file + '"').join('"media/' + file + '"')
 }
 code = code.split('/media/').join('media/') // 图片、二维码
 code = code.split('"/resume.pdf"').join('"resume.pdf"')
+
+const mediaDir = path.join(src, 'public', 'media')
+
+// 首页「What I like」那 7 张图内联成 data URL。
+// 原因：双击 index.html（file://）时，浏览器把本地图片算作跨域，WebGL 传不进纹理，
+// 首页会变成一排灰块。内联成 data: 之后不受限制；线上（http/https）一样能跑。
+// 代价只是 bundle.js 变大（约 +0.6MB），换来「双击就能看」这件事在首页也成立。
+const inlineLikes = fs.readdirSync(mediaDir).filter((f) => /^like-\d+-.+\.webp$/.test(f))
+for (const file of inlineLikes) {
+  const data = 'data:image/webp;base64,' + fs.readFileSync(path.join(mediaDir, file)).toString('base64')
+  code = code.split('"media/' + file + '"').join('"' + data + '"')
+}
 
 fs.mkdirSync(out, { recursive: true })
 fs.writeFileSync(path.join(out, 'bundle.js'), code, 'utf8')
@@ -98,9 +110,9 @@ copy(path.join(src, 'src', 'styles', 'global.css'), path.join(out, 'styles', 'gl
 copy(path.join(src, 'public', 'favicon.png'), path.join(out, 'favicon.png'))
 copy(path.join(src, 'public', 'resume.pdf'), path.join(out, 'resume.pdf'))
 
-const mediaDir = path.join(src, 'public', 'media')
 for (const file of fs.readdirSync(mediaDir)) {
   const from = path.join(mediaDir, file)
+  if (inlineLikes.includes(file)) continue // 已内联进 bundle.js，不用再拷一份
   if (fs.statSync(from).isFile()) copy(from, path.join(out, 'media', file))
 }
 
@@ -110,9 +122,9 @@ fs.writeFileSync(
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=1440" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/png" href="favicon.png" />
-    <meta name="theme-color" content="#141517" />
+    <meta name="theme-color" content="#0e0e10" />
     <meta name="description" content="闵灿 · 环境艺术设计 / 视觉艺术设计 / 概念艺术设计 —— 个人作品集" />
     <title>闵灿 · 个人作品集 | 环境艺术 / 视觉艺术 / 概念艺术</title>
     <link rel="stylesheet" href="styles/global.css" />

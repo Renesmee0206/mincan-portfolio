@@ -16,11 +16,66 @@ export const profile = {
   intent: '设计师 · 武汉 · 随时到岗',
 }
 
+/**
+ * 首屏数据条 —— 首页改成「What I like」之后已经不放这组数字了
+ * （同样的 4 个数字在个人经历里用 aboutStats 展示），这里保留着，随时可以放回首页。
+ */
 export const heroStats = [
   { value: '20+', unit: '项', label: '项目经历' },
   { value: '30+', unit: '项', label: '竞赛获奖' },
   { value: '3.8', unit: '/4', label: '硕士绩点' },
   { value: '06', unit: '年', label: '设计训练' },
+]
+
+/**
+ * 首页「What I like」——影响我的作品与影像
+ * 图片在 public/media/like-0N-*.webp（由「首页图片/」里的原图转成 WebP）
+ * title = 作品名，subtitle = 作者 + 原文名（标明来处），alt 给读屏用
+ * 顺序按画幅节奏排：方 → 竖 → 竖 → 方 → 横 → 宽横 → 横
+ */
+export const likes = [
+  {
+    src: '/media/like-01-zima-blue.webp',
+    title: '《齐马蓝》',
+    subtitle: 'Alastair Reynolds · Zima Blue',
+    alt: '《齐马蓝》：黑暗里的一块发光蓝色泳池，水中漂着一个正在拆解自己的机械体',
+  },
+  {
+    src: '/media/like-02-weather-project.webp',
+    title: '《天气计划》',
+    subtitle: 'Olafur Eliasson · The Weather Project',
+    alt: '《天气计划》：橘黄色雾气里一轮巨大的黄色太阳，地面上散落着躺坐的观众剪影',
+  },
+  {
+    src: '/media/like-03-rain-room.webp',
+    title: '《雨屋》',
+    subtitle: 'Random International · Rain Room',
+    alt: '《雨屋》：黑白照片里密集的雨丝，几个观众站在雨中',
+  },
+  {
+    src: '/media/like-04-tv-buddha.webp',
+    title: '《电视佛》',
+    subtitle: '白南准 Nam June Paik · TV Buddha',
+    alt: '《电视佛》：一尊金铜佛像面对着一台电视，屏幕上正映出佛像自己的脸',
+  },
+  {
+    src: '/media/like-05-dune.webp',
+    title: '《沙丘》',
+    subtitle: '丹尼斯·维伦纽瓦 · Dune',
+    alt: '《沙丘》：群山与湖面之间的巨型球状飞行器',
+  },
+  {
+    src: '/media/like-06-next-floor.webp',
+    title: '《下一层》',
+    subtitle: '丹尼斯·维伦纽瓦 · Next Floor',
+    alt: '《下一层》：幽暗长桌旁围坐的食客，头顶一枝水晶吊灯',
+  },
+  {
+    src: '/media/like-07-theaters.webp',
+    title: '《剧院》',
+    subtitle: '杉本博斯 Hiroshi Sugimoto · Theaters',
+    alt: '《剧院》：漆黑的老剧院里，舞台银幕是一整块过曝的白光',
+  },
 ]
 
 export const aboutStats = [

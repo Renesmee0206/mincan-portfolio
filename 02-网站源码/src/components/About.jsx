@@ -30,6 +30,8 @@ export default function About() {
             </h2>
 
             <div className="about__text">
+              {/* 原来放在首页的那段自我介绍，按「介绍我的往后放」挪到这里 */}
+              <p className="about__lead">{profile.lede}</p>
               <p>
                 我的起点其实不在空间，而在画面。小时候画画、打游戏、为喜欢的作品做延伸创作——
                 这件事让我第一次认真去想：一个世界是怎么搭起来的，角色为什么长成这样，
