@@ -183,6 +183,35 @@
 - [x] `03-页面截图` 与 `网页部署上线/03-页面截图` 的 15 张全部重出
       （开场 4 + 桌面 7 + 手机 4），桌面 1590×944、手机 780×1688
 
+## 已完成 · 第十三轮（2026-10-03 · 首页加 Prism 背景 + 作品流放大）
+
+- [x] **首页背景加动效**：装 React Bits 的 **Prism**（JS-CSS 变体，`src/components/Prism.jsx`，
+      注册表 `reactbits.dev/r/Prism-JS-CSS.json`）。按给的配置挂上：
+      `animationType="rotate"` `timeScale={0.5}` `height={3.5}` `baseWidth={5.5}` `scale={3.6}`
+      `hueShift={0}` `colorFrequency={1}` `noise={0.5}` `glow={1}`
+      - 与注册表的差异只有两处：去掉 Next.js 的 `'use client'`；去掉 `import './Prism.css'`
+        （esbuild 打包预览时 JS 里的 CSS import 会掉，那条规则并进 `global.css`）
+      - 多加了一个 `suspendWhenOffscreen`：滚出首屏就停渲染，别一直烧 GPU
+      - 系统开了「减少动态效果」就不挂载（`Hero.jsx` 里 `useReducedMotion`）
+      - 依赖 `ogl` 本来就有（FlexCarousel 在用），没有新增包
+- [x] **「What I like」放大 + 排版重做**：卡片从 0.5 个轨道高改成 **0.8**，
+      轨道下限从 200px 提到 `clamp(340px, 46svh, 560px)`；卡片整体**往上顶到名字块后面**，
+      左边「闵灿 / MIN CAN」+ 三个专业 + 两个按钮整块压在卡片上（`margin-top: -288px`，
+      8px 基线整数倍；底边由 flex 定死，所以只改顶边）
+- [x] 卡片左上角加一层**径向渐隐**，只压暗左边一条，保证压在上面的文字读得清、右边卡片照样亮；
+      原来压在卡片顶部的「What I like」标题行并到**卡片下面那一条**，跟题名 / 作者 / 操作提示排成一行
+- [x] `Hero.jsx` 里那段自我介绍早就挪去「个人经历」了，这轮只是把版面关系调到「文案遮挡作品流」
+- [x] **换开场视频**：`D:\论文\牛皮纸快递盒撕裂特写视频生成.mp4`
+      （**1112×834，4:3** / 5.05s / 2.28MB，牛皮纸箱特写 + 深红底）→ `public/media/intro-open.mp4`
+      - 4:3 比屏幕窄，**放不满的地方用颜色补齐**：`.intro__stage` 是一条红色渐变
+        （左端 `#6d1310` 略暗 → 接缝处正好落到视频左边缘的 `#982017`），
+        宽屏视频 `contain` 靠右贴边，接缝看不出来；竖屏 `cover` 铺满
+      - 原来那层「同素材放大模糊补满」的 `.intro__fill` 已删掉（不再需要模糊底）
+- [x] 黑场折字文案改成「**欢迎来到闵灿的频道**」（英文那行 `WELCOME TO MY CHANNEL` 没动）
+- [x] `03-页面截图` 与 `网页部署上线/03-页面截图` 的 15 张再次全部重出；
+      顺手把截图脚本 `sections` 模式从「假装 reduced-motion」改成「点跳过开场」——
+      否则 reduced-motion 下 Prism 不挂载，截出来的首页不是真实观感
+
 ## 上线前必须处理
 
 - [x] 视频体积：已换成 25.4MB / 21.1MB 的版本，总大小从 385MB 降到 46MB

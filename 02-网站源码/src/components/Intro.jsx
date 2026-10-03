@@ -298,15 +298,6 @@ export default function Intro({ onEnter, onGone }) {
       onPointerCancel={endDrag}
     >
       <div className="intro__stage">
-        {/* 竖屏时 16:9 的画面放不满：铺一层同素材的模糊底，手机上也像整屏 */}
-        <video
-          className="intro__fill"
-          src="/media/intro-open.mp4"
-          muted
-          playsInline
-          preload="auto"
-          aria-hidden="true"
-        />
         <video
           ref={videoRef}
           className="intro__video"
@@ -366,7 +357,7 @@ export default function Intro({ onEnter, onGone }) {
       {stage === 'text' || stage === 'leave' ? (
         <div className="intro__text">
           <FoldText
-            text="欢迎来到我的频道"
+            text="欢迎来到闵灿的频道"
             splitBy="char"
             hinge="top"
             duration={0.65}

@@ -1,15 +1,50 @@
 // 首页 = What I like：可以拖着流动的作品流（FlexCarousel）
-// 文案压到上层，只有链接 / 按钮接收点击，其余区域都交给拖拽
-import { useState } from 'react'
+// 背景是 React Bits 的 Prism（WebGL，见 Prism.jsx）
+// 版面：作品流是这一屏面积最大的一层，左边的名字块压在它上面（允许遮挡）
+// 交互：文案层不吃指针事件，只有链接 / 按钮接收点击，其余区域都交给拖拽
+import { useEffect, useState } from 'react'
 import { profile, likes } from '../data/site.js'
 import FlexCarousel from './FlexCarousel.jsx'
+import Prism from './Prism.jsx'
+
+/** 系统开了「减少动态效果」就不挂 WebGL 背景：省电，也照顾前庭敏感的人 */
+function useReducedMotion() {
+  const [reduced, setReduced] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia?.('(prefers-reduced-motion: reduce)')
+    if (!mq) return undefined
+    setReduced(mq.matches)
+    const onChange = (e) => setReduced(e.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+  return reduced
+}
 
 export default function Hero() {
   const [like, setLike] = useState(0)
+  const reduced = useReducedMotion()
   const current = likes[like] || likes[0]
 
   return (
     <section className="hero" id="home">
+      {!reduced && (
+        <div className="hero__prism" aria-hidden="true">
+          <Prism
+            animationType="rotate"
+            timeScale={0.5}
+            height={3.5}
+            baseWidth={5.5}
+            scale={3.6}
+            hueShift={0}
+            colorFrequency={1}
+            noise={0.5}
+            glow={1}
+            suspendWhenOffscreen
+          />
+        </div>
+      )}
+
       <div className="hero__scrim" />
       <div className="hero__grid" />
 
@@ -62,21 +97,13 @@ export default function Hero() {
         </div>
 
         <div className="hero__likes">
-          <div className="hero__likes-head">
-            <span className="hero__likes-label">
-              <b>What I like</b>
-              影响我的作品与影像
-            </span>
-            <span className="hero__likes-hint">按住拖动 / 滑动 · 点一下放大</span>
-          </div>
-
           <div className="hero__rail">
             <FlexCarousel
               items={likes}
               preset="liquid"
               intro="rise"
-              cardHeight={0.5}
-              gap={14}
+              cardHeight={0.8}
+              gap={16}
               squeeze={0.2}
               radius={2}
               focusOnClick
@@ -86,15 +113,25 @@ export default function Hero() {
             />
           </div>
 
-          {/* 来处：作品名 + 作者（原文名），跟着当前居中的那张走 */}
-          <div className="hero__caption">
-            <span className="hero__caption-index">
-              {String(like + 1).padStart(2, '0')}
-              <i>/</i>
-              {String(likes.length).padStart(2, '0')}
+          {/* 卡片下面一条：名号 + 当前这张的来处 + 操作提示。
+              放在底部而不是压在卡片上，卡片整块才留得住。 */}
+          <div className="hero__likes-foot">
+            <span className="hero__likes-label">
+              <b>What I like</b>
+              影响我的作品与影像
             </span>
-            <span className="hero__caption-title">{current.title}</span>
-            <span className="hero__caption-author">{current.subtitle}</span>
+
+            <span className="hero__caption">
+              <span className="hero__caption-index">
+                {String(like + 1).padStart(2, '0')}
+                <i>/</i>
+                {String(likes.length).padStart(2, '0')}
+              </span>
+              <span className="hero__caption-title">{current.title}</span>
+              <span className="hero__caption-author">{current.subtitle}</span>
+            </span>
+
+            <span className="hero__likes-hint">按住拖动 / 滑动 · 点一下放大</span>
           </div>
         </div>
 

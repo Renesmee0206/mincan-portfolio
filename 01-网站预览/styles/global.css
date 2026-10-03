@@ -2530,6 +2530,10 @@ section[id] {
 .intro__stage {
   position: absolute;
   inset: 0;
+  /* 新素材是 1112×834（4:3）的牛皮纸箱特写，底色是一块深红。
+     宽屏上 4:3 放不满左右两边 —— 空出来的部分就用素材自己的红底接上：
+     左边略压暗一点，到接缝处正好是视频左边缘的 #982017，接缝看不出来。 */
+  background: linear-gradient(90deg, #6d1310 0%, #8e1d17 18%, #982017 42%, #982017 100%);
 }
 
 .intro__video {
@@ -2537,32 +2541,17 @@ section[id] {
   inset: 0;
   width: 100%;
   height: 100%;
+  /* 竖屏：铺满，裁掉左右（撕口是横向的，裁不掉）
+     宽屏（比素材更宽）：完整显示，靠右贴边，左边空出来的地方由上面的红底补 */
   object-fit: cover;
   object-position: center;
   transition: transform 1.2s var(--ease-out), filter 0.8s linear;
 }
 
-/* 模糊底：宽屏用不到（cover 已经铺满），竖屏用同一素材放大模糊后补满 */
-.intro__fill {
-  display: none;
-}
-
-/* 竖屏：16:9 的画面完整显示（纸箱不会被裁掉），上下用同一素材的模糊放大量补满 */
-@media (max-aspect-ratio: 1/1) {
+@media (min-aspect-ratio: 4/3) {
   .intro__video {
     object-fit: contain;
-  }
-
-  .intro__fill {
-    display: block;
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    filter: blur(56px) brightness(0.62) saturate(1.5);
-    transform: scale(1.3);
+    object-position: right center;
   }
 }
 
@@ -3365,6 +3354,23 @@ section[id] {
    首页 = What I like：可以拖着流动的作品流
    ========================================================= */
 
+/* Prism 背景（React Bits）：垫在最底下，透过上面那层扇形渐变看得见它在慢慢转 */
+.hero__prism {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* Prism 自带的唯一一条样式（原本在 Prism.css 里 import，
+   这里并进 global.css —— 预览包用 esbuild 打包，JS 里的 CSS import 会掉） */
+.prism-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
 .hero__scrim {
   background: radial-gradient(75% 60% at 10% 92%, rgba(176, 154, 142, 0.14) 0%, transparent 60%),
     radial-gradient(65% 55% at 94% 6%, rgba(141, 154, 162, 0.16) 0%, transparent 62%);
@@ -3386,6 +3392,9 @@ section[id] {
 }
 
 .hero__lead {
+  position: relative;
+  /* 压在作品流之上：左边这块信息允许遮挡卡片 */
+  z-index: 3;
   margin-top: 2px;
 }
 
@@ -3429,6 +3438,7 @@ section[id] {
 
 /* 作品流 */
 .hero__likes {
+  position: relative;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -3436,13 +3446,20 @@ section[id] {
   margin-top: 26px;
 }
 
-.hero__likes-head {
+/* 卡片下面那一条：名号 / 来处 / 操作提示 */
+.hero__likes-foot {
+  position: relative;
+  z-index: 3;
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  justify-content: space-between;
-  gap: 20px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--line-dark-soft);
+  gap: 10px 28px;
+  padding: 14px 2px 0;
+  border-top: 1px solid var(--line-dark-soft);
+}
+
+.hero__likes-foot .hero__likes-hint {
+  margin-left: auto;
 }
 
 .hero__likes-label {
@@ -3477,9 +3494,31 @@ section[id] {
   /* flex-basis 必须是 0：高度完全由剩余空间决定。
      canvas 是内容高度驱动的，不锁死会自己把自己撑大（高度回环）。 */
   flex: 1 1 0;
-  min-height: 200px;
-  margin-top: 4px;
+  /* 作品流是这一屏的主体：下限定得比过去（200px）高得多，卡片才占得住版面 */
+  min-height: clamp(340px, 46svh, 560px);
+  /* 往上顶，一直钻到名字块后面 —— 这就是「文案压在作品流上」的那一下。
+     卡片底边由外层 flex 定死，所以这个值只改顶边：-288px 让卡片顶边落在页眉
+     下面一点，名字、角色、按钮整块压在卡片上。（-288 也是 8px 基线的整数倍） */
+  margin-top: -288px;
+  z-index: 1;
   overflow: hidden;
+}
+
+/* 左上角压一层背景色渐隐：名字、角色、按钮整块坐在卡片上也要读得清。
+   用径向而不是整条横幅，是为了只压暗左边那一条，右边的卡片仍然亮着。 */
+.hero__rail::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    118% 122% at 6% 10%,
+    rgba(11, 11, 13, 0.96) 0%,
+    rgba(11, 11, 13, 0.86) 30%,
+    rgba(11, 11, 13, 0.5) 55%,
+    rgba(11, 11, 13, 0) 78%
+  );
 }
 
 .hero__rail .flex-carousel {
@@ -3495,8 +3534,8 @@ section[id] {
   display: flex;
   align-items: baseline;
   gap: 16px;
-  padding: 13px 2px 0;
-  border-top: 1px solid var(--line-dark-soft);
+  padding: 0;
+  border-top: 0;
   font-size: 14px;
   letter-spacing: 0.04em;
 }
@@ -3597,7 +3636,8 @@ section[id] {
   }
 
   .hero__rail {
-    min-height: 190px;
+    min-height: 300px;
+    margin-top: -56px;
   }
 
   .hero__caption {
