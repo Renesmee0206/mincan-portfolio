@@ -2530,10 +2530,10 @@ section[id] {
 .intro__stage {
   position: absolute;
   inset: 0;
-  /* 新素材是 1112×834（4:3）的牛皮纸箱特写，底色是一块深红。
-     宽屏上 4:3 放不满左右两边 —— 空出来的部分就用素材自己的红底接上：
-     左边略压暗一点，到接缝处正好是视频左边缘的 #982017，接缝看不出来。 */
-  background: linear-gradient(90deg, #6d1310 0%, #8e1d17 18%, #982017 42%, #982017 100%);
+  /* 素材是 1112×834（4:3）的牛皮纸箱特写，宽屏上放不满左右。
+     空出来的地方补成黑边（按你的要求），整屏读起来像黑框里的一张静帧，
+     左边那条正好当快递单用（.intro__from）。 */
+  background: #0b0b0d;
 }
 
 .intro__video {
@@ -2558,6 +2558,42 @@ section[id] {
 .intro.is-sealing .intro__video {
   transform: scale(1.04);
   filter: brightness(0.6) saturate(0.9);
+}
+
+/* 左边黑边上的「快递单」：FROM: MIN CAN. / Please claim your exclusive parcel.
+   只在真的有黑边的宽屏上出现（窄屏视频铺满，没地方放）。 */
+.intro__from {
+  display: none;
+  position: absolute;
+  left: clamp(48px, 7vw, 132px);
+  top: 46%;
+  transform: translateY(-50%);
+  z-index: 3;
+  max-width: min(340px, 26vw);
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+}
+
+@media (min-aspect-ratio: 8/5) {
+  .intro__from {
+    display: flex;
+  }
+}
+
+.intro__from-main,
+.intro__from-sub .fold-text {
+  display: block;
+}
+
+.intro__from-main {
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+}
+
+.intro__from-sub .fold-text {
+  letter-spacing: 0.03em;
+  line-height: 1.45;
 }
 
 .intro__veil {
@@ -2703,7 +2739,8 @@ section[id] {
   background: var(--raise);
   transform: scaleX(0);
   transform-origin: left center;
-  transition: transform 0.12s linear;
+  /* 不加 transition：0.12s 的缓动会让拉条比鼠标慢一拍，正是「跟不上手」的来源之一。
+     进度现在是每帧直接写 DOM 的，本来就跟得上。 */
 }
 
 .intro__text {
@@ -3372,7 +3409,16 @@ section[id] {
 }
 
 .hero__scrim {
-  background: radial-gradient(75% 60% at 10% 92%, rgba(176, 154, 142, 0.14) 0%, transparent 60%),
+  /* 最后那条竖向渐变压在内容层下面（z-index 更低），只压暗底部的 Prism 光斑，
+     卡片和文字都在它上面，不受影响 —— 不然底部那行题名会糊在亮背景里。 */
+  background: linear-gradient(
+      180deg,
+      rgba(11, 11, 13, 0) 0%,
+      rgba(11, 11, 13, 0) 70%,
+      rgba(11, 11, 13, 0.7) 87%,
+      rgba(11, 11, 13, 0.95) 100%
+    ),
+    radial-gradient(75% 60% at 10% 92%, rgba(176, 154, 142, 0.14) 0%, transparent 60%),
     radial-gradient(65% 55% at 94% 6%, rgba(141, 154, 162, 0.16) 0%, transparent 62%);
 }
 
@@ -3504,20 +3550,20 @@ section[id] {
   overflow: hidden;
 }
 
-/* 左上角压一层背景色渐隐：名字、角色、按钮整块坐在卡片上也要读得清。
-   用径向而不是整条横幅，是为了只压暗左边那一条，右边的卡片仍然亮着。 */
+/* 左边压一层背景色渐隐：只压「名字 / 角色 / 按钮」那一竖条，
+   到 58% 就完全透明 —— 卡片中间和右边不加任何遮罩，免得影响看图。 */
 .hero__rail::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  background: radial-gradient(
-    118% 122% at 6% 10%,
-    rgba(11, 11, 13, 0.96) 0%,
-    rgba(11, 11, 13, 0.86) 30%,
-    rgba(11, 11, 13, 0.5) 55%,
-    rgba(11, 11, 13, 0) 78%
+  background: linear-gradient(
+    90deg,
+    rgba(11, 11, 13, 0.95) 0%,
+    rgba(11, 11, 13, 0.86) 26%,
+    rgba(11, 11, 13, 0.46) 42%,
+    rgba(11, 11, 13, 0) 58%
   );
 }
 

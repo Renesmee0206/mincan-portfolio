@@ -102,7 +102,7 @@ export default function Hero() {
               items={likes}
               preset="liquid"
               intro="rise"
-              cardHeight={0.8}
+              cardHeight={0.73}
               gap={16}
               squeeze={0.2}
               radius={2}

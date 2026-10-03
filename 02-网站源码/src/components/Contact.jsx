@@ -143,7 +143,7 @@ export default function Contact() {
 
       <div className="wrap">
         <footer className="contact__foot">
-          <span>© 2026 {profile.latin} · 环境艺术 / 视觉艺术 / 概念艺术</span>
+          <span>© 2026 {profile.latin} · 环境艺术 / AI 设计 / 概念艺术</span>
           <span>Designed &amp; Built with React + Vite</span>
           <a className="contact__top" href="#home">
             Back to top

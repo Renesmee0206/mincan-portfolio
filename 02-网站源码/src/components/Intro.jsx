@@ -97,18 +97,19 @@ function createTearSound() {
 export default function Intro({ onEnter, onGone }) {
   // box：等撕 → seal：撕到底、黑场淡入 → text：折字 → leave：整层淡出
   const [stage, setStage] = useState('box')
-  const [progress, setProgress] = useState(0)
   const [dragging, setDragging] = useState(false)
   const [ready, setReady] = useState(false)
   const [failed, setFailed] = useState(false)
   const [showLatin, setShowLatin] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
+  const [showFrom2, setShowFrom2] = useState(false)
 
   const videoRef = useRef(null)
+  const barRef = useRef(null)
+  const pctRef = useRef(null)
   const accRef = useRef(0) // 已撕开的进度 0 - 1
   const dragRef = useRef(null)
   const seekRef = useRef(-1)
-  const rafRef = useRef(0)
   const autoRef = useRef(0)
   const sealedRef = useRef(false)
   const timersRef = useRef([])
@@ -121,6 +122,18 @@ export default function Intro({ onEnter, onGone }) {
   const sound = useCallback(() => {
     if (!soundRef.current) soundRef.current = createTearSound()
     return soundRef.current
+  }, [])
+
+  /**
+   * 进度条 + 百分比文字：直接写 DOM，不走 setState。
+   * 走 state 的话每次 pointermove 都要等一次 re-render 才动，手感就是「拉条跟不上鼠标」。
+   */
+  const paint = useCallback((v) => {
+    if (barRef.current) barRef.current.style.transform = `scaleX(${v})`
+    if (pctRef.current) {
+      pctRef.current.textContent =
+        v > 0 && v < 1 ? `已撕开 ${Math.round(v * 100)}%` : '也可以直接按 Enter / 空格'
+    }
   }, [])
 
   // 视频元数据：拿到时长后才能把拖拽进度换算成 currentTime
@@ -150,7 +163,6 @@ export default function Intro({ onEnter, onGone }) {
   useEffect(
     () => () => {
       timersRef.current.forEach((t) => window.clearTimeout(t))
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
       if (autoRef.current) cancelAnimationFrame(autoRef.current)
       soundRef.current?.close()
       soundRef.current = null
@@ -158,49 +170,53 @@ export default function Intro({ onEnter, onGone }) {
     [],
   )
 
-  // 拖拽进度 → video.currentTime，每帧只写一次，避免抖动
+  // 拖拽进度 → video.currentTime。
+  // 常驻一条 rAF 循环盯着 accRef，每帧最多写一次 seek，避免抖动、也避免 seek 排队。
+  // （之前是「setState → useEffect → seek」，比指针慢一帧，所以拖起来发黏。）
   useEffect(() => {
-    const video = videoRef.current
-    if (!video || !ready) return undefined
-    const duration = video.duration || 0
-    if (!duration) return undefined
-    if (rafRef.current) return undefined
-    rafRef.current = requestAnimationFrame(() => {
-      rafRef.current = 0
-      const t = Math.min(duration - 0.02, accRef.current * duration)
-      if (Math.abs(t - seekRef.current) > 0.008) {
-        seekRef.current = t
-        try {
-          video.currentTime = t
-        } catch {
-          /* 忽略 */
+    if (!ready) return undefined
+    let raf = 0
+    const tick = () => {
+      const video = videoRef.current
+      if (video && video.duration) {
+        const t = Math.min(video.duration - 0.02, accRef.current * video.duration)
+        if (Math.abs(t - seekRef.current) > 0.004) {
+          seekRef.current = t
+          try {
+            video.currentTime = t
+          } catch {
+            /* 忽略 */
+          }
         }
       }
-    })
-    return undefined
-  }, [progress, ready])
+      raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [ready])
+
+  // React 重渲染会把提示文字刷回默认值，这里按当前进度补一次
+  useEffect(() => {
+    paint(accRef.current)
+  }, [dragging, stage, failed, paint])
+
+  // 快递单第二行比第一行晚一点折出来
+  useEffect(() => {
+    later(() => setShowFrom2(true), 320)
+  }, [later])
 
   const seal = useCallback(() => {
     if (sealedRef.current) return
     sealedRef.current = true
     accRef.current = 1
-    setProgress(1)
+    paint(1)
     setDragging(false)
     soundRef.current?.stop()
-    const video = videoRef.current
-    if (video && video.duration) {
-      seekRef.current = video.duration - 0.02
-      try {
-        video.currentTime = video.duration - 0.02
-      } catch {
-        /* 忽略 */
-      }
-    }
     setStage('seal') // 黑场开始淡入
     later(() => setStage('text'), VEIL_FADE - 120)
     later(() => setShowLatin(true), VEIL_FADE - 120 + TEXT_DELAY)
     later(() => setShowConfirm(true), VEIL_FADE - 120 + CONFIRM_DELAY)
-  }, [later])
+  }, [later, paint])
 
   const dragSpan = () => Math.min(560, Math.max(240, window.innerWidth * 0.42))
 
@@ -223,7 +239,7 @@ export default function Intro({ onEnter, onGone }) {
     const dx = e.clientX - drag.x
     drag.x = e.clientX
     accRef.current = clamp(accRef.current + dx / dragSpan(), 0, 1)
-    setProgress(accRef.current)
+    paint(accRef.current)
     if (dx !== 0) sound().move(dx)
     if (accRef.current >= 1) seal()
   }
@@ -245,7 +261,7 @@ export default function Intro({ onEnter, onGone }) {
       const k = Math.min(1, (now - start) / 900)
       const eased = 1 - (1 - k) ** 3
       accRef.current = from + (1 - from) * eased
-      setProgress(accRef.current)
+      paint(accRef.current)
       if (k < 1) autoRef.current = requestAnimationFrame(step)
       else {
         autoRef.current = 0
@@ -253,14 +269,13 @@ export default function Intro({ onEnter, onGone }) {
       }
     }
     autoRef.current = requestAnimationFrame(step)
-  }, [failed, seal, stage])
+  }, [failed, paint, seal, stage])
 
   /** 进入网站：解锁滚动（onEnter），等淡出结束再从 DOM 里摘掉（onGone） */
   const enter = useCallback(() => {
     if (stage === 'leave') return
     timersRef.current.forEach((t) => window.clearTimeout(t))
     timersRef.current = []
-    if (rafRef.current) cancelAnimationFrame(rafRef.current)
     if (autoRef.current) cancelAnimationFrame(autoRef.current)
     soundRef.current?.stop()
     onEnter()
@@ -314,6 +329,44 @@ export default function Intro({ onEnter, onGone }) {
 
       <div className="intro__scrim" />
 
+      {/* 左边那条黑边是补出来的，做成快递单：FROM / 收件提示。
+          两行都用「欢迎来到闵灿的频道」那一套折字特效（FoldText）。 */}
+      <div className="intro__from">
+        <FoldText
+          text="FROM: MIN CAN."
+          splitBy="char"
+          hinge="top"
+          duration={0.65}
+          stagger={0.045}
+          ease="power3.out"
+          perspective={700}
+          creaseShading={0.55}
+          trigger="mount"
+          fontSize="clamp(15px, 1.15vw, 19px)"
+          fontWeight={700}
+          color="#f7f2e8"
+          className="intro__from-main"
+        />
+        <span className="intro__from-sub">
+          {showFrom2 && (
+            <FoldText
+              text="Please claim your exclusive parcel."
+              splitBy="char"
+              hinge="top"
+              duration={0.65}
+              stagger={0.03}
+              ease="power3.out"
+              perspective={700}
+              creaseShading={0.4}
+              trigger="mount"
+              fontSize="clamp(12px, 0.95vw, 14px)"
+              fontWeight={400}
+              color="rgba(247, 242, 232, 0.62)"
+            />
+          )}
+        </span>
+      </div>
+
       <p className="intro__sr">
         开场动画：拖动撕开一个牛皮纸快递箱，然后进入网站。也可以直接按 Enter 或空格。
       </p>
@@ -340,18 +393,15 @@ export default function Intro({ onEnter, onGone }) {
               <span className="intro__hint-arrow" aria-hidden="true">
                 →
               </span>
-              <span className="intro__hint-sub">
-                {progress > 0 && progress < 1
-                  ? `已撕开 ${Math.round(progress * 100)}%`
-                  : '也可以直接按 Enter / 空格'}
-              </span>
+              {/* 文字由 paint() 直接写，不走 state —— 所以这里不能有 children */}
+              <span className="intro__hint-sub" ref={pctRef} />
             </>
           )}
         </div>
       )}
 
       <div className="intro__bar" aria-hidden="true">
-        <i style={{ transform: `scaleX(${progress})` }} />
+        <i ref={barRef} />
       </div>
 
       {stage === 'text' || stage === 'leave' ? (

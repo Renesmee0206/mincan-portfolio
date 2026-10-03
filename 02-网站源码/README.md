@@ -1,6 +1,6 @@
 # 闵灿 · 个人作品集网站
 
-环境艺术设计 / 视觉艺术设计 / 概念艺术设计 —— 单页作品集，版心 1700px，桌面 / 手机都做了适配。
+环境艺术设计 / AI 设计 / 概念艺术设计 —— 单页作品集，版心 1700px，桌面 / 手机都做了适配。
 技术栈：**React 18 + Vite 5**，只装了 gsap（开场折字用）与 ogl（首页作品流 + Prism 背景的
 WebGL 渲染），滚动动效全部手写。
 
@@ -55,16 +55,21 @@ pnpm preview
 
 - 视频：`public/media/intro-open.mp4`（**1112×834，4:3** / 5.05s / 2.28MB，静音）
   ——换素材只要**同名替换**这个文件，再跑一次打包即可。
-  - 素材是牛皮纸箱特写 + 一块**深红底**。4:3 比大多数屏幕窄，放不满的边用颜色补齐：
-    `.intro__stage` 的底色是一条红色渐变（左端略暗 → 接缝处正好是视频左边缘的 `#982017`），
-    宽屏上视频 `object-fit: contain` 靠右贴边，所以看不出接缝；竖屏则 `cover` 铺满。
-  - 换一段比例不同的视频时：改 `.intro__stage` 的渐变颜色（照视频边缘取色），其余不用动。
+  - 素材是牛皮纸箱特写 + 一块深红底，4:3 比大多数屏幕窄，**放不满的边补成黑边**
+    （`.intro__stage` 的底色 `#0b0b0d`）。宽屏上视频 `object-fit: contain` 靠右贴边，
+    竖屏则 `cover` 铺满。
+  - 左边那条黑边同时当**快递单**用：`.intro__from` 里两行折字，`FROM: MIN CAN.` +
+    `Please claim your exclusive parcel.`（第二行晚 320ms）。只在 `min-aspect-ratio: 8/5`
+    以上显示——窄屏没有黑边，放上去会压到纸箱。
 - 折字：`src/components/FoldText.jsx`（来自 reactbits.dev/text-animations/fold-text），
   依赖 `gsap`，用的是 `trigger="mount"`——**不要改成 `scroll`**，黑场里页面是锁滚动的，
   scroll 永远不触发，会变成全黑一片。
 - 文案：「欢迎来到闵灿的频道」+ `WELCOME TO MY CHANNEL`，都在 `Intro.jsx` 里。
 - 撕纸音效是浏览器现场合成的（Web Audio，白噪声 + 带通滤波），没有音频文件；
   不想要就删掉 `Intro.jsx` 里的 `createTearSound()` 和它的 3 处调用。
+- **拖拽不要改回 state 驱动**：进度是 `pointermove` 里直接写 DOM（拉条 + 百分比），
+  视频 seek 由一条常驻 rAF 循环每帧最多写一次；`.intro__bar i` 也**不加 transition**。
+  这两处任何一处改回「setState + useEffect」或加缓动，拉条就会明显慢半拍。
 - 每次进站都会播（没有用 sessionStorage 记住）。
 
 ---
@@ -78,17 +83,20 @@ pnpm preview
 **版面关系（这一屏的关键）**：作品流是面积最大的一层，**往上顶到名字块后面**——
 「闵灿 / MIN CAN」、三个专业、两个按钮整块压在卡片上（左边信息遮挡卡片，是刻意做的构图）。
 实现是 `.hero__rail` 的一个负 `margin-top`（`-288px`，8px 基线的整数倍）：
-它的底边由外层 flex 定死，所以这个值只改卡片的顶边。卡片左上角还有一层径向渐隐
-（`.hero__rail::before`），保证压在上面的文字始终读得清——只压暗左边一条，右边卡片照样亮。
+它的底边由外层 flex 定死，所以这个值只改卡片的顶边。左边还有一层横向渐隐
+（`.hero__rail::before`），保证压在上面的文字始终读得清——**只压左边那一竖条
+（0→26% 最深，58% 起完全透明），卡片中间和右边不加任何遮罩**。
 另外背景是 React Bits 的 **Prism**（`src/components/Prism.jsx`，WebGL，用 `ogl`），
 慢慢旋转的极光，透过 `.hero__scrim` 看得到；系统开了「减少动态效果」就不挂载它。
+`.hero__scrim` 底部那条竖向压暗压在内容层下面，只压暗 Prism 的亮斑（保证底部题名读得清），
+卡片和文字都在它上面。
 
 - 组件：`src/components/FlexCarousel.jsx`（来自 reactbits.dev，`preset="liquid"`，
   用 `ogl` 做 WebGL 变形）；页面上关闭了滚轮捕捉，所以在作品流上滚滚轮照样能翻页面。
 - 数据：`src/data/site.js` 的 `likes`（`src` / `title` / `subtitle` / `alt`）。
 - 素材：根目录 `首页图片/` 里的 7 张原图 → 转成 `public/media/like-0N-*.webp`
   （宽高 1200 以内、WebP q84）。
-- 卡片尺寸：`cardHeight={0.8}`（占轨道高度的 80%）。轨道下限
+- 卡片尺寸：`cardHeight={0.73}`（占轨道高度的 73%）。轨道下限
   `clamp(340px, 46svh, 560px)`——觉得卡片还要更大/更小，改这两个数就行。
 - ⚠️ 重新打包时 `scripts/build-preview.mjs` 会把这 7 张图**内联成 data URL** 写进
   `bundle.js`：`file://` 直接双击打开时，浏览器把本地图片算跨域，WebGL 传不进纹理，

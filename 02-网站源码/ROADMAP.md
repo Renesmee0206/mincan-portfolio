@@ -212,6 +212,29 @@
       顺手把截图脚本 `sections` 模式从「假装 reduced-motion」改成「点跳过开场」——
       否则 reduced-motion 下 Prism 不挂载，截出来的首页不是真实观感
 
+## 已完成 · 第十四轮（2026-10-03 · 按反馈微调首页与开场）
+
+- [x] **作品流上的黑遮罩收窄**：原来是「左上角径向渐隐」，会一直铺到卡片中间，压暗了画面。
+      改成**只压左边一竖条**的横向渐变（0% → 26% 最深，58% 处完全透明），
+      卡片中间和右边一点遮罩都没有
+- [x] **卡片再小一点**：`cardHeight` 0.8 → **0.73**
+- [x] 卡片变小后底部露出 Prism 的亮斑，底下的题名那行读不清：给 `.hero__scrim` 加了一条
+      **竖向压暗**（70% 以下开始，到 100% 到 0.95）。它在内容层下面，只压暗背景，
+      卡片和文字都在它上面，不受影响
+- [x] **开场左边的补色改成黑色**（原来是照素材红底做的渐变）：`.intro__stage` 直接用 `#0b0b0d`，
+      整屏读起来像黑框里的一张静帧
+- [x] 黑边上加了**快递单**，两行都用「欢迎来到闵灿的频道」那套折字特效（FoldText）：
+      第一行 `FROM: MIN CAN.`、第二行 `Please claim your exclusive parcel.`（延迟 320ms 折出）。
+      只在真的有黑边的宽屏上出现（`min-aspect-ratio: 8/5`），窄屏视频铺满、没地方放就不显示
+- [x] **修「拉条跟不上鼠标」**（两个原因一起修）：
+      1) `.intro__bar i` 原来有 `transition: transform .12s linear`，拉条永远慢 0.12s —— 去掉；
+      2) 进度原来是「pointermove → setState → useEffect → seek」，要等一次 re-render 才动。
+         现在改成 **pointermove 里直接写 DOM**（拉条 transform + 百分比文字），
+         视频 seek 交给一条常驻 rAF 循环每帧最多写一次 —— 进度条与指针 1:1
+- [x] 文案：角色里的「视觉艺术设计」改成「**AI 设计**」
+      （`site.js` 的 `profile.roles`、`Contact.jsx` 页脚、`index.html` 的 title / description、
+      以及 `build-preview.mjs` 里生成预览 index.html 的模板，四处一起改）
+
 ## 上线前必须处理
 
 - [x] 视频体积：已换成 25.4MB / 21.1MB 的版本，总大小从 385MB 降到 46MB

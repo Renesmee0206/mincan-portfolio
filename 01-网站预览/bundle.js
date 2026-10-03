@@ -7290,7 +7290,7 @@
   var profile = {
     name: "\u95F5\u707F",
     latin: "MIN CAN",
-    roles: ["\u73AF\u5883\u827A\u672F\u8BBE\u8BA1", "\u89C6\u89C9\u827A\u672F\u8BBE\u8BA1", "\u6982\u5FF5\u827A\u672F\u8BBE\u8BA1"],
+    roles: ["\u73AF\u5883\u827A\u672F\u8BBE\u8BA1", "AI \u8BBE\u8BA1", "\u6982\u5FF5\u827A\u672F\u8BBE\u8BA1"],
     tagline: "\u7A7A\u95F4\u662F\u53D9\u4E8B\u7684\u8F7D\u4F53\uFF0C\u89C6\u89C9\u662F\u60C5\u7EEA\u7684\u8BED\u6CD5\u3002",
     lede: "\u73AF\u5883\u827A\u672F\u8BBE\u8BA1\u7855\u58EB\u5728\u8BFB\u3002\u5174\u8DA3\u4ECE\u753B\u753B\u3001\u6E38\u620F\u4E0E\u4E3A\u559C\u6B22\u7684\u4F5C\u54C1\u505A\u5EF6\u4F38\u521B\u4F5C\u5F00\u59CB\uFF0C\u516D\u5E74\u95F4\u628A\u5B83\u5E26\u8FDB\u5BA4\u5185\u3001\u5EFA\u7B51\u3001\u666F\u89C2\u4E0E\u6570\u5B57\u5B6A\u751F\u2014\u2014\u64C5\u957F\u628A\u60F3\u6CD5\u4ECE\u6982\u5FF5\u63A8\u5230\u5EFA\u6A21\u3001\u6548\u679C\u56FE\u4E0E\u5B8C\u6574\u65B9\u6848\u672C\u3002",
     location: "\u6E56\u5317 \xB7 \u6B66\u6C49",
@@ -12346,7 +12346,7 @@ void main() {
               items: likes,
               preset: "liquid",
               intro: "rise",
-              cardHeight: 0.8,
+              cardHeight: 0.73,
               gap: 16,
               squeeze: 0.2,
               radius: 2,
@@ -12937,7 +12937,7 @@ void main() {
         /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { children: [
           "\xA9 2026 ",
           profile.latin,
-          " \xB7 \u73AF\u5883\u827A\u672F / \u89C6\u89C9\u827A\u672F / \u6982\u5FF5\u827A\u672F"
+          " \xB7 \u73AF\u5883\u827A\u672F / AI \u8BBE\u8BA1 / \u6982\u5FF5\u827A\u672F"
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { children: "Designed & Built with React + Vite" }),
         /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("a", { className: "contact__top", href: "#home", children: [
@@ -19875,17 +19875,18 @@ void main() {
   }
   function Intro({ onEnter, onGone }) {
     const [stage, setStage] = (0, import_react8.useState)("box");
-    const [progress, setProgress] = (0, import_react8.useState)(0);
     const [dragging, setDragging] = (0, import_react8.useState)(false);
     const [ready, setReady] = (0, import_react8.useState)(false);
     const [failed, setFailed] = (0, import_react8.useState)(false);
     const [showLatin, setShowLatin] = (0, import_react8.useState)(false);
     const [showConfirm, setShowConfirm] = (0, import_react8.useState)(false);
+    const [showFrom2, setShowFrom2] = (0, import_react8.useState)(false);
     const videoRef = (0, import_react8.useRef)(null);
+    const barRef = (0, import_react8.useRef)(null);
+    const pctRef = (0, import_react8.useRef)(null);
     const accRef = (0, import_react8.useRef)(0);
     const dragRef = (0, import_react8.useRef)(null);
     const seekRef = (0, import_react8.useRef)(-1);
-    const rafRef = (0, import_react8.useRef)(0);
     const autoRef = (0, import_react8.useRef)(0);
     const sealedRef = (0, import_react8.useRef)(false);
     const timersRef = (0, import_react8.useRef)([]);
@@ -19896,6 +19897,12 @@ void main() {
     const sound = (0, import_react8.useCallback)(() => {
       if (!soundRef.current) soundRef.current = createTearSound();
       return soundRef.current;
+    }, []);
+    const paint = (0, import_react8.useCallback)((v) => {
+      if (barRef.current) barRef.current.style.transform = `scaleX(${v})`;
+      if (pctRef.current) {
+        pctRef.current.textContent = v > 0 && v < 1 ? `\u5DF2\u6495\u5F00 ${Math.round(v * 100)}%` : "\u4E5F\u53EF\u4EE5\u76F4\u63A5\u6309 Enter / \u7A7A\u683C";
+      }
     }, []);
     (0, import_react8.useEffect)(() => {
       const video = videoRef.current;
@@ -19920,7 +19927,6 @@ void main() {
     (0, import_react8.useEffect)(
       () => () => {
         timersRef.current.forEach((t) => window.clearTimeout(t));
-        if (rafRef.current) cancelAnimationFrame(rafRef.current);
         if (autoRef.current) cancelAnimationFrame(autoRef.current);
         soundRef.current?.close();
         soundRef.current = null;
@@ -19928,44 +19934,43 @@ void main() {
       []
     );
     (0, import_react8.useEffect)(() => {
-      const video = videoRef.current;
-      if (!video || !ready) return void 0;
-      const duration = video.duration || 0;
-      if (!duration) return void 0;
-      if (rafRef.current) return void 0;
-      rafRef.current = requestAnimationFrame(() => {
-        rafRef.current = 0;
-        const t = Math.min(duration - 0.02, accRef.current * duration);
-        if (Math.abs(t - seekRef.current) > 8e-3) {
-          seekRef.current = t;
-          try {
-            video.currentTime = t;
-          } catch {
+      if (!ready) return void 0;
+      let raf = 0;
+      const tick = () => {
+        const video = videoRef.current;
+        if (video && video.duration) {
+          const t = Math.min(video.duration - 0.02, accRef.current * video.duration);
+          if (Math.abs(t - seekRef.current) > 4e-3) {
+            seekRef.current = t;
+            try {
+              video.currentTime = t;
+            } catch {
+            }
           }
         }
-      });
-      return void 0;
-    }, [progress, ready]);
+        raf = requestAnimationFrame(tick);
+      };
+      raf = requestAnimationFrame(tick);
+      return () => cancelAnimationFrame(raf);
+    }, [ready]);
+    (0, import_react8.useEffect)(() => {
+      paint(accRef.current);
+    }, [dragging, stage, failed, paint]);
+    (0, import_react8.useEffect)(() => {
+      later(() => setShowFrom2(true), 320);
+    }, [later]);
     const seal = (0, import_react8.useCallback)(() => {
       if (sealedRef.current) return;
       sealedRef.current = true;
       accRef.current = 1;
-      setProgress(1);
+      paint(1);
       setDragging(false);
       soundRef.current?.stop();
-      const video = videoRef.current;
-      if (video && video.duration) {
-        seekRef.current = video.duration - 0.02;
-        try {
-          video.currentTime = video.duration - 0.02;
-        } catch {
-        }
-      }
       setStage("seal");
       later(() => setStage("text"), VEIL_FADE - 120);
       later(() => setShowLatin(true), VEIL_FADE - 120 + TEXT_DELAY);
       later(() => setShowConfirm(true), VEIL_FADE - 120 + CONFIRM_DELAY);
-    }, [later]);
+    }, [later, paint]);
     const dragSpan = () => Math.min(560, Math.max(240, window.innerWidth * 0.42));
     const onPointerDown = (e) => {
       if (stage !== "box" || failed) return;
@@ -19984,7 +19989,7 @@ void main() {
       const dx = e.clientX - drag.x;
       drag.x = e.clientX;
       accRef.current = clamp4(accRef.current + dx / dragSpan(), 0, 1);
-      setProgress(accRef.current);
+      paint(accRef.current);
       if (dx !== 0) sound().move(dx);
       if (accRef.current >= 1) seal();
     };
@@ -20003,7 +20008,7 @@ void main() {
         const k = Math.min(1, (now - start) / 900);
         const eased = 1 - (1 - k) ** 3;
         accRef.current = from + (1 - from) * eased;
-        setProgress(accRef.current);
+        paint(accRef.current);
         if (k < 1) autoRef.current = requestAnimationFrame(step);
         else {
           autoRef.current = 0;
@@ -20011,12 +20016,11 @@ void main() {
         }
       };
       autoRef.current = requestAnimationFrame(step);
-    }, [failed, seal, stage]);
+    }, [failed, paint, seal, stage]);
     const enter = (0, import_react8.useCallback)(() => {
       if (stage === "leave") return;
       timersRef.current.forEach((t) => window.clearTimeout(t));
       timersRef.current = [];
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
       if (autoRef.current) cancelAnimationFrame(autoRef.current);
       soundRef.current?.stop();
       onEnter();
@@ -20064,6 +20068,43 @@ void main() {
           ) }),
           /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: `intro__veil${stage === "seal" || stage === "text" ? " is-on" : ""}` }),
           /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "intro__scrim" }),
+          /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "intro__from", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+              FoldText_default,
+              {
+                text: "FROM: MIN CAN.",
+                splitBy: "char",
+                hinge: "top",
+                duration: 0.65,
+                stagger: 0.045,
+                ease: "power3.out",
+                perspective: 700,
+                creaseShading: 0.55,
+                trigger: "mount",
+                fontSize: "clamp(15px, 1.15vw, 19px)",
+                fontWeight: 700,
+                color: "#f7f2e8",
+                className: "intro__from-main"
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "intro__from-sub", children: showFrom2 && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+              FoldText_default,
+              {
+                text: "Please claim your exclusive parcel.",
+                splitBy: "char",
+                hinge: "top",
+                duration: 0.65,
+                stagger: 0.03,
+                ease: "power3.out",
+                perspective: 700,
+                creaseShading: 0.4,
+                trigger: "mount",
+                fontSize: "clamp(12px, 0.95vw, 14px)",
+                fontWeight: 400,
+                color: "rgba(247, 242, 232, 0.62)"
+              }
+            ) })
+          ] }),
           /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "intro__sr", children: "\u5F00\u573A\u52A8\u753B\uFF1A\u62D6\u52A8\u6495\u5F00\u4E00\u4E2A\u725B\u76AE\u7EB8\u5FEB\u9012\u7BB1\uFF0C\u7136\u540E\u8FDB\u5165\u7F51\u7AD9\u3002\u4E5F\u53EF\u4EE5\u76F4\u63A5\u6309 Enter \u6216\u7A7A\u683C\u3002" }),
           /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("button", { type: "button", className: "intro__skip", onClick: enter, children: [
             "\u8DF3\u8FC7",
@@ -20075,9 +20116,9 @@ void main() {
           ] }) : /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(import_jsx_runtime12.Fragment, { children: [
             /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "intro__hint-line", children: isDragging ? "\u7EE7\u7EED\u5411\u53F3\u62D6 \xB7 \u6495\u5F00" : "\u6309\u4F4F\u5411\u53F3\u62D6\u52A8 \xB7 \u6495\u5F00\u7EB8\u7BB1" }),
             /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "intro__hint-arrow", "aria-hidden": "true", children: "\u2192" }),
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "intro__hint-sub", children: progress > 0 && progress < 1 ? `\u5DF2\u6495\u5F00 ${Math.round(progress * 100)}%` : "\u4E5F\u53EF\u4EE5\u76F4\u63A5\u6309 Enter / \u7A7A\u683C" })
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "intro__hint-sub", ref: pctRef })
           ] }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "intro__bar", "aria-hidden": "true", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("i", { style: { transform: `scaleX(${progress})` } }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "intro__bar", "aria-hidden": "true", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("i", { ref: barRef }) }),
           stage === "text" || stage === "leave" ? /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "intro__text", children: [
             /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
               FoldText_default,
