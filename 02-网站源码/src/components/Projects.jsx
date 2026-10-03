@@ -1,11 +1,41 @@
 import { useEffect, useRef, useState } from 'react'
 import SectionHead from './SectionHead.jsx'
 import ProjectDetail from './ProjectDetail.jsx'
-import { projects, gallery, marqueeWords, profile } from '../data/site.js'
+import BounceCards from './BounceCards.jsx'
+import { projects, galleryPool, marqueeWords, profile } from '../data/site.js'
+
+/** 成果集锦一叠放几张 */
+const HAND = 5
+
+/**
+ * 从「项目图片」那一套里随机抽一组：先整池洗乱，再按顺序取，
+ * 同一个项目最多出 2 张 —— 不设限的话纯随机偶尔会抽到「5 张里 4 张都是大坝」。
+ */
+function drawHand() {
+  const pool = galleryPool.slice()
+  for (let i = pool.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[pool[i], pool[j]] = [pool[j], pool[i]]
+  }
+
+  const hand = []
+  const perProject = new Map()
+  for (const item of pool) {
+    if (hand.length >= HAND) break
+    const used = perProject.get(item.project) || 0
+    if (used >= 2) continue
+    perProject.set(item.project, used + 1)
+    hand.push(item)
+  }
+  return hand
+}
 
 export default function Projects() {
   const [openId, setOpenId] = useState(null)
   const [flashId, setFlashId] = useState(null)
+  // round 只用来给 BounceCards 换 key —— 换一组就重新弹一次
+  const [hand, setHand] = useState(() => drawHand())
+  const [round, setRound] = useState(0)
   const openerRef = useRef(null)
   const flashTimer = useRef(0)
 
@@ -28,6 +58,14 @@ export default function Projects() {
     setOpenId(project.id)
   }
 
+  /** 洗牌：重抽一组（尽量别跟上一组一模一样），并让卡片重新弹一次 */
+  const shuffle = () => {
+    let next = drawHand()
+    for (let i = 0; i < 4 && next.every((c, j) => c.src === hand[j]?.src); i += 1) next = drawHand()
+    setHand(next)
+    setRound((r) => r + 1)
+  }
+
   return (
     <section className="projects" id="projects">
       <div className="wrap">
@@ -35,7 +73,7 @@ export default function Projects() {
           no="02"
           title="精选项目"
           en="Selected Projects"
-          note="顺序与配图按最新一版作品集整理——每张卡片都可以点开，看该项目的其他图纸与效果图。"
+          note="顺序按最新一版作品集整理，配图从「项目图片」重出——每张卡片都可以点开，看该项目的其他图纸与效果图。"
         />
 
         <div className="projects__grid">
@@ -128,23 +166,24 @@ export default function Projects() {
         <div className="gallery">
           <div className="gallery__head" data-reveal>
             <h3>成果集锦</h3>
-            <p>Gallery / 点击任意一张回到对应项目</p>
+            <p>Gallery / 每次随机抽一组，点一张回到对应项目</p>
           </div>
-          <div className="gallery__grid">
-            {gallery.map((g, i) => (
-              <button
-                className="gallery__item"
-                key={g.src}
-                data-reveal
-                style={{ transitionDelay: `${(i % 4) * 80}ms` }}
-                onClick={() => jumpToProject(g.project)}
-                aria-label={`跳转到项目：${g.caption}`}
-              >
-                <img src={g.src} alt={g.caption} loading="lazy" />
-                <span className="gallery__cap">{g.caption}</span>
-                <span className="gallery__jump">回到项目 ↑</span>
-              </button>
-            ))}
+
+          <BounceCards
+            key={round}
+            items={hand}
+            onPick={(item) => jumpToProject(item.project)}
+            className="gallery__deck"
+          />
+
+          <div className="gallery__foot" data-reveal>
+            <button type="button" className="btn btn--ghost gallery__shuffle" onClick={shuffle}>
+              <span>洗牌换一组</span>
+              <span className="btn__arrow">↺</span>
+            </button>
+            <p className="gallery__now">
+              项目图片 {galleryPool.length} 张 · 每次随机抽一组
+            </p>
           </div>
         </div>
       </div>

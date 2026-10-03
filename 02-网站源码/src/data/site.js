@@ -195,7 +195,6 @@ export const projects = [
       '/media/d-02-4.webp',
       '/media/d-02-5.webp',
       '/media/d-02-6.webp',
-      '/media/d-02-7.webp',
     ],
   },
   {
@@ -218,6 +217,7 @@ export const projects = [
       '/media/d-03-4.webp',
       '/media/d-03-5.webp',
       '/media/d-03-6.webp',
+      '/media/d-03-7.webp',
     ],
   },
   {
@@ -254,7 +254,15 @@ export const projects = [
       '依据大坝工程图纸、地形测绘数据与设计参数，独立完成大坝及周边环境的高精度三维建模，输出用于呈现建成形态、结构细节与自然景观融合的效果图；并协调 Unity 团队完成 web 端模拟与实时数据接入，把数据总览、实时监控的可视化界面一并落地。',
     image: '/media/p-05.webp',
     video: '',
-    detail: ['/media/d-05-1.webp', '/media/d-05-2.webp', '/media/d-05-3.webp'],
+    detail: [
+      '/media/d-05-1.webp',
+      '/media/d-05-2.webp',
+      '/media/d-05-3.webp',
+      '/media/d-05-4.webp',
+      '/media/d-05-5.webp',
+      '/media/d-05-6.webp',
+      '/media/d-05-7.webp',
+    ],
   },
   {
     index: '06',
@@ -269,21 +277,31 @@ export const projects = [
       '以「织补」为策略，把闲置的存量空间改造成可以停留的市集廊道：轻钢与格栅构成可拆卸的骨架，在不改动原有结构的前提下插入展销、餐饮与休憩节点；木构节奏、光影序列与人的行为被组织成一条连续的叙事动线。',
     image: '/media/p-06.webp',
     video: '',
-    detail: ['/media/d-06-1.webp', '/media/d-06-2.webp'],
+    detail: [
+      '/media/d-06-1.webp',
+      '/media/d-06-2.webp',
+      '/media/d-06-3.webp',
+      '/media/d-06-4.webp',
+      '/media/d-06-5.webp',
+      '/media/d-06-6.webp',
+      '/media/d-06-7.webp',
+    ],
   },
 ]
 
-/** 成果集锦 —— 每张都挂在某个项目上，点一下回到对应项目 */
-export const gallery = [
-  { src: '/media/g-01.webp', caption: '大坝数字孪生 · 库区观景台', project: 'p-dam' },
-  { src: '/media/g-02.webp', caption: '矩以构 · 聚以生 — 结构拆解', project: 'p-juyi' },
-  { src: '/media/g-03.webp', caption: '矩以构 · 聚以生 — 构造大样', project: 'p-juyi' },
-  { src: '/media/g-04.webp', caption: '映岳 · 叠景 — 屋面跑道', project: 'p-yingyue' },
-  { src: '/media/g-05.webp', caption: '海上生明月 · 夜航远景', project: 'p-cruise' },
-  { src: '/media/g-06.webp', caption: '爱达 · 望舒号 — 甲板白昼', project: 'p-cruise' },
-  { src: '/media/g-07.webp', caption: '海南黎染美术馆 — 实体模型', project: 'p-museum' },
-  { src: '/media/g-08.webp', caption: '积稻市廊 — 廊下光影', project: 'p-jidao' },
-]
+/**
+ * 成果集锦 —— 图片全部来自「项目图片/」重出的那一套（就是各项目的细节图），
+ * 不再单独养一份 g-* 素材。前端每次从里面随机抽一组，
+ * 每张都记得自己属于哪个项目，点一下回到对应项目卡片。
+ */
+export const galleryPool = projects.flatMap((p) =>
+  p.detail.map((src) => ({
+    src,
+    project: p.id,
+    title: p.title,
+    index: p.index,
+  })),
+)
 
 export const navItems = [
   { id: 'home', label: '首页', en: 'Index' },

@@ -120,11 +120,21 @@ export default function About() {
           </div>
         </div>
 
-        <div className="gallery" data-reveal style={{ marginTop: 'clamp(60px,6vw,90px)' }}>
-          <div className="gallery__head">
+        {/* 荣誉奖项和上面「经历与教育」用同一套两栏骨架（左标签栏 + 右侧行），
+            这样日期那一列和右边正文是齐的；单纯放在 .gallery 里会整体贴到左边。 */}
+        <div className="timeline timeline--awards" data-reveal>
+          <div className="timeline__label">
             <h3>荣誉奖项</h3>
-            <p>Awards / {awards.length} Items</p>
+            <p>
+              Awards
+              <br />
+              {awards.length} Items
+              <br />
+              <br />
+              2024 — 2026
+            </p>
           </div>
+
           <div className="timeline__rows">
             {awards.map((a) => (
               <article className="timeline__row" key={a.name}>

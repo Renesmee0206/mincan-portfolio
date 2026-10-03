@@ -122,10 +122,24 @@ export default function Hero() {
         </div>
 
         <div className="hero__foot">
-          <div className="hero__scroll">
-            <span>Scroll</span>
-            <i />
-          </div>
+          {/* 底部中间的小指引：箭头一直往上弹。
+              往上拉（滚动）本来就到个人经历，点它也一样 —— 给这一屏一个「下面还有」的手感。 */}
+          <button
+            type="button"
+            className="hero__next"
+            onClick={() =>
+              document.getElementById('about')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            }
+          >
+            <svg className="hero__next-arrow" viewBox="0 0 24 19" fill="none" aria-hidden="true">
+              <path d="M2 8.4 12 1l10 7.4" />
+              <path d="M2 17.6 12 10.2l10 7.4" />
+            </svg>
+            <span className="hero__next-text">
+              <b>继续了解我</b>
+              <em>往上拉 · Scroll</em>
+            </span>
+          </button>
         </div>
       </div>
     </section>

@@ -93,9 +93,9 @@ git push
 | 用途 | 文件名 |
 | --- | --- |
 | 项目主图 | `p-01.webp` … `p-06.webp` |
-| 项目细节图 | `d-01-1.webp` … `d-06-2.webp` |
+| 项目细节图 | `d-01-1.webp` … `d-06-7.webp`（共 39 张，同时也是成果集锦的图片池） |
 | 首页「What I like」 | `like-01-zima-blue.webp` … `like-07-theaters.webp`（源图在根目录 `首页图片/`） |
-| 成果集锦 | `g-01.webp` … `g-08.webp` |
+| 成果集锦 | 不再单独一套素材，直接用上面的 `d-*`（前端每次随机抽一组） |
 | 人物图 / 头像 | `portrait.webp` / `avatar.webp` |
 
 > 换「What I like」的图时注意：这 7 张会在打包时**内联进 `bundle.js`**，

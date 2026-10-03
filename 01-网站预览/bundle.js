@@ -7280,11 +7280,11 @@
   });
 
   // src/main.jsx
-  var import_react12 = __toESM(require_react(), 1);
+  var import_react13 = __toESM(require_react(), 1);
   var import_client = __toESM(require_client(), 1);
 
   // src/App.jsx
-  var import_react11 = __toESM(require_react(), 1);
+  var import_react12 = __toESM(require_react(), 1);
 
   // src/data/site.js
   var profile = {
@@ -7450,8 +7450,7 @@
         "media/d-02-3.webp",
         "media/d-02-4.webp",
         "media/d-02-5.webp",
-        "media/d-02-6.webp",
-        "media/d-02-7.webp"
+        "media/d-02-6.webp"
       ]
     },
     {
@@ -7472,7 +7471,8 @@
         "media/d-03-3.webp",
         "media/d-03-4.webp",
         "media/d-03-5.webp",
-        "media/d-03-6.webp"
+        "media/d-03-6.webp",
+        "media/d-03-7.webp"
       ]
     },
     {
@@ -7507,7 +7507,15 @@
       desc: "\u4F9D\u636E\u5927\u575D\u5DE5\u7A0B\u56FE\u7EB8\u3001\u5730\u5F62\u6D4B\u7ED8\u6570\u636E\u4E0E\u8BBE\u8BA1\u53C2\u6570\uFF0C\u72EC\u7ACB\u5B8C\u6210\u5927\u575D\u53CA\u5468\u8FB9\u73AF\u5883\u7684\u9AD8\u7CBE\u5EA6\u4E09\u7EF4\u5EFA\u6A21\uFF0C\u8F93\u51FA\u7528\u4E8E\u5448\u73B0\u5EFA\u6210\u5F62\u6001\u3001\u7ED3\u6784\u7EC6\u8282\u4E0E\u81EA\u7136\u666F\u89C2\u878D\u5408\u7684\u6548\u679C\u56FE\uFF1B\u5E76\u534F\u8C03 Unity \u56E2\u961F\u5B8C\u6210 web \u7AEF\u6A21\u62DF\u4E0E\u5B9E\u65F6\u6570\u636E\u63A5\u5165\uFF0C\u628A\u6570\u636E\u603B\u89C8\u3001\u5B9E\u65F6\u76D1\u63A7\u7684\u53EF\u89C6\u5316\u754C\u9762\u4E00\u5E76\u843D\u5730\u3002",
       image: "media/p-05.webp",
       video: "",
-      detail: ["media/d-05-1.webp", "media/d-05-2.webp", "media/d-05-3.webp"]
+      detail: [
+        "media/d-05-1.webp",
+        "media/d-05-2.webp",
+        "media/d-05-3.webp",
+        "media/d-05-4.webp",
+        "media/d-05-5.webp",
+        "media/d-05-6.webp",
+        "media/d-05-7.webp"
+      ]
     },
     {
       index: "06",
@@ -7521,19 +7529,25 @@
       desc: "\u4EE5\u300C\u7EC7\u8865\u300D\u4E3A\u7B56\u7565\uFF0C\u628A\u95F2\u7F6E\u7684\u5B58\u91CF\u7A7A\u95F4\u6539\u9020\u6210\u53EF\u4EE5\u505C\u7559\u7684\u5E02\u96C6\u5ECA\u9053\uFF1A\u8F7B\u94A2\u4E0E\u683C\u6805\u6784\u6210\u53EF\u62C6\u5378\u7684\u9AA8\u67B6\uFF0C\u5728\u4E0D\u6539\u52A8\u539F\u6709\u7ED3\u6784\u7684\u524D\u63D0\u4E0B\u63D2\u5165\u5C55\u9500\u3001\u9910\u996E\u4E0E\u4F11\u61A9\u8282\u70B9\uFF1B\u6728\u6784\u8282\u594F\u3001\u5149\u5F71\u5E8F\u5217\u4E0E\u4EBA\u7684\u884C\u4E3A\u88AB\u7EC4\u7EC7\u6210\u4E00\u6761\u8FDE\u7EED\u7684\u53D9\u4E8B\u52A8\u7EBF\u3002",
       image: "media/p-06.webp",
       video: "",
-      detail: ["media/d-06-1.webp", "media/d-06-2.webp"]
+      detail: [
+        "media/d-06-1.webp",
+        "media/d-06-2.webp",
+        "media/d-06-3.webp",
+        "media/d-06-4.webp",
+        "media/d-06-5.webp",
+        "media/d-06-6.webp",
+        "media/d-06-7.webp"
+      ]
     }
   ];
-  var gallery = [
-    { src: "media/g-01.webp", caption: "\u5927\u575D\u6570\u5B57\u5B6A\u751F \xB7 \u5E93\u533A\u89C2\u666F\u53F0", project: "p-dam" },
-    { src: "media/g-02.webp", caption: "\u77E9\u4EE5\u6784 \xB7 \u805A\u4EE5\u751F \u2014 \u7ED3\u6784\u62C6\u89E3", project: "p-juyi" },
-    { src: "media/g-03.webp", caption: "\u77E9\u4EE5\u6784 \xB7 \u805A\u4EE5\u751F \u2014 \u6784\u9020\u5927\u6837", project: "p-juyi" },
-    { src: "media/g-04.webp", caption: "\u6620\u5CB3 \xB7 \u53E0\u666F \u2014 \u5C4B\u9762\u8DD1\u9053", project: "p-yingyue" },
-    { src: "media/g-05.webp", caption: "\u6D77\u4E0A\u751F\u660E\u6708 \xB7 \u591C\u822A\u8FDC\u666F", project: "p-cruise" },
-    { src: "media/g-06.webp", caption: "\u7231\u8FBE \xB7 \u671B\u8212\u53F7 \u2014 \u7532\u677F\u767D\u663C", project: "p-cruise" },
-    { src: "media/g-07.webp", caption: "\u6D77\u5357\u9ECE\u67D3\u7F8E\u672F\u9986 \u2014 \u5B9E\u4F53\u6A21\u578B", project: "p-museum" },
-    { src: "media/g-08.webp", caption: "\u79EF\u7A3B\u5E02\u5ECA \u2014 \u5ECA\u4E0B\u5149\u5F71", project: "p-jidao" }
-  ];
+  var galleryPool = projects.flatMap(
+    (p) => p.detail.map((src) => ({
+      src,
+      project: p.id,
+      title: p.title,
+      index: p.index
+    }))
+  );
   var navItems = [
     { id: "home", label: "\u9996\u9875", en: "Index" },
     { id: "about", label: "\u4E2A\u4EBA\u7ECF\u5386", en: "About" },
@@ -12357,10 +12371,24 @@ void main() {
             /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: "hero__likes-hint", children: "\u6309\u4F4F\u62D6\u52A8 / \u6ED1\u52A8 \xB7 \u70B9\u4E00\u4E0B\u653E\u5927" })
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: "hero__foot", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "hero__scroll", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { children: "Scroll" }),
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("i", {})
-        ] }) })
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: "hero__foot", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(
+          "button",
+          {
+            type: "button",
+            className: "hero__next",
+            onClick: () => document.getElementById("about")?.scrollIntoView({ behavior: "smooth", block: "start" }),
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("svg", { className: "hero__next-arrow", viewBox: "0 0 24 19", fill: "none", "aria-hidden": "true", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("path", { d: "M2 8.4 12 1l10 7.4" }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("path", { d: "M2 17.6 12 10.2l10 7.4" })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("span", { className: "hero__next-text", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("b", { children: "\u7EE7\u7EED\u4E86\u89E3\u6211" }),
+                /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("em", { children: "\u5F80\u4E0A\u62C9 \xB7 Scroll" })
+              ] })
+            ]
+          }
+        ) })
       ] })
     ] });
   }
@@ -12487,13 +12515,17 @@ void main() {
           /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: `timeline__badge${row.current ? " is-now" : ""}`, children: row.current ? "Now" : row.period.slice(0, 4) })
         ] }, row.title)) })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "gallery", "data-reveal": true, style: { marginTop: "clamp(60px,6vw,90px)" }, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "gallery__head", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "timeline timeline--awards", "data-reveal": true, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "timeline__label", children: [
           /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("h3", { children: "\u8363\u8A89\u5956\u9879" }),
           /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("p", { children: [
-            "Awards / ",
+            "Awards",
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("br", {}),
             awards.length,
-            " Items"
+            " Items",
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("br", {}),
+            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("br", {}),
+            "2024 \u2014 2026"
           ] })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "timeline__rows", children: awards.map((a) => /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("article", { className: "timeline__row", children: [
@@ -12509,7 +12541,7 @@ void main() {
   }
 
   // src/components/Projects.jsx
-  var import_react5 = __toESM(require_react(), 1);
+  var import_react6 = __toESM(require_react(), 1);
 
   // src/components/ProjectDetail.jsx
   var import_react4 = __toESM(require_react(), 1);
@@ -12650,315 +12682,8 @@ void main() {
     ] });
   }
 
-  // src/components/Projects.jsx
-  var import_jsx_runtime8 = __toESM(require_jsx_runtime(), 1);
-  function Projects() {
-    const [openId, setOpenId] = (0, import_react5.useState)(null);
-    const [flashId, setFlashId] = (0, import_react5.useState)(null);
-    const openerRef = (0, import_react5.useRef)(null);
-    const flashTimer = (0, import_react5.useRef)(0);
-    const openProject = projects.find((p) => p.id === openId) || null;
-    (0, import_react5.useEffect)(() => () => window.clearTimeout(flashTimer.current), []);
-    const jumpToProject = (pid) => {
-      const el = document.getElementById(pid);
-      if (!el) return;
-      el.scrollIntoView({ behavior: "smooth", block: "center" });
-      setFlashId(pid);
-      window.clearTimeout(flashTimer.current);
-      flashTimer.current = window.setTimeout(() => setFlashId(null), 2400);
-    };
-    const openDetail = (project, el) => {
-      openerRef.current = el || null;
-      setOpenId(project.id);
-    };
-    return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("section", { className: "projects", id: "projects", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "wrap", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
-          SectionHead,
-          {
-            no: "02",
-            title: "\u7CBE\u9009\u9879\u76EE",
-            en: "Selected Projects",
-            note: "\u987A\u5E8F\u4E0E\u914D\u56FE\u6309\u6700\u65B0\u4E00\u7248\u4F5C\u54C1\u96C6\u6574\u7406\u2014\u2014\u6BCF\u5F20\u5361\u7247\u90FD\u53EF\u4EE5\u70B9\u5F00\uFF0C\u770B\u8BE5\u9879\u76EE\u7684\u5176\u4ED6\u56FE\u7EB8\u4E0E\u6548\u679C\u56FE\u3002"
-          }
-        ),
-        /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "projects__grid", children: [
-          projects.map((p, i) => {
-            const shotCount = p.detail.length + 1 + (p.video ? 1 : 0);
-            return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
-              "article",
-              {
-                className: `pcard${flashId === p.id ? " is-flash" : ""}`,
-                id: p.id,
-                role: "button",
-                tabIndex: 0,
-                "aria-label": `\u67E5\u770B\u300C${p.title}\u300D\u7684 ${shotCount} \u5F20\u56FE`,
-                "data-reveal": true,
-                style: { transitionDelay: `${i % 2 * 110}ms` },
-                onClick: (e) => openDetail(p, e.currentTarget),
-                onKeyDown: (e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    openDetail(p, e.currentTarget);
-                  }
-                },
-                children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("figure", { className: "pcard__figure", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("img", { src: p.image, alt: p.title, loading: "lazy" }),
-                    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "pcard__index", children: p.index }),
-                    p.period && /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "pcard__period", children: p.period }),
-                    /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", { className: "pcard__open", children: [
-                      "\u67E5\u770B\u8BE6\u60C5",
-                      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("b", { children: shotCount }),
-                      "\u5F20"
-                    ] })
-                  ] }),
-                  /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "pcard__body", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("h3", { className: "pcard__title", children: p.title }),
-                      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "pcard__sub", children: p.subtitle })
-                    ] }),
-                    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "pcard__desc", children: p.desc }),
-                    /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "pcard__foot", children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "pcard__tags", children: p.tags.map((t) => /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { children: t }, t)) }),
-                      /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("p", { className: "pcard__role", children: [
-                        p.org,
-                        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("br", {}),
-                        p.role
-                      ] })
-                    ] })
-                  ] })
-                ]
-              },
-              p.id
-            );
-          }),
-          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("article", { className: "pcard pcard--quote", "data-reveal": true, style: { transitionDelay: "110ms" }, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "quote", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "quote__label", children: "Statement / \u8BBE\u8BA1\u4E3B\u5F20" }),
-            /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("p", { className: "quote__text", children: [
-              "\u300C",
-              profile.tagline,
-              "\u300D"
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "quote__note", children: "\u73AF\u5883\u827A\u672F\u3001\u89C6\u89C9\u8868\u8FBE\u4E0E\u6982\u5FF5\u63A8\u6F14\u5728\u6211\u8FD9\u91CC\u662F\u540C\u4E00\u4EF6\u4E8B\u7684\u4E09\u9762\u2014\u2014 \u5148\u628A\u95EE\u9898\u770B\u6E05\u695A\uFF0C\u518D\u51B3\u5B9A\u7528\u4EC0\u4E48\u65B9\u5F0F\u8BA9\u5B83\u88AB\u7406\u89E3\u3002" }),
-            /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("a", { className: "quote__link", href: "#contact", children: [
-              "\u804A\u804A\u5408\u4F5C",
-              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { children: "\u2192" })
-            ] })
-          ] }) })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "marquee", "aria-hidden": "true", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "marquee__track", children: [0, 1].map((dup) => /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { style: { display: "flex" }, children: marqueeWords.map((w) => /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", { className: "marquee__item", children: [
-          w,
-          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("i", {})
-        ] }, dup + w)) }, dup)) }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "gallery", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "gallery__head", "data-reveal": true, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("h3", { children: "\u6210\u679C\u96C6\u9526" }),
-            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { children: "Gallery / \u70B9\u51FB\u4EFB\u610F\u4E00\u5F20\u56DE\u5230\u5BF9\u5E94\u9879\u76EE" })
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "gallery__grid", children: gallery.map((g, i) => /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
-            "button",
-            {
-              className: "gallery__item",
-              "data-reveal": true,
-              style: { transitionDelay: `${i % 4 * 80}ms` },
-              onClick: () => jumpToProject(g.project),
-              "aria-label": `\u8DF3\u8F6C\u5230\u9879\u76EE\uFF1A${g.caption}`,
-              children: [
-                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("img", { src: g.src, alt: g.caption, loading: "lazy" }),
-                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "gallery__cap", children: g.caption }),
-                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "gallery__jump", children: "\u56DE\u5230\u9879\u76EE \u2191" })
-              ]
-            },
-            g.src
-          )) })
-        ] })
-      ] }),
-      openProject && /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
-        ProjectDetail,
-        {
-          project: openProject,
-          onClose: () => setOpenId(null),
-          returnFocusTo: openerRef
-        },
-        openProject.id
-      )
-    ] });
-  }
-
-  // src/components/Contact.jsx
-  var import_react6 = __toESM(require_react(), 1);
-  var import_jsx_runtime9 = __toESM(require_jsx_runtime(), 1);
-  async function writeClipboard(text) {
-    try {
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(text);
-        return true;
-      }
-    } catch {
-    }
-    try {
-      const ta = document.createElement("textarea");
-      ta.value = text;
-      ta.setAttribute("readonly", "");
-      ta.style.cssText = "position:fixed;top:-1000px;opacity:0";
-      document.body.appendChild(ta);
-      ta.select();
-      const ok = document.execCommand("copy");
-      document.body.removeChild(ta);
-      return ok;
-    } catch {
-      return false;
-    }
-  }
-  function Contact() {
-    const [toast, setToast] = (0, import_react6.useState)("");
-    const timer = (0, import_react6.useRef)(0);
-    (0, import_react6.useEffect)(() => () => window.clearTimeout(timer.current), []);
-    const copy6 = async (text, label) => {
-      const ok = await writeClipboard(text);
-      setToast(ok ? `${label}\u5DF2\u590D\u5236` : "\u590D\u5236\u5931\u8D25\uFF0C\u8BF7\u624B\u52A8\u9009\u62E9");
-      window.clearTimeout(timer.current);
-      timer.current = window.setTimeout(() => setToast(""), 2200);
-    };
-    return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("section", { className: "contact", id: "contact", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "contact__glow" }),
-      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "contact__grid" }),
-      /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "wrap", style: { flex: 1, display: "flex", flexDirection: "column" }, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { className: "eyebrow", style: { color: "rgba(255,255,255,.5)" }, children: "Get in touch \u2014 03 / 03" }),
-        /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "contact__body", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { "data-reveal": true, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("h2", { className: "contact__title", children: [
-              "\u4E00\u8D77\u628A\u4E0B\u4E00\u4E2A\u8BBE\u8BA1",
-              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("br", {}),
-              "\u505A\u6210",
-              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("em", { children: "\u53EF\u4EE5\u6D41\u901A\u7684\u6545\u4E8B" }),
-              "\u3002"
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "contact__title-latin", children: "Let's build something spatial" }),
-            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("a", { className: "contact__mail", href: `mailto:${profile.email}`, children: profile.email }),
-            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "contact__actions", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(
-                "button",
-                {
-                  type: "button",
-                  className: "btn btn--solid",
-                  onClick: () => copy6(profile.email, "\u90AE\u7BB1"),
-                  children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { children: "\u590D\u5236\u90AE\u7BB1" }),
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "btn__arrow", children: "\u29C9" })
-                  ]
-                }
-              ),
-              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(
-                "button",
-                {
-                  type: "button",
-                  className: "btn btn--ghost",
-                  onClick: () => copy6(profile.phone, "\u7535\u8BDD"),
-                  children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { children: profile.phone }),
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "btn__arrow", children: "\u29C9" })
-                  ]
-                }
-              ),
-              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("a", { className: "btn btn--ghost", href: "resume.pdf", target: "_blank", rel: "noreferrer", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { children: "\u4E0B\u8F7D\u7B80\u5386 PDF" }) })
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { className: "contact__hint", children: "\u70B9\u6309\u94AE\u5373\u53EF\u590D\u5236\uFF0C\u4E5F\u53EF\u4EE5\u76F4\u63A5\u70B9\u4E0A\u9762\u7684\u90AE\u7BB1\u53D1\u4FE1\u3002" })
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "contact__side", id: "contact-info", "data-reveal": true, style: { transitionDelay: "120ms" }, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "contact__qr", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("img", { src: profile.wechatQr, alt: "\u5FAE\u4FE1\u4E8C\u7EF4\u7801" }),
-              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "contact__qr-text", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "contact__qr-label", children: "\u5FAE\u4FE1 / WeChat" }),
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(
-                  "button",
-                  {
-                    type: "button",
-                    className: "contact__wechat",
-                    onClick: () => copy6(profile.wechat, "\u5FAE\u4FE1\u53F7"),
-                    title: "\u70B9\u51FB\u590D\u5236\u5FAE\u4FE1\u53F7",
-                    children: [
-                      profile.wechat,
-                      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("i", { children: "\u29C9" })
-                    ]
-                  }
-                ),
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { children: "\u626B\u7801\u6216\u70B9\u5FAE\u4FE1\u53F7\u590D\u5236\uFF0C\u90AE\u4EF6\u56DE\u590D\u4F1A\u66F4\u5FEB\u4E00\u4E9B\u3002" }),
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("a", { href: `mailto:${profile.email}`, children: profile.email })
-              ] })
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("dl", { className: "contact__list", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "contact__item", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("dt", { children: "Phone" }),
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("dd", { children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("a", { href: profile.phoneHref, children: profile.phone }) })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "contact__item", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("dt", { children: "Location" }),
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("dd", { children: profile.location })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "contact__item", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("dt", { children: "\u6C42\u804C\u610F\u5411" }),
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("dd", { children: profile.intent })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "contact__item", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("dt", { children: "\u6559\u80B2\u80CC\u666F" }),
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("dd", { children: "\u6E56\u5317\u7F8E\u672F\u5B66\u9662 \xB7 \u73AF\u5883\u827A\u672F\u8BBE\u8BA1 \u7855\u58EB" })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "contact__item", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("dt", { children: "Status" }),
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("dd", { children: profile.status })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "contact__item", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("dt", { children: "\u7B80\u5386" }),
-                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("dd", { children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("a", { href: "resume.pdf", target: "_blank", rel: "noreferrer", children: "\u4E0B\u8F7D PDF" }) })
-              ] })
-            ] })
-          ] })
-        ] })
-      ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "wrap", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("footer", { className: "contact__foot", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { children: [
-          "\xA9 2026 ",
-          profile.latin,
-          " \xB7 \u73AF\u5883\u827A\u672F / AI \u8BBE\u8BA1 / \u6982\u5FF5\u827A\u672F"
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { children: "Designed & Built with React + Vite" }),
-        /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("a", { className: "contact__top", href: "#home", children: [
-          "Back to top",
-          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("i", { children: "\u2191" })
-        ] })
-      ] }) }),
-      toast && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "toast", role: "status", "aria-live": "polite", children: toast })
-    ] });
-  }
-
-  // src/components/Rail.jsx
-  var import_jsx_runtime10 = __toESM(require_jsx_runtime(), 1);
-  function Rail({ active, dark }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("nav", { className: `rail${dark ? " is-dark" : ""}`, "aria-label": "\u7AE0\u8282\u5BFC\u822A", children: navItems.map((item, i) => /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
-      "a",
-      {
-        href: `#${item.id}`,
-        className: active === item.id ? "is-active" : "",
-        children: [
-          /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("span", { children: [
-            String(i + 1).padStart(2, "0"),
-            " ",
-            item.label
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("i", {})
-        ]
-      },
-      item.id
-    )) });
-  }
-
-  // src/components/Intro.jsx
-  var import_react8 = __toESM(require_react(), 1);
-
-  // src/components/FoldText.jsx
-  var import_react7 = __toESM(require_react(), 1);
+  // src/components/BounceCards.jsx
+  var import_react5 = __toESM(require_react(), 1);
 
   // node_modules/.pnpm/gsap@3.13.0/node_modules/gsap/gsap-core.js
   function _assertThisInitialized(self) {
@@ -17233,6 +16958,476 @@ void main() {
   var gsapWithCSS = gsap.registerPlugin(CSSPlugin) || gsap;
   var TweenMaxWithCSS = gsapWithCSS.core.Tween;
 
+  // src/components/BounceCards.jsx
+  var import_jsx_runtime8 = __toESM(require_jsx_runtime(), 1);
+  var LAYOUTS = {
+    5: [
+      { x: -1.62, y: 0.06, r: 9 },
+      { x: -0.86, y: -0.05, r: 5 },
+      { x: 0, y: 0.03, r: -3 },
+      { x: 0.86, y: -0.05, r: -8 },
+      { x: 1.62, y: 0.06, r: 4 }
+    ],
+    3: [
+      { x: -1.02, y: 0.05, r: 9 },
+      { x: 0, y: -0.05, r: -3 },
+      { x: 1.02, y: 0.05, r: -8 }
+    ]
+  };
+  var NARROW = 620;
+  var clamp3 = (min, value, max) => Math.min(max, Math.max(min, value));
+  function BounceCards({ items = [], onPick, className = "" }) {
+    const wrapRef = (0, import_react5.useRef)(null);
+    const [width, setWidth] = (0, import_react5.useState)(0);
+    const [hovered, setHovered] = (0, import_react5.useState)(-1);
+    (0, import_react5.useLayoutEffect)(() => {
+      const el = wrapRef.current;
+      if (!el) return void 0;
+      const measure = () => setWidth(el.clientWidth);
+      measure();
+      if (!("ResizeObserver" in window)) {
+        window.addEventListener("resize", measure);
+        return () => window.removeEventListener("resize", measure);
+      }
+      const ro = new ResizeObserver(measure);
+      ro.observe(el);
+      return () => ro.disconnect();
+    }, []);
+    const narrow = width > 0 && width < NARROW;
+    const layout = narrow ? LAYOUTS[3] : LAYOUTS[5];
+    const cards = items.slice(0, layout.length);
+    const cardW = width ? clamp3(96, width / (narrow ? 3.3 : 4.5), 250) : 200;
+    const push = cardW * 0.52;
+    (0, import_react5.useEffect)(() => {
+      const el = wrapRef.current;
+      if (!el) return void 0;
+      const slots = el.querySelectorAll(".bounce__slot");
+      if (!slots.length) return void 0;
+      const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches === true;
+      const play = () => {
+        if (reduced) {
+          gsapWithCSS.set(slots, { scale: 1, opacity: 1 });
+          return;
+        }
+        gsapWithCSS.fromTo(
+          slots,
+          { scale: 0, opacity: 0 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.72,
+            ease: "elastic.out(1, 0.5)",
+            stagger: 0.07,
+            delay: 0.1,
+            overwrite: true
+          }
+        );
+      };
+      if (reduced || !("IntersectionObserver" in window)) {
+        play();
+        return void 0;
+      }
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            play();
+            io.disconnect();
+          });
+        },
+        { threshold: 0.28 }
+      );
+      io.observe(el);
+      return () => io.disconnect();
+    }, [items]);
+    return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: `bounce${narrow ? " is-narrow" : ""} ${className}`.trim(), ref: wrapRef, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "bounce__stack", style: { width: cardW, height: cardW }, children: cards.map((item, i) => {
+      const seat = layout[i];
+      const on = hovered === i;
+      const shift = hovered < 0 || on ? 0 : i < hovered ? -push : push;
+      const x = seat.x * cardW + shift;
+      const y = seat.y * cardW + (on ? -cardW * 0.06 : 0);
+      const rotate3 = on ? 0 : seat.r;
+      return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+        "div",
+        {
+          className: "bounce__slot",
+          style: {
+            width: cardW,
+            height: cardW,
+            marginLeft: -cardW / 2,
+            marginTop: -cardW / 2,
+            zIndex: on ? cards.length + 2 : i + 1
+          },
+          children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
+            "button",
+            {
+              type: "button",
+              className: "bounce__card",
+              style: {
+                transform: `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) rotate(${rotate3}deg) scale(${on ? 1.04 : 1})`
+              },
+              onMouseEnter: () => setHovered(i),
+              onMouseLeave: () => setHovered((h) => h === i ? -1 : h),
+              onFocus: () => setHovered(i),
+              onBlur: () => setHovered((h) => h === i ? -1 : h),
+              onClick: () => onPick?.(item),
+              "aria-label": `${item.title} \u2014 \u56DE\u5230\u8FD9\u4E2A\u9879\u76EE`,
+              children: [
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("img", { src: item.src, alt: "", loading: "lazy" }),
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "bounce__no", children: item.index }),
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", { className: "bounce__say", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("b", { children: item.title }),
+                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("i", { children: "\u56DE\u5230\u9879\u76EE \u2191" })
+                ] })
+              ]
+            }
+          )
+        },
+        `${item.src}-${i}`
+      );
+    }) }) });
+  }
+
+  // src/components/Projects.jsx
+  var import_jsx_runtime9 = __toESM(require_jsx_runtime(), 1);
+  var HAND = 5;
+  function drawHand() {
+    const pool = galleryPool.slice();
+    for (let i = pool.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    const hand = [];
+    const perProject = /* @__PURE__ */ new Map();
+    for (const item of pool) {
+      if (hand.length >= HAND) break;
+      const used = perProject.get(item.project) || 0;
+      if (used >= 2) continue;
+      perProject.set(item.project, used + 1);
+      hand.push(item);
+    }
+    return hand;
+  }
+  function Projects() {
+    const [openId, setOpenId] = (0, import_react6.useState)(null);
+    const [flashId, setFlashId] = (0, import_react6.useState)(null);
+    const [hand, setHand] = (0, import_react6.useState)(() => drawHand());
+    const [round, setRound] = (0, import_react6.useState)(0);
+    const openerRef = (0, import_react6.useRef)(null);
+    const flashTimer = (0, import_react6.useRef)(0);
+    const openProject = projects.find((p) => p.id === openId) || null;
+    (0, import_react6.useEffect)(() => () => window.clearTimeout(flashTimer.current), []);
+    const jumpToProject = (pid) => {
+      const el = document.getElementById(pid);
+      if (!el) return;
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+      setFlashId(pid);
+      window.clearTimeout(flashTimer.current);
+      flashTimer.current = window.setTimeout(() => setFlashId(null), 2400);
+    };
+    const openDetail = (project, el) => {
+      openerRef.current = el || null;
+      setOpenId(project.id);
+    };
+    const shuffle3 = () => {
+      let next = drawHand();
+      for (let i = 0; i < 4 && next.every((c, j) => c.src === hand[j]?.src); i += 1) next = drawHand();
+      setHand(next);
+      setRound((r) => r + 1);
+    };
+    return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("section", { className: "projects", id: "projects", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "wrap", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+          SectionHead,
+          {
+            no: "02",
+            title: "\u7CBE\u9009\u9879\u76EE",
+            en: "Selected Projects",
+            note: "\u987A\u5E8F\u6309\u6700\u65B0\u4E00\u7248\u4F5C\u54C1\u96C6\u6574\u7406\uFF0C\u914D\u56FE\u4ECE\u300C\u9879\u76EE\u56FE\u7247\u300D\u91CD\u51FA\u2014\u2014\u6BCF\u5F20\u5361\u7247\u90FD\u53EF\u4EE5\u70B9\u5F00\uFF0C\u770B\u8BE5\u9879\u76EE\u7684\u5176\u4ED6\u56FE\u7EB8\u4E0E\u6548\u679C\u56FE\u3002"
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "projects__grid", children: [
+          projects.map((p, i) => {
+            const shotCount = p.detail.length + 1 + (p.video ? 1 : 0);
+            return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(
+              "article",
+              {
+                className: `pcard${flashId === p.id ? " is-flash" : ""}`,
+                id: p.id,
+                role: "button",
+                tabIndex: 0,
+                "aria-label": `\u67E5\u770B\u300C${p.title}\u300D\u7684 ${shotCount} \u5F20\u56FE`,
+                "data-reveal": true,
+                style: { transitionDelay: `${i % 2 * 110}ms` },
+                onClick: (e) => openDetail(p, e.currentTarget),
+                onKeyDown: (e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    openDetail(p, e.currentTarget);
+                  }
+                },
+                children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("figure", { className: "pcard__figure", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("img", { src: p.image, alt: p.title, loading: "lazy" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "pcard__index", children: p.index }),
+                    p.period && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "pcard__period", children: p.period }),
+                    /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "pcard__open", children: [
+                      "\u67E5\u770B\u8BE6\u60C5",
+                      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("b", { children: shotCount }),
+                      "\u5F20"
+                    ] })
+                  ] }),
+                  /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "pcard__body", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("h3", { className: "pcard__title", children: p.title }),
+                      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { className: "pcard__sub", children: p.subtitle })
+                    ] }),
+                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { className: "pcard__desc", children: p.desc }),
+                    /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "pcard__foot", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "pcard__tags", children: p.tags.map((t) => /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { children: t }, t)) }),
+                      /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("p", { className: "pcard__role", children: [
+                        p.org,
+                        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("br", {}),
+                        p.role
+                      ] })
+                    ] })
+                  ] })
+                ]
+              },
+              p.id
+            );
+          }),
+          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("article", { className: "pcard pcard--quote", "data-reveal": true, style: { transitionDelay: "110ms" }, children: /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "quote", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "quote__label", children: "Statement / \u8BBE\u8BA1\u4E3B\u5F20" }),
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("p", { className: "quote__text", children: [
+              "\u300C",
+              profile.tagline,
+              "\u300D"
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { className: "quote__note", children: "\u73AF\u5883\u827A\u672F\u3001\u89C6\u89C9\u8868\u8FBE\u4E0E\u6982\u5FF5\u63A8\u6F14\u5728\u6211\u8FD9\u91CC\u662F\u540C\u4E00\u4EF6\u4E8B\u7684\u4E09\u9762\u2014\u2014 \u5148\u628A\u95EE\u9898\u770B\u6E05\u695A\uFF0C\u518D\u51B3\u5B9A\u7528\u4EC0\u4E48\u65B9\u5F0F\u8BA9\u5B83\u88AB\u7406\u89E3\u3002" }),
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("a", { className: "quote__link", href: "#contact", children: [
+              "\u804A\u804A\u5408\u4F5C",
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { children: "\u2192" })
+            ] })
+          ] }) })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "marquee", "aria-hidden": "true", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "marquee__track", children: [0, 1].map((dup) => /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { style: { display: "flex" }, children: marqueeWords.map((w) => /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "marquee__item", children: [
+          w,
+          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("i", {})
+        ] }, dup + w)) }, dup)) }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "gallery", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "gallery__head", "data-reveal": true, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("h3", { children: "\u6210\u679C\u96C6\u9526" }),
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { children: "Gallery / \u6BCF\u6B21\u968F\u673A\u62BD\u4E00\u7EC4\uFF0C\u70B9\u4E00\u5F20\u56DE\u5230\u5BF9\u5E94\u9879\u76EE" })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+            BounceCards,
+            {
+              items: hand,
+              onPick: (item) => jumpToProject(item.project),
+              className: "gallery__deck"
+            },
+            round
+          ),
+          /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "gallery__foot", "data-reveal": true, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("button", { type: "button", className: "btn btn--ghost gallery__shuffle", onClick: shuffle3, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { children: "\u6D17\u724C\u6362\u4E00\u7EC4" }),
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "btn__arrow", children: "\u21BA" })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("p", { className: "gallery__now", children: [
+              "\u9879\u76EE\u56FE\u7247 ",
+              galleryPool.length,
+              " \u5F20 \xB7 \u6BCF\u6B21\u968F\u673A\u62BD\u4E00\u7EC4"
+            ] })
+          ] })
+        ] })
+      ] }),
+      openProject && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+        ProjectDetail,
+        {
+          project: openProject,
+          onClose: () => setOpenId(null),
+          returnFocusTo: openerRef
+        },
+        openProject.id
+      )
+    ] });
+  }
+
+  // src/components/Contact.jsx
+  var import_react7 = __toESM(require_react(), 1);
+  var import_jsx_runtime10 = __toESM(require_jsx_runtime(), 1);
+  async function writeClipboard(text) {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+    } catch {
+    }
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.cssText = "position:fixed;top:-1000px;opacity:0";
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      return ok;
+    } catch {
+      return false;
+    }
+  }
+  function Contact() {
+    const [toast, setToast] = (0, import_react7.useState)("");
+    const timer = (0, import_react7.useRef)(0);
+    (0, import_react7.useEffect)(() => () => window.clearTimeout(timer.current), []);
+    const copy6 = async (text, label) => {
+      const ok = await writeClipboard(text);
+      setToast(ok ? `${label}\u5DF2\u590D\u5236` : "\u590D\u5236\u5931\u8D25\uFF0C\u8BF7\u624B\u52A8\u9009\u62E9");
+      window.clearTimeout(timer.current);
+      timer.current = window.setTimeout(() => setToast(""), 2200);
+    };
+    return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("section", { className: "contact", id: "contact", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "contact__glow" }),
+      /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "contact__grid" }),
+      /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "wrap", style: { flex: 1, display: "flex", flexDirection: "column" }, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("p", { className: "eyebrow", style: { color: "rgba(255,255,255,.5)" }, children: "Get in touch \u2014 03 / 03" }),
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__body", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { "data-reveal": true, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("h2", { className: "contact__title", children: [
+              "\u4E00\u8D77\u628A\u4E0B\u4E00\u4E2A\u8BBE\u8BA1",
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("br", {}),
+              "\u505A\u6210",
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("em", { children: "\u53EF\u4EE5\u6D41\u901A\u7684\u6545\u4E8B" }),
+              "\u3002"
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { className: "contact__title-latin", children: "Let's build something spatial" }),
+            /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("a", { className: "contact__mail", href: `mailto:${profile.email}`, children: profile.email }),
+            /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__actions", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+                "button",
+                {
+                  type: "button",
+                  className: "btn btn--solid",
+                  onClick: () => copy6(profile.email, "\u90AE\u7BB1"),
+                  children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { children: "\u590D\u5236\u90AE\u7BB1" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { className: "btn__arrow", children: "\u29C9" })
+                  ]
+                }
+              ),
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+                "button",
+                {
+                  type: "button",
+                  className: "btn btn--ghost",
+                  onClick: () => copy6(profile.phone, "\u7535\u8BDD"),
+                  children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { children: profile.phone }),
+                    /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { className: "btn__arrow", children: "\u29C9" })
+                  ]
+                }
+              ),
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("a", { className: "btn btn--ghost", href: "resume.pdf", target: "_blank", rel: "noreferrer", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { children: "\u4E0B\u8F7D\u7B80\u5386 PDF" }) })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("p", { className: "contact__hint", children: "\u70B9\u6309\u94AE\u5373\u53EF\u590D\u5236\uFF0C\u4E5F\u53EF\u4EE5\u76F4\u63A5\u70B9\u4E0A\u9762\u7684\u90AE\u7BB1\u53D1\u4FE1\u3002" })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__side", id: "contact-info", "data-reveal": true, style: { transitionDelay: "120ms" }, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__qr", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("img", { src: profile.wechatQr, alt: "\u5FAE\u4FE1\u4E8C\u7EF4\u7801" }),
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__qr-text", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { className: "contact__qr-label", children: "\u5FAE\u4FE1 / WeChat" }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+                  "button",
+                  {
+                    type: "button",
+                    className: "contact__wechat",
+                    onClick: () => copy6(profile.wechat, "\u5FAE\u4FE1\u53F7"),
+                    title: "\u70B9\u51FB\u590D\u5236\u5FAE\u4FE1\u53F7",
+                    children: [
+                      profile.wechat,
+                      /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("i", { children: "\u29C9" })
+                    ]
+                  }
+                ),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("p", { children: "\u626B\u7801\u6216\u70B9\u5FAE\u4FE1\u53F7\u590D\u5236\uFF0C\u90AE\u4EF6\u56DE\u590D\u4F1A\u66F4\u5FEB\u4E00\u4E9B\u3002" }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("a", { href: `mailto:${profile.email}`, children: profile.email })
+              ] })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("dl", { className: "contact__list", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__item", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dt", { children: "Phone" }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dd", { children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("a", { href: profile.phoneHref, children: profile.phone }) })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__item", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dt", { children: "Location" }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dd", { children: profile.location })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__item", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dt", { children: "\u6C42\u804C\u610F\u5411" }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dd", { children: profile.intent })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__item", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dt", { children: "\u6559\u80B2\u80CC\u666F" }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dd", { children: "\u6E56\u5317\u7F8E\u672F\u5B66\u9662 \xB7 \u73AF\u5883\u827A\u672F\u8BBE\u8BA1 \u7855\u58EB" })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__item", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dt", { children: "Status" }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dd", { children: profile.status })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__item", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dt", { children: "\u7B80\u5386" }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dd", { children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("a", { href: "resume.pdf", target: "_blank", rel: "noreferrer", children: "\u4E0B\u8F7D PDF" }) })
+              ] })
+            ] })
+          ] })
+        ] })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "wrap", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("footer", { className: "contact__foot", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("span", { children: [
+          "\xA9 2026 ",
+          profile.latin,
+          " \xB7 \u73AF\u5883\u827A\u672F / AI \u8BBE\u8BA1 / \u6982\u5FF5\u827A\u672F"
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { children: "Designed & Built with React + Vite" }),
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("a", { className: "contact__top", href: "#home", children: [
+          "Back to top",
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("i", { children: "\u2191" })
+        ] })
+      ] }) }),
+      toast && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "toast", role: "status", "aria-live": "polite", children: toast })
+    ] });
+  }
+
+  // src/components/Rail.jsx
+  var import_jsx_runtime11 = __toESM(require_jsx_runtime(), 1);
+  function Rail({ active, dark }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("nav", { className: `rail${dark ? " is-dark" : ""}`, "aria-label": "\u7AE0\u8282\u5BFC\u822A", children: navItems.map((item, i) => /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
+      "a",
+      {
+        href: `#${item.id}`,
+        className: active === item.id ? "is-active" : "",
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("span", { children: [
+            String(i + 1).padStart(2, "0"),
+            " ",
+            item.label
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("i", {})
+        ]
+      },
+      item.id
+    )) });
+  }
+
+  // src/components/Intro.jsx
+  var import_react9 = __toESM(require_react(), 1);
+
+  // src/components/FoldText.jsx
+  var import_react8 = __toESM(require_react(), 1);
+
   // node_modules/.pnpm/gsap@3.13.0/node_modules/gsap/Observer.js
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
@@ -17757,12 +17952,12 @@ void main() {
   var _lastScrollTime = 0;
   var _enabled = 0;
   var _parseClamp = function _parseClamp2(value, type, self) {
-    var clamp5 = _isString3(value) && (value.substr(0, 6) === "clamp(" || value.indexOf("max") > -1);
-    self["_" + type + "Clamp"] = clamp5;
-    return clamp5 ? value.substr(6, value.length - 7) : value;
+    var clamp6 = _isString3(value) && (value.substr(0, 6) === "clamp(" || value.indexOf("max") > -1);
+    self["_" + type + "Clamp"] = clamp6;
+    return clamp6 ? value.substr(6, value.length - 7) : value;
   };
-  var _keepClamp = function _keepClamp2(value, clamp5) {
-    return clamp5 && (!_isString3(value) || value.substr(0, 6) !== "clamp(") ? "clamp(" + value + ")" : value;
+  var _keepClamp = function _keepClamp2(value, clamp6) {
+    return clamp6 && (!_isString3(value) || value.substr(0, 6) !== "clamp(") ? "clamp(" + value + ")" : value;
   };
   var _rafBugFix = function _rafBugFix2() {
     return _enabled && requestAnimationFrame(_rafBugFix2);
@@ -19616,7 +19811,7 @@ void main() {
   _getGSAP3() && gsap3.registerPlugin(ScrollTrigger2);
 
   // src/components/FoldText.jsx
-  var import_jsx_runtime11 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime12 = __toESM(require_jsx_runtime(), 1);
   gsapWithCSS.registerPlugin(ScrollTrigger2);
   var HINGE_CONFIG = {
     top: { origin: "50% 0%", rotateX: -92, rotateY: 0 },
@@ -19624,11 +19819,11 @@ void main() {
     left: { origin: "0% 50%", rotateX: 0, rotateY: 92 },
     right: { origin: "100% 50%", rotateX: 0, rotateY: -92 }
   };
-  var clamp3 = (value, min, max) => Math.min(max, Math.max(min, value));
+  var clamp4 = (value, min, max) => Math.min(max, Math.max(min, value));
   var renderWhitespace = (value, key) => value.split(/(\n)/).map((part, index) => {
-    if (part === "\n") return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("br", {}, `${key}-br-${index}`);
+    if (part === "\n") return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("br", {}, `${key}-br-${index}`);
     if (!part) return null;
-    return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { className: "fold-text-whitespace", children: part.replace(/ /g, "\xA0") }, `${key}-space-${index}`);
+    return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "fold-text-whitespace", children: part.replace(/ /g, "\xA0") }, `${key}-space-${index}`);
   });
   var FoldText = ({
     text = "Design unfolds",
@@ -19646,22 +19841,22 @@ void main() {
     className = "",
     style = {}
   }) => {
-    const rootRef = (0, import_react7.useRef)(null);
-    const timelineRef = (0, import_react7.useRef)(null);
+    const rootRef = (0, import_react8.useRef)(null);
+    const timelineRef = (0, import_react8.useRef)(null);
     const hingeConfig = HINGE_CONFIG[hinge] || HINGE_CONFIG.top;
-    const safeCrease = clamp3(creaseShading, 0, 1);
+    const safeCrease = clamp4(creaseShading, 0, 1);
     const safePerspective = Math.max(120, perspective2);
-    const segments = (0, import_react7.useMemo)(() => {
+    const segments = (0, import_react8.useMemo)(() => {
       let segmentIndex = 0;
       const renderSegment = (content, key, split = splitBy) => {
         segmentIndex += 1;
-        return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+        return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
           "span",
           {
             className: "fold-text-segment",
             "data-fold-split": split,
             style: { "--fold-perspective": `${safePerspective}px` },
-            children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
+            children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
               "span",
               {
                 className: "fold-text-piece",
@@ -19675,7 +19870,7 @@ void main() {
         );
       };
       if (splitBy === "line") {
-        return text.split("\n").map((line, index) => /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { className: "fold-text-line", children: renderSegment(line || "\xA0", `segment-line-${index}`, "line") }, `line-${index}`));
+        return text.split("\n").map((line, index) => /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "fold-text-line", children: renderSegment(line || "\xA0", `segment-line-${index}`, "line") }, `line-${index}`));
       }
       if (splitBy === "word") {
         return text.split(/(\s+)/).flatMap((part, index) => {
@@ -19685,11 +19880,11 @@ void main() {
         });
       }
       return Array.from(text).map((char, index) => {
-        if (char === "\n") return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("br", {}, `br-${index}`);
+        if (char === "\n") return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("br", {}, `br-${index}`);
         return renderSegment(char === " " ? "\xA0" : char, `segment-char-${index}`);
       });
     }, [text, splitBy, hinge, hingeConfig.origin, safePerspective]);
-    (0, import_react7.useEffect)(() => {
+    (0, import_react8.useEffect)(() => {
       if (typeof window === "undefined") return void 0;
       const root = rootRef.current;
       if (!root) return void 0;
@@ -19771,20 +19966,20 @@ void main() {
       "--fold-text-color": color,
       ...style
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("span", { ref: rootRef, className: `fold-text ${className}`.trim(), style: rootStyle, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { className: "fold-text-sr-only", children: text }),
-      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { className: "fold-text-visual", "aria-hidden": "true", children: segments })
+    return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("span", { ref: rootRef, className: `fold-text ${className}`.trim(), style: rootStyle, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "fold-text-sr-only", children: text }),
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "fold-text-visual", "aria-hidden": "true", children: segments })
     ] });
   };
   var FoldText_default = FoldText;
 
   // src/components/Intro.jsx
-  var import_jsx_runtime12 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime13 = __toESM(require_jsx_runtime(), 1);
   var VEIL_FADE = 600;
   var TEXT_DELAY = 220;
   var CONFIRM_DELAY = 900;
   var LEAVE_FADE = 700;
-  var clamp4 = (v, min, max) => Math.min(max, Math.max(min, v));
+  var clamp5 = (v, min, max) => Math.min(max, Math.max(min, v));
   function createTearSound() {
     let ctx = null;
     let gain = null;
@@ -19858,37 +20053,37 @@ void main() {
     };
   }
   function Intro({ onEnter, onGone }) {
-    const [stage, setStage] = (0, import_react8.useState)("box");
-    const [dragging, setDragging] = (0, import_react8.useState)(false);
-    const [ready, setReady] = (0, import_react8.useState)(false);
-    const [failed, setFailed] = (0, import_react8.useState)(false);
-    const [showLatin, setShowLatin] = (0, import_react8.useState)(false);
-    const [showConfirm, setShowConfirm] = (0, import_react8.useState)(false);
-    const [showFrom2, setShowFrom2] = (0, import_react8.useState)(false);
-    const videoRef = (0, import_react8.useRef)(null);
-    const barRef = (0, import_react8.useRef)(null);
-    const pctRef = (0, import_react8.useRef)(null);
-    const accRef = (0, import_react8.useRef)(0);
-    const dragRef = (0, import_react8.useRef)(null);
-    const seekRef = (0, import_react8.useRef)(-1);
-    const autoRef = (0, import_react8.useRef)(0);
-    const sealedRef = (0, import_react8.useRef)(false);
-    const timersRef = (0, import_react8.useRef)([]);
-    const soundRef = (0, import_react8.useRef)(null);
-    const later = (0, import_react8.useCallback)((fn, ms) => {
+    const [stage, setStage] = (0, import_react9.useState)("box");
+    const [dragging, setDragging] = (0, import_react9.useState)(false);
+    const [ready, setReady] = (0, import_react9.useState)(false);
+    const [failed, setFailed] = (0, import_react9.useState)(false);
+    const [showLatin, setShowLatin] = (0, import_react9.useState)(false);
+    const [showConfirm, setShowConfirm] = (0, import_react9.useState)(false);
+    const [showFrom2, setShowFrom2] = (0, import_react9.useState)(false);
+    const videoRef = (0, import_react9.useRef)(null);
+    const barRef = (0, import_react9.useRef)(null);
+    const pctRef = (0, import_react9.useRef)(null);
+    const accRef = (0, import_react9.useRef)(0);
+    const dragRef = (0, import_react9.useRef)(null);
+    const seekRef = (0, import_react9.useRef)(-1);
+    const autoRef = (0, import_react9.useRef)(0);
+    const sealedRef = (0, import_react9.useRef)(false);
+    const timersRef = (0, import_react9.useRef)([]);
+    const soundRef = (0, import_react9.useRef)(null);
+    const later = (0, import_react9.useCallback)((fn, ms) => {
       timersRef.current.push(window.setTimeout(fn, ms));
     }, []);
-    const sound = (0, import_react8.useCallback)(() => {
+    const sound = (0, import_react9.useCallback)(() => {
       if (!soundRef.current) soundRef.current = createTearSound();
       return soundRef.current;
     }, []);
-    const paint = (0, import_react8.useCallback)((v) => {
+    const paint = (0, import_react9.useCallback)((v) => {
       if (barRef.current) barRef.current.style.transform = `scaleX(${v})`;
       if (pctRef.current) {
         pctRef.current.textContent = v > 0 && v < 1 ? `\u5DF2\u6495\u5F00 ${Math.round(v * 100)}%` : "\u4E5F\u53EF\u4EE5\u76F4\u63A5\u6309 Enter / \u7A7A\u683C";
       }
     }, []);
-    (0, import_react8.useEffect)(() => {
+    (0, import_react9.useEffect)(() => {
       const video = videoRef.current;
       if (!video) return void 0;
       const onMeta = () => {
@@ -19908,7 +20103,7 @@ void main() {
         video.removeEventListener("error", onError);
       };
     }, []);
-    (0, import_react8.useEffect)(
+    (0, import_react9.useEffect)(
       () => () => {
         timersRef.current.forEach((t) => window.clearTimeout(t));
         if (autoRef.current) cancelAnimationFrame(autoRef.current);
@@ -19917,7 +20112,7 @@ void main() {
       },
       []
     );
-    (0, import_react8.useEffect)(() => {
+    (0, import_react9.useEffect)(() => {
       if (!ready) return void 0;
       let raf = 0;
       const tick = () => {
@@ -19937,13 +20132,13 @@ void main() {
       raf = requestAnimationFrame(tick);
       return () => cancelAnimationFrame(raf);
     }, [ready]);
-    (0, import_react8.useEffect)(() => {
+    (0, import_react9.useEffect)(() => {
       paint(accRef.current);
     }, [dragging, stage, failed, paint]);
-    (0, import_react8.useEffect)(() => {
+    (0, import_react9.useEffect)(() => {
       later(() => setShowFrom2(true), 320);
     }, [later]);
-    const seal = (0, import_react8.useCallback)(() => {
+    const seal = (0, import_react9.useCallback)(() => {
       if (sealedRef.current) return;
       sealedRef.current = true;
       accRef.current = 1;
@@ -19972,7 +20167,7 @@ void main() {
       if (!drag || drag.id !== e.pointerId || stage !== "box" || failed) return;
       const dx = e.clientX - drag.x;
       drag.x = e.clientX;
-      accRef.current = clamp4(accRef.current + dx / dragSpan(), 0, 1);
+      accRef.current = clamp5(accRef.current + dx / dragSpan(), 0, 1);
       paint(accRef.current);
       if (dx !== 0) sound().move(dx);
       if (accRef.current >= 1) seal();
@@ -19983,7 +20178,7 @@ void main() {
       setDragging(false);
       soundRef.current?.stop();
     };
-    const autoOpen = (0, import_react8.useCallback)(() => {
+    const autoOpen = (0, import_react9.useCallback)(() => {
       if (stage !== "box" || failed) return;
       const from = accRef.current;
       const start = performance.now();
@@ -20001,7 +20196,7 @@ void main() {
       };
       autoRef.current = requestAnimationFrame(step);
     }, [failed, paint, seal, stage]);
-    const enter = (0, import_react8.useCallback)(() => {
+    const enter = (0, import_react9.useCallback)(() => {
       if (stage === "leave") return;
       timersRef.current.forEach((t) => window.clearTimeout(t));
       timersRef.current = [];
@@ -20011,7 +20206,7 @@ void main() {
       setStage("leave");
       later(onGone, LEAVE_FADE);
     }, [later, onEnter, onGone, stage]);
-    (0, import_react8.useEffect)(() => {
+    (0, import_react9.useEffect)(() => {
       const onKey = (e) => {
         if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
           e.preventDefault();
@@ -20025,7 +20220,7 @@ void main() {
       return () => window.removeEventListener("keydown", onKey);
     }, [autoOpen, enter, stage]);
     const isDragging = dragging && stage === "box";
-    return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
+    return /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(
       "div",
       {
         className: `intro${stage === "seal" || stage === "text" ? " is-sealing" : ""}${stage === "leave" ? " is-leaving" : ""}`,
@@ -20037,7 +20232,7 @@ void main() {
         onPointerUp: endDrag,
         onPointerCancel: endDrag,
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "intro__stage", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "intro__stage", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
             "video",
             {
               ref: videoRef,
@@ -20050,10 +20245,10 @@ void main() {
               "aria-hidden": "true"
             }
           ) }),
-          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: `intro__veil${stage === "seal" || stage === "text" ? " is-on" : ""}` }),
-          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "intro__scrim" }),
-          /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "intro__from", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: `intro__veil${stage === "seal" || stage === "text" ? " is-on" : ""}` }),
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "intro__scrim" }),
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "intro__from", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
               FoldText_default,
               {
                 text: "FROM: MIN CAN.",
@@ -20071,7 +20266,7 @@ void main() {
                 className: "intro__from-main"
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "intro__from-sub", children: showFrom2 && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "intro__from-sub", children: showFrom2 && /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
               FoldText_default,
               {
                 text: "Please claim your exclusive parcel.",
@@ -20089,16 +20284,16 @@ void main() {
               }
             ) })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "intro__sr", children: "\u5F00\u573A\u52A8\u753B\uFF1A\u62D6\u52A8\u6495\u5F00\u4E00\u4E2A\u725B\u76AE\u7EB8\u5FEB\u9012\u7BB1\uFF0C\u7136\u540E\u8FDB\u5165\u7F51\u7AD9\u3002\u4E5F\u53EF\u4EE5\u76F4\u63A5\u6309 Enter \u6216\u7A7A\u683C\u3002" }),
-          /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("button", { type: "button", className: "intro__skip", onClick: enter, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("p", { className: "intro__sr", children: "\u5F00\u573A\u52A8\u753B\uFF1A\u62D6\u52A8\u6495\u5F00\u4E00\u4E2A\u725B\u76AE\u7EB8\u5FEB\u9012\u7BB1\uFF0C\u7136\u540E\u8FDB\u5165\u7F51\u7AD9\u3002\u4E5F\u53EF\u4EE5\u76F4\u63A5\u6309 Enter \u6216\u7A7A\u683C\u3002" }),
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("button", { type: "button", className: "intro__skip", onClick: enter, children: [
             "\u8DF3\u8FC7",
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("svg", { width: "12", height: "12", viewBox: "0 0 13 13", fill: "none", "aria-hidden": "true", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("path", { d: "M1 12 12 1M12 1H4M12 1v8", stroke: "currentColor", strokeWidth: "1.2" }) })
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("svg", { width: "12", height: "12", viewBox: "0 0 13 13", fill: "none", "aria-hidden": "true", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("path", { d: "M1 12 12 1M12 1H4M12 1v8", stroke: "currentColor", strokeWidth: "1.2" }) })
           ] }),
-          stage === "box" && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: `intro__hint${isDragging ? " is-dragging" : ""}${failed ? " is-failed" : ""}`, children: failed ? /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("button", { type: "button", className: "btn btn--solid intro__enter", onClick: enter, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { children: "\u8FDB\u5165\u7F51\u7AD9" }),
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "btn__arrow", children: "\u2192" })
-          ] }) : /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(import_jsx_runtime12.Fragment, { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "intro__hint-line", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+          stage === "box" && /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: `intro__hint${isDragging ? " is-dragging" : ""}${failed ? " is-failed" : ""}`, children: failed ? /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("button", { type: "button", className: "btn btn--solid intro__enter", onClick: enter, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { children: "\u8FDB\u5165\u7F51\u7AD9" }),
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "btn__arrow", children: "\u2192" })
+          ] }) : /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(import_jsx_runtime13.Fragment, { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "intro__hint-line", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
               FoldText_default,
               {
                 text: isDragging ? "\u7EE7\u7EED\u5411\u53F3\u62D6 \xB7 \u6495\u5F00" : "\u6309\u4F4F\u5411\u53F3\u62D6\u52A8 \xB7 \u6495\u5F00\u7EB8\u7BB1",
@@ -20116,12 +20311,12 @@ void main() {
                 className: "intro__hint-fold"
               }
             ) }),
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "intro__hint-arrow", "aria-hidden": "true", children: "\u2192" }),
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "intro__hint-sub", ref: pctRef })
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "intro__hint-arrow", "aria-hidden": "true", children: "\u2192" }),
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "intro__hint-sub", ref: pctRef })
           ] }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "intro__bar", "aria-hidden": "true", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("i", { ref: barRef }) }),
-          stage === "text" || stage === "leave" ? /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "intro__text", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "intro__bar", "aria-hidden": "true", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("i", { ref: barRef }) }),
+          stage === "text" || stage === "leave" ? /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "intro__text", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
               FoldText_default,
               {
                 text: "\u6B22\u8FCE\u6765\u5230\u95F5\u707F\u7684\u9891\u9053",
@@ -20140,7 +20335,7 @@ void main() {
                 style: { letterSpacing: "0.01em", textWrap: "balance" }
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "intro__latin", children: showLatin && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "intro__latin", children: showLatin && /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
               FoldText_default,
               {
                 text: "WELCOME TO MY CHANNEL",
@@ -20158,19 +20353,19 @@ void main() {
                 style: { letterSpacing: "0.34em" }
               }
             ) }),
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(
               "button",
               {
                 type: "button",
                 className: `intro__confirm${showConfirm ? " is-on" : ""}`,
                 onClick: enter,
                 children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { children: "\u786E\u5B9A" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "intro__confirm-arrow", children: "\u2193" })
+                  /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { children: "\u786E\u5B9A" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "intro__confirm-arrow", children: "\u2193" })
                 ]
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: `intro__confirm-hint${showConfirm ? " is-on" : ""}`, children: "\u8FDB\u5165\u7F51\u7AD9 \xB7 \u6216\u6309 Enter" })
+            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("p", { className: `intro__confirm-hint${showConfirm ? " is-on" : ""}`, children: "\u8FDB\u5165\u7F51\u7AD9 \xB7 \u6216\u6309 Enter" })
           ] }) : null
         ]
       }
@@ -20178,9 +20373,9 @@ void main() {
   }
 
   // src/hooks/useReveal.js
-  var import_react9 = __toESM(require_react(), 1);
+  var import_react10 = __toESM(require_react(), 1);
   function useReveal() {
-    (0, import_react9.useEffect)(() => {
+    (0, import_react10.useEffect)(() => {
       const nodes = Array.from(document.querySelectorAll("[data-reveal]"));
       if (!("IntersectionObserver" in window)) {
         nodes.forEach((n) => n.classList.add("is-in"));
@@ -20203,10 +20398,10 @@ void main() {
   }
 
   // src/hooks/useScroll.js
-  var import_react10 = __toESM(require_react(), 1);
+  var import_react11 = __toESM(require_react(), 1);
   function useScrollProgress() {
-    const [p, setP] = (0, import_react10.useState)(0);
-    (0, import_react10.useEffect)(() => {
+    const [p, setP] = (0, import_react11.useState)(0);
+    (0, import_react11.useEffect)(() => {
       let raf = 0;
       const onScroll = () => {
         if (raf) return;
@@ -20228,10 +20423,10 @@ void main() {
     return p;
   }
   function useScrollState(ids) {
-    const [y, setY] = (0, import_react10.useState)(0);
-    const [active, setActive] = (0, import_react10.useState)(ids[0]);
-    const [dark, setDark] = (0, import_react10.useState)(true);
-    (0, import_react10.useEffect)(() => {
+    const [y, setY] = (0, import_react11.useState)(0);
+    const [active, setActive] = (0, import_react11.useState)(ids[0]);
+    const [dark, setDark] = (0, import_react11.useState)(true);
+    (0, import_react11.useEffect)(() => {
       let raf = 0;
       const measure = () => {
         raf = 0;
@@ -20262,37 +20457,37 @@ void main() {
   }
 
   // src/App.jsx
-  var import_jsx_runtime13 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime14 = __toESM(require_jsx_runtime(), 1);
   var skipIntro = () => typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches === true;
   function App() {
-    const ids = (0, import_react11.useMemo)(() => navItems.map((n) => n.id), []);
+    const ids = (0, import_react12.useMemo)(() => navItems.map((n) => n.id), []);
     const progress = useScrollProgress();
     const { y, active, dark } = useScrollState(ids);
-    const [introOn, setIntroOn] = (0, import_react11.useState)(() => !skipIntro());
-    const [locked, setLocked] = (0, import_react11.useState)(() => !skipIntro());
+    const [introOn, setIntroOn] = (0, import_react12.useState)(() => !skipIntro());
+    const [locked, setLocked] = (0, import_react12.useState)(() => !skipIntro());
     useReveal();
-    (0, import_react11.useEffect)(() => {
+    (0, import_react12.useEffect)(() => {
       document.body.classList.toggle("is-locked", locked);
     }, [locked]);
-    return /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(import_jsx_runtime13.Fragment, { children: [
-      introOn && /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Intro, { onEnter: () => setLocked(false), onGone: () => setIntroOn(false) }),
-      /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "progress", style: { width: `${progress}%` } }),
-      /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Nav, { stuck: y > 60, active }),
-      /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Rail, { active, dark }),
-      /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("main", { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Hero, {}),
-        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(About, {}),
-        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Projects, {}),
-        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Contact, {})
+    return /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(import_jsx_runtime14.Fragment, { children: [
+      introOn && /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Intro, { onEnter: () => setLocked(false), onGone: () => setIntroOn(false) }),
+      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "progress", style: { width: `${progress}%` } }),
+      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Nav, { stuck: y > 60, active }),
+      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Rail, { active, dark }),
+      /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("main", { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Hero, {}),
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(About, {}),
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Projects, {}),
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Contact, {})
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "grain", "aria-hidden": "true" })
+      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "grain", "aria-hidden": "true" })
     ] });
   }
 
   // src/main.jsx
-  var import_jsx_runtime14 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime15 = __toESM(require_jsx_runtime(), 1);
   (0, import_client.createRoot)(document.getElementById("root")).render(
-    /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(import_react12.default.StrictMode, { children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(App, {}) })
+    /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(import_react13.default.StrictMode, { children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(App, {}) })
   );
 })();
 /*! Bundled license information:

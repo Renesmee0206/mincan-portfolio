@@ -33,7 +33,7 @@ pnpm preview
 | 00 开场动画 | `src/components/Intro.jsx` | 拖拽撕开牛皮纸快递箱 → 黑场折字 → 进站（每次进站都播） |
 | 01 全屏首页 | `src/components/Hero.jsx` | Prism 极光背景 + 大标题（压在作品流之上）+「What I like」可拖动画作流（`FlexCarousel.jsx`） |
 | 02 个人经历 | `src/components/About.jsx` | 人物图、头像名片、介绍、联系方式、数据、经历 / 教育 / 获奖时间轴 |
-| 03 精选项目 | `src/components/Projects.jsx` | 6 张大卡片 + 设计主张卡片 + 关键词跑马灯 + 成果集锦 |
+| 03 精选项目 | `src/components/Projects.jsx` | 6 张大卡片 + 设计主张卡片 + 关键词跑马灯 + 成果集锦（`BounceCards.jsx`，可洗牌） |
 | 04 联系方式 | `src/components/Contact.jsx` | 整屏收尾页，大标题 + 邮箱 + 电话 + 简历下载 |
 
 配色为**暗色**：近黑留暖调（页面底 `--bg` `#0E0E10`、交替区块 `--bg-2` `#131316`、
@@ -93,6 +93,9 @@ pnpm preview
 
 - 组件：`src/components/FlexCarousel.jsx`（来自 reactbits.dev，`preset="liquid"`，
   用 `ogl` 做 WebGL 变形）；页面上关闭了滚轮捕捉，所以在作品流上滚滚轮照样能翻页面。
+- 底部中间那条**「继续了解我」指引**（`.hero__next`）：双箭头 + 一行小字，
+  箭头用 `nextNudge` 一直往上弹（回弹靠 `cubic-bezier(.34,1.56,.64,1)`），
+  点一下平滑滚到「个人经历」。原来右下角那条「SCROLL」已被它取代。
 - 数据：`src/data/site.js` 的 `likes`（`src` / `title` / `subtitle` / `alt`）。
 - 素材：根目录 `首页图片/` 里的 7 张原图 → 转成 `public/media/like-0N-*.webp`
   （宽高 1200 以内、WebP q84）。
@@ -111,8 +114,8 @@ pnpm preview
 - `profile` 姓名 / 身份 / 邮箱 / 电话 / 所在地 / 求职意向
 - `likes` 首页「What I like」的 7 件作品 / 影像（`heroStats` 已不在首页使用，留给以后）
 - `education` `experience` `awards` 经历与荣誉
-- `projects` 精选项目（标题、副标题、标签、年份、图片、描述）
-- `gallery` 成果集锦缩略图
+- `projects` 精选项目（标题、副标题、标签、年份、图片、描述；`detail` 就是该项目的细节图）
+- `galleryPool` 成果集锦的图片池 —— 由各项目的 `detail` 自动拼出来，不单独养素材
 - `navItems` 导航与侧边章节
 
 图片放在 `public/media/`，均由简历与作品集原始文件导出为 WebP：
@@ -123,9 +126,31 @@ pnpm preview
 | `like-01 … like-07.webp` | 首页「What I like」作品流（源图在根目录 `首页图片/`，打包时内联进 bundle） |
 | `portrait.webp` / `avatar.webp` | 个人经历人物图 / 导航名片头像 |
 | `p-01 … p-06.webp` | 精选项目大卡片 |
-| `g-01 … g-08.webp` | 成果集锦缩略图 |
+| `d-01-1 … d-06-7.webp` | 项目细节图（同时也是成果集锦的图片池，共 39 张） |
 
 替换图片时保持同名即可，无需改代码。
+
+> 项目图（`p-*` / `d-*`）是从根目录 `项目图片/` 里重出的：长边 1800、WebP q82，
+> 六个项目各一个文件夹。重出脚本是 `.codex-build/rebuild-media.py`（不在仓库里）。
+
+---
+
+## 成果集锦（BounceCards）
+
+`src/components/BounceCards.jsx` —— 参考 React Bits 的 BounceCards 写的：
+一叠 5 张（容器窄于 620px 时用 3 张那套落位）扇形摊开，
+gsap `elastic.out(1, 0.5)` 弹入（`IntersectionObserver`，滚进视口才播），
+hover 把两边推开、当前那张摊平并放大一点点。**卡片是彩色的**，没有灰度滤镜。
+
+- 每张卡是 `<button>`，键盘 Tab / 回车能走，点一下滚回它所属的项目卡片并高亮。
+- 数据来自 `site.js` 的 `galleryPool`（= 6 个项目的细节图，39 张）。
+  「洗牌换一组」在 `Projects.jsx` 的 `drawHand()`：整池洗乱后按顺序取，
+  **同一个项目最多 2 张**；换一组会换 `key` 让卡片重新弹一次。
+- ⚠️ `.bounce__slot`（定位盒子）必须保持 `pointer-events: none`：
+  五张卡片的定位盒子都叠在容器中心，不关掉的话会抢走真实鼠标的 hover 和点击。
+- 入场动画作用在 `.bounce__slot` 上（只有 gsap 碰它的 `transform`），
+  hover 那个 `transform` 在里面的 `.bounce__card` 上（只有 CSS transition 碰）——
+  两者分开才不会互相覆盖，改的时候别合并。
 
 ---
 
@@ -135,6 +160,8 @@ pnpm preview
 - 所有区块滚动入场（`IntersectionObserver`，尊重 `prefers-reduced-motion`）
 - 首页「What I like」拖拽 / 滑动 / 点击聚焦（滚轮不被吃，照样翻页）、导航锚点平滑滚动、
   项目卡片灰度 → 彩色悬停
+- 首页底部「继续了解我」指引（箭头一直弹，点一下去个人经历）；
+  成果集锦那一叠卡：hover 推开 / 「洗牌换一组」/ 点一张回到项目
 - 整页叠加极细胶片颗粒，避免纯色背景发"平"
 
 ---
@@ -158,6 +185,7 @@ portfolio-site/
    │  ├─ Intro.jsx  FoldText.jsx     # 开场动画 + 折字
    │  ├─ Hero.jsx  FlexCarousel.jsx  # 首页 + 首页那条作品流（WebGL）
    │  ├─ Prism.jsx                   # 首页背景的极光（React Bits，WebGL）
+   │  ├─ BounceCards.jsx             # 成果集锦那一叠卡（洗牌 + 弹入）
    │  ├─ Nav.jsx  About.jsx  Projects.jsx  ProjectDetail.jsx  Contact.jsx
    │  ├─ SectionHead.jsx  Rail.jsx
    └─ styles/global.css
