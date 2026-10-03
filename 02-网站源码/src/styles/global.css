@@ -1578,6 +1578,17 @@ section[id] {
   border-radius: 11px;
 }
 
+/* 过场条：手机上收窄、字号再降一档，一行放得下 */
+@media (max-width: 768px) {
+  .chapter {
+    padding: clamp(30px, 8.4vw, 48px) 0;
+  }
+
+  .chapter__word {
+    font-size: clamp(23px, 7.2vw, 38px);
+  }
+}
+
 .gallery__foot {
   display: flex;
   flex-direction: column;
@@ -2873,6 +2884,69 @@ section[id] {
 
 .intro__enter {
   height: 52px;
+}
+
+/* =========================================================
+   板块之间的英文过场（React Bits ScrollFloat）
+   —— 注册表里 ScrollFloat.css 的三条规则先原样抄一遍，
+      字的大小 / 颜色等落点交给 .chapter__word 覆盖（必须写在后面）
+   ========================================================= */
+
+.scroll-float {
+  overflow: hidden;
+}
+
+.scroll-float-text {
+  display: inline-block;
+  line-height: 1.5;
+}
+
+.char {
+  display: inline-block;
+}
+
+.chapter {
+  position: relative;
+  z-index: 1;
+  padding: clamp(40px, 4.4vw, 74px) 0;
+  background: var(--bg);
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.chapter__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.chapter__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--grey-500);
+}
+
+.chapter__meta span {
+  color: var(--clay);
+}
+
+/* 落点：比注册表默认的 clamp(1.6rem, 8vw, 10rem) / 900 收一大截，
+   过场是分隔符，不该比正文还抢眼 */
+.chapter__word {
+  font-family: var(--font-sans);
+  font-size: clamp(30px, 4.6vw, 68px);
+  font-weight: 500;
+  line-height: 1.22;
+  letter-spacing: 0.005em;
+  text-align: center;
+  color: var(--ink);
 }
 
 /* =========================================================

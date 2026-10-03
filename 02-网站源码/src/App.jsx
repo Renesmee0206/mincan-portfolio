@@ -6,6 +6,7 @@ import Projects from './components/Projects.jsx'
 import Contact from './components/Contact.jsx'
 import Rail from './components/Rail.jsx'
 import Intro from './components/Intro.jsx'
+import ChapterDivider from './components/ChapterDivider.jsx'
 import { useReveal } from './hooks/useReveal.js'
 import { useScrollProgress, useScrollState } from './hooks/useScroll.js'
 import { navItems } from './data/site.js'
@@ -40,8 +41,11 @@ export default function App() {
 
       <main>
         <Hero />
+        <ChapterDivider no="01" en="About & Experience" cn="个人经历" />
         <About />
+        <ChapterDivider no="02" en="Selected Projects" cn="精选项目" />
         <Projects />
+        <ChapterDivider no="03" en="Contact" cn="联系方式" />
         <Contact />
       </main>
 

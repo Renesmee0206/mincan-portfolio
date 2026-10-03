@@ -7280,11 +7280,11 @@
   });
 
   // src/main.jsx
-  var import_react13 = __toESM(require_react(), 1);
+  var import_react14 = __toESM(require_react(), 1);
   var import_client = __toESM(require_client(), 1);
 
   // src/App.jsx
-  var import_react12 = __toESM(require_react(), 1);
+  var import_react13 = __toESM(require_react(), 1);
 
   // src/data/site.js
   var profile = {
@@ -20376,10 +20376,102 @@ void main() {
     );
   }
 
-  // src/hooks/useReveal.js
+  // src/components/ScrollFloat.jsx
   var import_react10 = __toESM(require_react(), 1);
-  function useReveal() {
+  var import_jsx_runtime14 = __toESM(require_jsx_runtime(), 1);
+  gsapWithCSS.registerPlugin(ScrollTrigger2);
+  var refreshed = false;
+  var scheduleRefresh = () => {
+    if (refreshed) return;
+    refreshed = true;
+    window.setTimeout(() => ScrollTrigger2.refresh(), 60);
+  };
+  function ScrollFloat({
+    children,
+    scrollContainerRef,
+    containerClassName = "",
+    textClassName = "",
+    animationDuration = 1,
+    ease = "back.inOut(2)",
+    scrollStart = "center bottom+=50%",
+    scrollEnd = "bottom bottom-=40%",
+    stagger = 0.03
+  }) {
+    const containerRef = (0, import_react10.useRef)(null);
+    const splitText = (0, import_react10.useMemo)(() => {
+      const text = typeof children === "string" ? children : "";
+      return text.split("").map((char, index) => /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: "char", children: char === " " ? "\xA0" : char }, index));
+    }, [children]);
     (0, import_react10.useEffect)(() => {
+      const el = containerRef.current;
+      if (!el) return void 0;
+      if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return void 0;
+      const scroller = scrollContainerRef && scrollContainerRef.current ? scrollContainerRef.current : window;
+      const charElements = el.querySelectorAll(".char");
+      const tween = gsapWithCSS.fromTo(
+        charElements,
+        {
+          willChange: "opacity, transform",
+          opacity: 0,
+          yPercent: 120,
+          scaleY: 2.3,
+          scaleX: 0.7,
+          transformOrigin: "50% 0%"
+        },
+        {
+          duration: animationDuration,
+          ease,
+          opacity: 1,
+          yPercent: 0,
+          scaleY: 1,
+          scaleX: 1,
+          stagger,
+          scrollTrigger: {
+            trigger: el,
+            scroller,
+            start: scrollStart,
+            end: scrollEnd,
+            scrub: true
+          }
+        }
+      );
+      scheduleRefresh();
+      return () => {
+        tween.scrollTrigger?.kill();
+        tween.kill();
+      };
+    }, [scrollContainerRef, animationDuration, ease, scrollStart, scrollEnd, stagger]);
+    return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("h2", { ref: containerRef, className: `scroll-float ${containerClassName}`.trim(), children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: `scroll-float-text ${textClassName}`.trim(), children: splitText }) });
+  }
+
+  // src/components/ChapterDivider.jsx
+  var import_jsx_runtime15 = __toESM(require_jsx_runtime(), 1);
+  function ChapterDivider({ no, en, cn }) {
+    return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "chapter", children: /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { className: "wrap chapter__inner", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("p", { className: "chapter__meta", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("span", { children: no }),
+        cn
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+        ScrollFloat,
+        {
+          containerClassName: "chapter__float",
+          textClassName: "chapter__word",
+          animationDuration: 1,
+          ease: "back.inOut(2)",
+          scrollStart: "center bottom+=50%",
+          scrollEnd: "bottom bottom-=40%",
+          stagger: 0.03,
+          children: en
+        }
+      )
+    ] }) });
+  }
+
+  // src/hooks/useReveal.js
+  var import_react11 = __toESM(require_react(), 1);
+  function useReveal() {
+    (0, import_react11.useEffect)(() => {
       const nodes = Array.from(document.querySelectorAll("[data-reveal]"));
       if (!("IntersectionObserver" in window)) {
         nodes.forEach((n) => n.classList.add("is-in"));
@@ -20402,10 +20494,10 @@ void main() {
   }
 
   // src/hooks/useScroll.js
-  var import_react11 = __toESM(require_react(), 1);
+  var import_react12 = __toESM(require_react(), 1);
   function useScrollProgress() {
-    const [p, setP] = (0, import_react11.useState)(0);
-    (0, import_react11.useEffect)(() => {
+    const [p, setP] = (0, import_react12.useState)(0);
+    (0, import_react12.useEffect)(() => {
       let raf = 0;
       const onScroll = () => {
         if (raf) return;
@@ -20427,10 +20519,10 @@ void main() {
     return p;
   }
   function useScrollState(ids) {
-    const [y, setY] = (0, import_react11.useState)(0);
-    const [active, setActive] = (0, import_react11.useState)(ids[0]);
-    const [dark, setDark] = (0, import_react11.useState)(true);
-    (0, import_react11.useEffect)(() => {
+    const [y, setY] = (0, import_react12.useState)(0);
+    const [active, setActive] = (0, import_react12.useState)(ids[0]);
+    const [dark, setDark] = (0, import_react12.useState)(true);
+    (0, import_react12.useEffect)(() => {
       let raf = 0;
       const measure = () => {
         raf = 0;
@@ -20461,37 +20553,40 @@ void main() {
   }
 
   // src/App.jsx
-  var import_jsx_runtime14 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime16 = __toESM(require_jsx_runtime(), 1);
   var skipIntro = () => typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches === true;
   function App() {
-    const ids = (0, import_react12.useMemo)(() => navItems.map((n) => n.id), []);
+    const ids = (0, import_react13.useMemo)(() => navItems.map((n) => n.id), []);
     const progress = useScrollProgress();
     const { y, active, dark } = useScrollState(ids);
-    const [introOn, setIntroOn] = (0, import_react12.useState)(() => !skipIntro());
-    const [locked, setLocked] = (0, import_react12.useState)(() => !skipIntro());
+    const [introOn, setIntroOn] = (0, import_react13.useState)(() => !skipIntro());
+    const [locked, setLocked] = (0, import_react13.useState)(() => !skipIntro());
     useReveal();
-    (0, import_react12.useEffect)(() => {
+    (0, import_react13.useEffect)(() => {
       document.body.classList.toggle("is-locked", locked);
     }, [locked]);
-    return /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)(import_jsx_runtime14.Fragment, { children: [
-      introOn && /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Intro, { onEnter: () => setLocked(false), onGone: () => setIntroOn(false) }),
-      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "progress", style: { width: `${progress}%` } }),
-      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Nav, { stuck: y > 60, active }),
-      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Rail, { active, dark }),
-      /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("main", { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Hero, {}),
-        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(About, {}),
-        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Projects, {}),
-        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Contact, {})
+    return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(import_jsx_runtime16.Fragment, { children: [
+      introOn && /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Intro, { onEnter: () => setLocked(false), onGone: () => setIntroOn(false) }),
+      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className: "progress", style: { width: `${progress}%` } }),
+      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Nav, { stuck: y > 60, active }),
+      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Rail, { active, dark }),
+      /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("main", { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Hero, {}),
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(ChapterDivider, { no: "01", en: "About & Experience", cn: "\u4E2A\u4EBA\u7ECF\u5386" }),
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(About, {}),
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(ChapterDivider, { no: "02", en: "Selected Projects", cn: "\u7CBE\u9009\u9879\u76EE" }),
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Projects, {}),
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(ChapterDivider, { no: "03", en: "Contact", cn: "\u8054\u7CFB\u65B9\u5F0F" }),
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Contact, {})
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "grain", "aria-hidden": "true" })
+      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className: "grain", "aria-hidden": "true" })
     ] });
   }
 
   // src/main.jsx
-  var import_jsx_runtime15 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime17 = __toESM(require_jsx_runtime(), 1);
   (0, import_client.createRoot)(document.getElementById("root")).render(
-    /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(import_react13.default.StrictMode, { children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(App, {}) })
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(import_react14.default.StrictMode, { children: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(App, {}) })
   );
 })();
 /*! Bundled license information:
