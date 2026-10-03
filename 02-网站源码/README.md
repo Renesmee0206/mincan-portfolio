@@ -126,7 +126,7 @@ pnpm preview
 | `like-01 … like-07.webp` | 首页「What I like」作品流（源图在根目录 `首页图片/`，打包时内联进 bundle） |
 | `portrait.webp` / `avatar.webp` | 个人经历人物图 / 导航名片头像 |
 | `p-01 … p-06.webp` | 精选项目大卡片 |
-| `d-01-1 … d-06-7.webp` | 项目细节图（同时也是成果集锦的图片池，共 39 张） |
+| `d-01-1 … d-06-7.webp` | 项目细节图（同时也是成果集锦的图片池，共 43 张） |
 
 替换图片时保持同名即可，无需改代码。
 
@@ -143,7 +143,7 @@ gsap `elastic.out(1, 0.5)` 弹入（`IntersectionObserver`，滚进视口才播�
 hover 把两边推开、当前那张摊平并放大一点点。**卡片是彩色的**，没有灰度滤镜。
 
 - 每张卡是 `<button>`，键盘 Tab / 回车能走，点一下滚回它所属的项目卡片并高亮。
-- 数据来自 `site.js` 的 `galleryPool`（= 6 个项目的细节图，39 张）。
+- 数据来自 `site.js` 的 `galleryPool`（= 6 个项目的细节图，43 张）。
   「洗牌换一组」在 `Projects.jsx` 的 `drawHand()`：整池洗乱后按顺序取，
   **同一个项目最多 2 张**；换一组会换 `key` 让卡片重新弹一次。
 - ⚠️ `.bounce__slot`（定位盒子）必须保持 `pointer-events: none`：

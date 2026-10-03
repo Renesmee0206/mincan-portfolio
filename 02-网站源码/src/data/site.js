@@ -218,6 +218,7 @@ export const projects = [
       '/media/d-03-5.webp',
       '/media/d-03-6.webp',
       '/media/d-03-7.webp',
+      '/media/d-03-8.webp',
     ],
   },
   {
@@ -239,6 +240,9 @@ export const projects = [
       '/media/d-04-3.webp',
       '/media/d-04-4.webp',
       '/media/d-04-5.webp',
+      '/media/d-04-6.webp',
+      '/media/d-04-7.webp',
+      '/media/d-04-8.webp',
     ],
   },
   {
