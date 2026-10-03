@@ -12302,26 +12302,10 @@ void main() {
       /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: "hero__scrim" }),
       /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: "hero__grid" }),
       /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "wrap hero__inner", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "hero__top", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("p", { className: "eyebrow", children: [
-            "Portfolio 2026 \u2014 \u6E56\u5317\u7F8E\u672F\u5B66\u9662",
-            /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("i", { className: "hero__eyebrow-tail", children: " \xB7 \u73AF\u5883\u827A\u672F\u8BBE\u8BA1" })
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "hero__top-right", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("p", { className: "hero__meta", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("b", { children: "Base" }),
-              "\u6E56\u5317 \xB7 \u6B66\u6C49"
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("p", { className: "hero__meta", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("b", { children: "Status" }),
-              profile.status
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("p", { className: "hero__meta", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("b", { children: "Contact" }),
-              profile.email
-            ] })
-          ] })
-        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: "hero__top", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("p", { className: "eyebrow", children: [
+          "Portfolio 2026 \u2014 \u6E56\u5317\u7F8E\u672F\u5B66\u9662",
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("i", { className: "hero__eyebrow-tail", children: " \xB7 \u73AF\u5883\u827A\u672F\u8BBE\u8BA1" })
+        ] }) }),
         /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "hero__lead", children: [
           /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("h1", { className: "hero__name", children: [
             /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: "hero__name-cn", children: profile.name }),
@@ -20114,7 +20098,24 @@ void main() {
             /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { children: "\u8FDB\u5165\u7F51\u7AD9" }),
             /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "btn__arrow", children: "\u2192" })
           ] }) : /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(import_jsx_runtime12.Fragment, { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "intro__hint-line", children: isDragging ? "\u7EE7\u7EED\u5411\u53F3\u62D6 \xB7 \u6495\u5F00" : "\u6309\u4F4F\u5411\u53F3\u62D6\u52A8 \xB7 \u6495\u5F00\u7EB8\u7BB1" }),
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "intro__hint-line", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+              FoldText_default,
+              {
+                text: isDragging ? "\u7EE7\u7EED\u5411\u53F3\u62D6 \xB7 \u6495\u5F00" : "\u6309\u4F4F\u5411\u53F3\u62D6\u52A8 \xB7 \u6495\u5F00\u7EB8\u7BB1",
+                splitBy: "char",
+                hinge: "top",
+                duration: 0.65,
+                stagger: 0.045,
+                ease: "power3.out",
+                perspective: 700,
+                creaseShading: 0.55,
+                trigger: "mount",
+                fontSize: "clamp(14px, 1.4vw, 17px)",
+                fontWeight: 500,
+                color: "rgba(255, 255, 255, 0.94)",
+                className: "intro__hint-fold"
+              }
+            ) }),
             /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "intro__hint-arrow", "aria-hidden": "true", children: "\u2192" }),
             /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "intro__hint-sub", ref: pctRef })
           ] }) }),
@@ -20136,7 +20137,7 @@ void main() {
                 fontWeight: 800,
                 color: "#f7f2e8",
                 className: "intro__cjk",
-                style: { letterSpacing: "0.01em" }
+                style: { letterSpacing: "0.01em", textWrap: "balance" }
               }
             ),
             /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "intro__latin", children: showLatin && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(

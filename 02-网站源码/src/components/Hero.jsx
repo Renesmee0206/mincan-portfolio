@@ -54,20 +54,6 @@ export default function Hero() {
             Portfolio 2026 — 湖北美术学院
             <i className="hero__eyebrow-tail"> · 环境艺术设计</i>
           </p>
-          <div className="hero__top-right">
-            <p className="hero__meta">
-              <b>Base</b>
-              湖北 · 武汉
-            </p>
-            <p className="hero__meta">
-              <b>Status</b>
-              {profile.status}
-            </p>
-            <p className="hero__meta">
-              <b>Contact</b>
-              {profile.email}
-            </p>
-          </div>
         </div>
 
         <div className="hero__lead">

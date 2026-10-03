@@ -388,7 +388,22 @@ export default function Intro({ onEnter, onGone }) {
           ) : (
             <>
               <span className="intro__hint-line">
-                {isDragging ? '继续向右拖 · 撕开' : '按住向右拖动 · 撕开纸箱'}
+                {/* 和「欢迎来到闵灿的频道」用同一套折字特效，整面文字才是一套语言 */}
+                <FoldText
+                  text={isDragging ? '继续向右拖 · 撕开' : '按住向右拖动 · 撕开纸箱'}
+                  splitBy="char"
+                  hinge="top"
+                  duration={0.65}
+                  stagger={0.045}
+                  ease="power3.out"
+                  perspective={700}
+                  creaseShading={0.55}
+                  trigger="mount"
+                  fontSize="clamp(14px, 1.4vw, 17px)"
+                  fontWeight={500}
+                  color="rgba(255, 255, 255, 0.94)"
+                  className="intro__hint-fold"
+                />
               </span>
               <span className="intro__hint-arrow" aria-hidden="true">
                 →
@@ -420,7 +435,9 @@ export default function Intro({ onEnter, onGone }) {
             fontWeight={800}
             color="#f7f2e8"
             className="intro__cjk"
-            style={{ letterSpacing: '0.01em' }}
+            /* 手机窄屏上这 9 个字会折行；balance 让它均分成两行，
+               不然最后只有一个「道」字孤零零留在第二行 */
+            style={{ letterSpacing: '0.01em', textWrap: 'balance' }}
           />
 
           <div className="intro__latin">{showLatin && <FoldText

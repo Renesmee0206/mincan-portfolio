@@ -702,27 +702,6 @@ section[id] {
   color: rgba(255, 255, 255, 0.6);
 }
 
-.hero__top-right {
-  display: flex;
-  gap: 44px;
-  text-align: right;
-}
-
-.hero__meta {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.42);
-  line-height: 2;
-}
-
-.hero__meta b {
-  display: block;
-  color: rgba(255, 255, 255, 0.86);
-  font-weight: 500;
-}
-
 .hero__mid {
   padding: 30px 0 20px;
 }
@@ -2573,6 +2552,12 @@ section[id] {
   flex-direction: column;
   gap: 12px;
   pointer-events: none;
+  transition: opacity 0.3s linear;
+}
+
+/* 撕到底的瞬间，黑边和快递单跟着整屏一起变黑，不能留到「欢迎来到闵灿的频道」那一面 */
+.intro.is-sealing .intro__from {
+  opacity: 0;
 }
 
 @media (min-aspect-ratio: 8/5) {
@@ -2599,6 +2584,9 @@ section[id] {
 .intro__veil {
   position: absolute;
   inset: 0;
+  /* z-index 4：要盖住下面的黑边、快递单和进度条（它们都是 z-index 3）。
+     撕到底时整屏一起变黑，不把任何东西留到「欢迎来到闵灿的频道」那一面。 */
+  z-index: 4;
   background: #0b0b0d;
   opacity: 0;
   transition: opacity 0.6s linear;
@@ -2630,6 +2618,13 @@ section[id] {
   z-index: 4;
   pointer-events: none;
   background: linear-gradient(180deg, transparent 0%, rgba(8, 8, 10, 0.28) 55%, rgba(8, 8, 10, 0.6) 100%);
+  transition: opacity 0.5s linear;
+}
+
+/* 这层本来只为压暗牛皮纸、让拖拽提示读得清。撕到底之后它留在黑场上，
+   会在下半屏看到一条很淡的渐变带，所以跟着整屏一起灭。 */
+.intro.is-sealing .intro__scrim {
+  opacity: 0;
 }
 
 .intro__skip {
@@ -2692,6 +2687,12 @@ section[id] {
   text-shadow: 0 2px 20px rgba(0, 0, 0, 0.55);
 }
 
+/* 折字默认 letter-spacing 是 -0.04em（拉丁标题用），中文提示要放开一点 */
+.intro__hint-fold {
+  letter-spacing: 0.16em;
+  line-height: 1.25;
+}
+
 .intro__hint-arrow {
   font-size: 22px;
   line-height: 1;
@@ -2728,8 +2729,14 @@ section[id] {
   right: 0;
   bottom: 0;
   height: 2px;
-  z-index: 5;
+  /* 压在 veil（z-index 4）下面：撕到底之后这条拉条不能还留在下一面 */
+  z-index: 3;
   background: rgba(255, 255, 255, 0.16);
+  transition: opacity 0.25s linear;
+}
+
+.intro.is-sealing .intro__bar {
+  opacity: 0;
 }
 
 .intro__bar i {
