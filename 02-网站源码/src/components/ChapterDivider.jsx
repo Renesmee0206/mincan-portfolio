@@ -1,8 +1,9 @@
 import ScrollFloat from './ScrollFloat.jsx'
 
 /**
- * 板块之间那一小条过场：一个英文大字（滚到跟前逐字浮上来）+ 一行小标注。
- * 上下留白刻意收得比较窄（.chapter 的 padding），别让它变成一整屏。
+ * 板块之间的过场：**一整屏的黑**（.chapter 高度 = 100svh），
+ * 屏幕上只有一行小标注 + 一个英文大字，字滚到跟前逐字从下面浮上来，
+ * 浮完再跟着滚出上边，下一部分才接上来。放大 / 缩短都改 global.css 里 .chapter 那几条。
  */
 export default function ChapterDivider({ no, en, cn }) {
   return (

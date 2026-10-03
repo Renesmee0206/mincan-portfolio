@@ -35,7 +35,7 @@ pnpm preview
 | 02 个人经历 | `src/components/About.jsx` | 人物图、头像名片、介绍、联系方式、数据、经历 / 教育 / 获奖时间轴 |
 | 03 精选项目 | `src/components/Projects.jsx` | 6 张大卡片 + 设计主张卡片 + 关键词跑马灯 + 成果集锦（`BounceCards.jsx`，可洗牌） |
 | 04 联系方式 | `src/components/Contact.jsx` | 整屏收尾页，大标题 + 邮箱 + 电话 + 简历下载 |
-| — 板块过场 | `src/components/ChapterDivider.jsx`（内用 `ScrollFloat.jsx`） | 板块之间那条英文大字：`About & Experience` / `Selected Projects` / `Contact`，滚到跟前逐字浮上来 |
+| — 板块过场 | `src/components/ChapterDivider.jsx`（内用 `ScrollFloat.jsx`） | **一整屏的黑**，中间一行英文大字：`About & Experience` / `Selected Projects` / `Contact`，滚到跟前逐字浮上来，浮完跟着滚出上边 |
 
 配色为**暗色**：近黑留暖调（页面底 `--bg` `#0E0E10`、交替区块 `--bg-2` `#131316`、
 卡面 `--bg-3` `#1A1A1F`），配陶土、蓝灰、雾绿、紫灰四个低饱和点缀色
@@ -164,8 +164,9 @@ hover 把两边推开、当前那张摊平并放大一点点。**卡片是彩色
 - 首页底部「继续了解我」指引（箭头一直弹，点一下去个人经历）；
   成果集锦那一叠卡：hover 推开 / 「洗牌换一组」/ 点一张回到项目
 - 板块之间的**英文过场**（React Bits 的 ScrollFloat，JS+CSS 变体）：
-  滚到跟前逐字从下面浮上来（`scrub` 绑滚动进度，不是播完就完）；
-  系统开了「减少动态效果」时字直接显示。上下留白刻意收窄，只当过场、不当一整屏
+  一整屏的黑（`.chapter` 高 `100svh`），字滚到跟前逐字从下面浮上来
+  （`scrub` 绑滚动进度，不是播完就完），浮到位时正好铺满一屏，再跟着滚出上边；
+  系统开了「减少动态效果」时字直接显示
 - 整页叠加极细胶片颗粒，避免纯色背景发"平"
 
 ---

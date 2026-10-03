@@ -1578,17 +1578,6 @@ section[id] {
   border-radius: 11px;
 }
 
-/* 过场条：手机上收窄、字号再降一档，一行放得下 */
-@media (max-width: 768px) {
-  .chapter {
-    padding: clamp(30px, 8.4vw, 48px) 0;
-  }
-
-  .chapter__word {
-    font-size: clamp(23px, 7.2vw, 38px);
-  }
-}
-
 .gallery__foot {
   display: flex;
   flex-direction: column;
@@ -2908,17 +2897,21 @@ section[id] {
 .chapter {
   position: relative;
   z-index: 1;
-  padding: clamp(40px, 4.4vw, 74px) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: clamp(56px, 7vw, 120px) 0;
   background: var(--bg);
-  border-top: 1px solid var(--line-soft);
-  border-bottom: 1px solid var(--line-soft);
 }
 
 .chapter__inner {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 22px;
   text-align: center;
 }
 
@@ -2927,7 +2920,7 @@ section[id] {
   align-items: center;
   gap: 12px;
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--grey-500);
@@ -2937,14 +2930,14 @@ section[id] {
   color: var(--clay);
 }
 
-/* 落点：比注册表默认的 clamp(1.6rem, 8vw, 10rem) / 900 收一大截，
-   过场是分隔符，不该比正文还抢眼 */
+/* 一整屏的黑就为这一行字：尺寸往注册表原本的 clamp(1.6rem, 8vw, 10rem) / 900 靠，
+   只把上限压到一行放得下为止（1700px 栏宽内都不换行） */
 .chapter__word {
   font-family: var(--font-sans);
-  font-size: clamp(30px, 4.6vw, 68px);
-  font-weight: 500;
-  line-height: 1.22;
-  letter-spacing: 0.005em;
+  font-size: clamp(40px, 7vw, 122px);
+  font-weight: 700;
+  line-height: 1.16;
+  letter-spacing: -0.01em;
   text-align: center;
   color: var(--ink);
 }
@@ -2966,6 +2959,21 @@ section[id] {
 
   section[id] {
     scroll-margin-top: 72px;
+  }
+
+  /* 过场：仍然占满一屏，只是字号降一档、左右留窄一点，保证一行放得下。
+     这段必须放在基础 .chapter 规则后面，否则会被上面的 clamp 盖掉。 */
+  .chapter {
+    padding: clamp(40px, 12vw, 72px) 0;
+  }
+
+  .chapter__inner {
+    gap: 16px;
+    width: min(1700px, 100% - 28px);
+  }
+
+  .chapter__word {
+    font-size: clamp(22px, 8.4vw, 46px);
   }
 
   .nav__inner {
