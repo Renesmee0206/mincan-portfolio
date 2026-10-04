@@ -98,7 +98,7 @@ pnpm preview
   箭头用 `nextNudge` 一直往上弹（回弹靠 `cubic-bezier(.34,1.56,.64,1)`），
   点一下平滑滚到「个人经历」。原来右下角那条「SCROLL」已被它取代。
 - 数据：`src/data/site.js` 的 `likes`（`src` / `title` / `subtitle` / `alt`）。
-- 素材：根目录 `首页图片/` 里的 7 张原图 → 转成 `public/media/like-0N-*.webp`
+- 素材：`素材与原件/首页图片/` 里的 7 张原图 → 转成 `public/media/like-0N-*.webp`
   （宽高 1200 以内、WebP q84）。
 - 卡片尺寸：`cardHeight={0.73}`（占轨道高度的 73%）。轨道下限
   `clamp(340px, 46svh, 560px)`——觉得卡片还要更大/更小，改这两个数就行。
@@ -124,14 +124,14 @@ pnpm preview
 | 文件 | 用途 |
 | --- | --- |
 | `intro-open.mp4` | 开场动画：牛皮纸快递盒撕裂特写 |
-| `like-01 … like-07.webp` | 首页「What I like」作品流（源图在根目录 `首页图片/`，打包时内联进 bundle） |
+| `like-01 … like-07.webp` | 首页「What I like」作品流（源图在`素材与原件/首页图片/`，打包时内联进 bundle） |
 | `portrait.webp` / `avatar.webp` | 个人经历人物图 / 导航名片头像 |
 | `p-01 … p-06.webp` | 精选项目大卡片 |
 | `d-01-1 … d-06-7.webp`（03 / 04 排到 `-8`） | 项目细节图（同时也是成果集锦的图片池，共 43 张） |
 
 替换图片时保持同名即可，无需改代码。
 
-> 项目图（`p-*` / `d-*`）是从根目录 `项目图片/` 里重出的：长边 1800、WebP q82，
+> 项目图（`p-*` / `d-*`）是从`素材与原件/项目图片/` 里重出的：长边 1800、WebP q82，
 > 六个项目各一个文件夹。重出脚本是 `.codex-build/rebuild-media.py`（不在仓库里）。
 
 ---
