@@ -2,14 +2,11 @@ import { useCallback, useState } from 'react'
 import SectionHead from './SectionHead.jsx'
 import InfiniteSpiral from './InfiniteSpiral.jsx'
 import PhotoLightbox from './PhotoLightbox.jsx'
-import { useMediaQuery } from '../hooks/useMediaQuery.js'
 import { profile, aboutStats, education, experience, awards, personalPhotos } from '../data/site.js'
 
 export default function About() {
   const rows = [...experience, ...education]
   const [shot, setShot] = useState(null)
-  // 手机上换一套几何：卡片小一点、竖着拉开一点，屏幕上只留五六张，不然会糊成一堆
-  const narrow = useMediaQuery('(max-width: 768px)')
   const stepShot = useCallback(
     (delta) =>
       setShot((i) =>
@@ -29,12 +26,32 @@ export default function About() {
         />
 
         <div className="about__body">
-          <div className="about__visual" data-reveal>
-            <figure className="about__photo">
-              <img src="/media/portrait.webp" alt="闵灿" />
-              <figcaption className="about__photo-tag">Portrait / 2026</figcaption>
-            </figure>
-          </div>
+          {/* 左栏：个人照片墙（React Bits 的 InfiniteSpiral），占满这一栏、自己慢慢转。
+              源图在根目录 素材与原件/个人图片/，重出脚本 .codex-build/build-people.py */}
+          <figure className="about__wall" data-reveal>
+            <div className="about__wall-stage">
+              <InfiniteSpiral
+                items={personalPhotos}
+                animationMode="all"
+                speed={0.5}
+                radius={260}
+                cardWidth={132}
+                cardHeight={132}
+                verticalSpacing={92}
+                perspective={1200}
+                cardsPerTurn={9}
+                cardRadius={14}
+                centerScale={1.2}
+                edgeFade={0.34}
+                edgeBlur={5}
+                onSelect={setShot}
+              />
+            </div>
+            <figcaption className="about__wall-tag">
+              <span>Personal / {personalPhotos.length}</span>
+              <span>自动流动 · 停住看 · 点一张放大</span>
+            </figcaption>
+          </figure>
 
           <div className="about__intro" data-reveal style={{ transitionDelay: '120ms' }}>
             <h2>
@@ -102,37 +119,6 @@ export default function About() {
             </div>
           </div>
         </div>
-
-        {/* 个人照片墙：React Bits 的 InfiniteSpiral。
-            源图在根目录 素材与原件/个人图片/，重出脚本 .codex-build/build-people.py */}
-        <figure className="wall">
-          <figcaption className="wall__head">
-            <h3>个人影像</h3>
-            <p>
-              Personal · {String(personalPhotos.length).padStart(2, '0')} 张 · 停住不动 · 拖动翻看 ·
-              点一张放大
-            </p>
-          </figcaption>
-
-          <div className="wall__stage">
-            <InfiniteSpiral
-              items={personalPhotos}
-              animationMode="all"
-              speed={0.5}
-              radius={narrow ? 240 : 380}
-              cardWidth={narrow ? 132 : 152}
-              cardHeight={narrow ? 132 : 152}
-              verticalSpacing={narrow ? 92 : 58}
-              perspective={1200}
-              cardsPerTurn={narrow ? 8 : 10}
-              cardRadius={narrow ? 14 : 16}
-              centerScale={1.2}
-              edgeFade={0.34}
-              edgeBlur={5}
-              onSelect={setShot}
-            />
-          </div>
-        </figure>
 
         <div className="timeline" data-reveal>
           <div className="timeline__label">

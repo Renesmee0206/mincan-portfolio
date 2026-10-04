@@ -1040,39 +1040,17 @@ section[id] {
       hover 的放大 / 描边只能挂在内层，写外层会被覆盖
    ========================================================= */
 
-.wall {
-  margin: 0;
-  margin-top: clamp(72px, 7.6vw, 118px);
-  border-top: 1px solid var(--line);
-  padding-top: clamp(24px, 2.4vw, 38px);
-}
-
-.wall__head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 28px;
-}
-
-.wall__head h3 {
-  font-size: clamp(20px, 1.6vw, 26px);
-  font-weight: 500;
-  letter-spacing: -0.005em;
-}
-
-.wall__head p {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--grey-500);
-  text-align: right;
-}
-
-.wall__stage {
+/* 个人经历的左栏就是这面照片墙：跟着右栏文字的高度撑满，自己慢慢转。
+   右下角那枚小标签沿用原来 PORTRAIT / 2026 那一款。 */
+.about__wall {
   position: relative;
-  height: clamp(430px, 33vw, 540px);
-  margin-top: 14px;
+  margin: 0;
+  min-height: clamp(440px, 36vw, 560px);
+}
+
+.about__wall-stage {
+  position: absolute;
+  inset: 0;
   /* 上下用一层渐隐收掉：螺旋走到两头是「淡出」而不是被硬切一刀 */
   -webkit-mask-image: linear-gradient(
     to bottom,
@@ -1082,6 +1060,32 @@ section[id] {
     transparent 100%
   );
   mask-image: linear-gradient(to bottom, transparent 0, #000 15%, #000 85%, transparent 100%);
+}
+
+.about__wall-tag {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 20px;
+  background: rgba(10, 10, 12, 0.66);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  pointer-events: none;
+}
+
+.about__wall-tag span:last-child {
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  color: var(--grey-500);
 }
 
 .infinite-spiral {
@@ -3258,22 +3262,8 @@ section[id] {
 
   /* 过场：仍然占满一屏，只是字号降一档、左右留窄一点，保证一行放得下。
      这段必须放在基础 .chapter 规则后面，否则会被上面的 clamp 盖掉。 */
-  .wall {
-    margin-top: clamp(56px, 14vw, 84px);
-  }
-
-  .wall__head {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-
-  .wall__head p {
-    text-align: left;
-  }
-
-  .wall__stage {
-    height: clamp(380px, 104vw, 460px);
+  .about__wall {
+    min-height: clamp(380px, 104vw, 460px);
   }
 
   .lightbox__nav {

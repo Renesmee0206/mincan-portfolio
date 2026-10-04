@@ -7280,11 +7280,11 @@
   });
 
   // src/main.jsx
-  var import_react18 = __toESM(require_react(), 1);
+  var import_react17 = __toESM(require_react(), 1);
   var import_client = __toESM(require_client(), 1);
 
   // src/App.jsx
-  var import_react17 = __toESM(require_react(), 1);
+  var import_react16 = __toESM(require_react(), 1);
 
   // src/data/site.js
   var profile = {
@@ -12412,7 +12412,7 @@ void main() {
   }
 
   // src/components/About.jsx
-  var import_react7 = __toESM(require_react(), 1);
+  var import_react6 = __toESM(require_react(), 1);
 
   // src/components/SectionHead.jsx
   var import_jsx_runtime5 = __toESM(require_jsx_runtime(), 1);
@@ -12780,29 +12780,12 @@ void main() {
     );
   }
 
-  // src/hooks/useMediaQuery.js
-  var import_react6 = __toESM(require_react(), 1);
-  function useMediaQuery(query) {
-    const [matches, setMatches] = (0, import_react6.useState)(
-      () => typeof window === "undefined" ? false : window.matchMedia(query).matches
-    );
-    (0, import_react6.useEffect)(() => {
-      const mq = window.matchMedia(query);
-      const onChange = () => setMatches(mq.matches);
-      onChange();
-      mq.addEventListener("change", onChange);
-      return () => mq.removeEventListener("change", onChange);
-    }, [query]);
-    return matches;
-  }
-
   // src/components/About.jsx
   var import_jsx_runtime8 = __toESM(require_jsx_runtime(), 1);
   function About() {
     const rows = [...experience, ...education];
-    const [shot, setShot] = (0, import_react7.useState)(null);
-    const narrow = useMediaQuery("(max-width: 768px)");
-    const stepShot = (0, import_react7.useCallback)(
+    const [shot, setShot] = (0, import_react6.useState)(null);
+    const stepShot = (0, import_react6.useCallback)(
       (delta) => setShot(
         (i) => i == null ? i : (i + delta + personalPhotos.length) % personalPhotos.length
       ),
@@ -12820,10 +12803,34 @@ void main() {
           }
         ),
         /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "about__body", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "about__visual", "data-reveal": true, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("figure", { className: "about__photo", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("img", { src: "media/portrait.webp", alt: "\u95F5\u707F" }),
-            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("figcaption", { className: "about__photo-tag", children: "Portrait / 2026" })
-          ] }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("figure", { className: "about__wall", "data-reveal": true, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "about__wall-stage", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+              InfiniteSpiral,
+              {
+                items: personalPhotos,
+                animationMode: "all",
+                speed: 0.5,
+                radius: 260,
+                cardWidth: 132,
+                cardHeight: 132,
+                verticalSpacing: 92,
+                perspective: 1200,
+                cardsPerTurn: 9,
+                cardRadius: 14,
+                centerScale: 1.2,
+                edgeFade: 0.34,
+                edgeBlur: 5,
+                onSelect: setShot
+              }
+            ) }),
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("figcaption", { className: "about__wall-tag", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", { children: [
+                "Personal / ",
+                personalPhotos.length
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { children: "\u81EA\u52A8\u6D41\u52A8 \xB7 \u505C\u4F4F\u770B \xB7 \u70B9\u4E00\u5F20\u653E\u5927" })
+            ] })
+          ] }),
           /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "about__intro", "data-reveal": true, style: { transitionDelay: "120ms" }, children: [
             /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("h2", { children: [
               "\u5148\u6709\u60F3\u8BB2\u7684\u4E8B\uFF0C",
@@ -12878,35 +12885,6 @@ void main() {
               /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("i", { children: s.note })
             ] }, s.label)) })
           ] })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("figure", { className: "wall", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("figcaption", { className: "wall__head", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("h3", { children: "\u4E2A\u4EBA\u5F71\u50CF" }),
-            /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("p", { children: [
-              "Personal \xB7 ",
-              String(personalPhotos.length).padStart(2, "0"),
-              " \u5F20 \xB7 \u505C\u4F4F\u4E0D\u52A8 \xB7 \u62D6\u52A8\u7FFB\u770B \xB7 \u70B9\u4E00\u5F20\u653E\u5927"
-            ] })
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "wall__stage", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
-            InfiniteSpiral,
-            {
-              items: personalPhotos,
-              animationMode: "all",
-              speed: 0.5,
-              radius: narrow ? 240 : 380,
-              cardWidth: narrow ? 132 : 152,
-              cardHeight: narrow ? 132 : 152,
-              verticalSpacing: narrow ? 92 : 58,
-              perspective: 1200,
-              cardsPerTurn: narrow ? 8 : 10,
-              cardRadius: narrow ? 14 : 16,
-              centerScale: 1.2,
-              edgeFade: 0.34,
-              edgeBlur: 5,
-              onSelect: setShot
-            }
-          ) })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "timeline", "data-reveal": true, children: [
           /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "timeline__label", children: [
@@ -12971,13 +12949,13 @@ void main() {
   }
 
   // src/components/Projects.jsx
-  var import_react10 = __toESM(require_react(), 1);
+  var import_react9 = __toESM(require_react(), 1);
 
   // src/components/ProjectDetail.jsx
-  var import_react8 = __toESM(require_react(), 1);
+  var import_react7 = __toESM(require_react(), 1);
   var import_jsx_runtime9 = __toESM(require_jsx_runtime(), 1);
   function ProjectDetail({ project, onClose, returnFocusTo }) {
-    const shots = (0, import_react8.useMemo)(
+    const shots = (0, import_react7.useMemo)(
       () => [
         { type: "image", src: project.image },
         ...project.video ? [{ type: "video", src: project.video }] : [],
@@ -12985,11 +12963,11 @@ void main() {
       ],
       [project]
     );
-    const [active, setActive] = (0, import_react8.useState)(0);
-    const closeRef = (0, import_react8.useRef)(null);
+    const [active, setActive] = (0, import_react7.useState)(0);
+    const closeRef = (0, import_react7.useRef)(null);
     const current = shots[active];
     const step = (delta) => setActive((i) => (i + delta + shots.length) % shots.length);
-    (0, import_react8.useEffect)(() => {
+    (0, import_react7.useEffect)(() => {
       const onKey = (e) => {
         if (e.target?.tagName === "VIDEO") return;
         if (e.key === "Escape") onClose();
@@ -13113,7 +13091,7 @@ void main() {
   }
 
   // src/components/BounceCards.jsx
-  var import_react9 = __toESM(require_react(), 1);
+  var import_react8 = __toESM(require_react(), 1);
 
   // node_modules/.pnpm/gsap@3.13.0/node_modules/gsap/gsap-core.js
   function _assertThisInitialized(self) {
@@ -17407,10 +17385,10 @@ void main() {
   var NARROW = 620;
   var clamp4 = (min, value, max) => Math.min(max, Math.max(min, value));
   function BounceCards({ items = [], onPick, className = "" }) {
-    const wrapRef = (0, import_react9.useRef)(null);
-    const [width, setWidth] = (0, import_react9.useState)(0);
-    const [hovered, setHovered] = (0, import_react9.useState)(-1);
-    (0, import_react9.useLayoutEffect)(() => {
+    const wrapRef = (0, import_react8.useRef)(null);
+    const [width, setWidth] = (0, import_react8.useState)(0);
+    const [hovered, setHovered] = (0, import_react8.useState)(-1);
+    (0, import_react8.useLayoutEffect)(() => {
       const el = wrapRef.current;
       if (!el) return void 0;
       const measure = () => setWidth(el.clientWidth);
@@ -17428,7 +17406,7 @@ void main() {
     const cards = items.slice(0, layout.length);
     const cardW = width ? clamp4(96, width / (narrow ? 3.3 : 4.5), 250) : 200;
     const push = cardW * 0.52;
-    (0, import_react9.useEffect)(() => {
+    (0, import_react8.useEffect)(() => {
       const el = wrapRef.current;
       if (!el) return void 0;
       const slots = el.querySelectorAll(".bounce__slot");
@@ -17539,14 +17517,14 @@ void main() {
     return hand;
   }
   function Projects() {
-    const [openId, setOpenId] = (0, import_react10.useState)(null);
-    const [flashId, setFlashId] = (0, import_react10.useState)(null);
-    const [hand, setHand] = (0, import_react10.useState)(() => drawHand());
-    const [round, setRound] = (0, import_react10.useState)(0);
-    const openerRef = (0, import_react10.useRef)(null);
-    const flashTimer = (0, import_react10.useRef)(0);
+    const [openId, setOpenId] = (0, import_react9.useState)(null);
+    const [flashId, setFlashId] = (0, import_react9.useState)(null);
+    const [hand, setHand] = (0, import_react9.useState)(() => drawHand());
+    const [round, setRound] = (0, import_react9.useState)(0);
+    const openerRef = (0, import_react9.useRef)(null);
+    const flashTimer = (0, import_react9.useRef)(0);
     const openProject = projects.find((p) => p.id === openId) || null;
-    (0, import_react10.useEffect)(() => () => window.clearTimeout(flashTimer.current), []);
+    (0, import_react9.useEffect)(() => () => window.clearTimeout(flashTimer.current), []);
     const jumpToProject = (pid) => {
       const el = document.getElementById(pid);
       if (!el) return;
@@ -17685,7 +17663,7 @@ void main() {
   }
 
   // src/components/Contact.jsx
-  var import_react11 = __toESM(require_react(), 1);
+  var import_react10 = __toESM(require_react(), 1);
   var import_jsx_runtime12 = __toESM(require_jsx_runtime(), 1);
   async function writeClipboard(text) {
     try {
@@ -17710,9 +17688,9 @@ void main() {
     }
   }
   function Contact() {
-    const [toast, setToast] = (0, import_react11.useState)("");
-    const timer = (0, import_react11.useRef)(0);
-    (0, import_react11.useEffect)(() => () => window.clearTimeout(timer.current), []);
+    const [toast, setToast] = (0, import_react10.useState)("");
+    const timer = (0, import_react10.useRef)(0);
+    (0, import_react10.useEffect)(() => () => window.clearTimeout(timer.current), []);
     const copy6 = async (text, label) => {
       const ok = await writeClipboard(text);
       setToast(ok ? `${label}\u5DF2\u590D\u5236` : "\u590D\u5236\u5931\u8D25\uFF0C\u8BF7\u624B\u52A8\u9009\u62E9");
@@ -17853,10 +17831,10 @@ void main() {
   }
 
   // src/components/Intro.jsx
-  var import_react13 = __toESM(require_react(), 1);
+  var import_react12 = __toESM(require_react(), 1);
 
   // src/components/FoldText.jsx
-  var import_react12 = __toESM(require_react(), 1);
+  var import_react11 = __toESM(require_react(), 1);
 
   // node_modules/.pnpm/gsap@3.13.0/node_modules/gsap/Observer.js
   function _defineProperties(target, props) {
@@ -20271,12 +20249,12 @@ void main() {
     className = "",
     style = {}
   }) => {
-    const rootRef = (0, import_react12.useRef)(null);
-    const timelineRef = (0, import_react12.useRef)(null);
+    const rootRef = (0, import_react11.useRef)(null);
+    const timelineRef = (0, import_react11.useRef)(null);
     const hingeConfig = HINGE_CONFIG[hinge] || HINGE_CONFIG.top;
     const safeCrease = clamp5(creaseShading, 0, 1);
     const safePerspective = Math.max(120, perspective2);
-    const segments = (0, import_react12.useMemo)(() => {
+    const segments = (0, import_react11.useMemo)(() => {
       let segmentIndex = 0;
       const renderSegment = (content, key, split = splitBy) => {
         segmentIndex += 1;
@@ -20314,7 +20292,7 @@ void main() {
         return renderSegment(char === " " ? "\xA0" : char, `segment-char-${index}`);
       });
     }, [text, splitBy, hinge, hingeConfig.origin, safePerspective]);
-    (0, import_react12.useEffect)(() => {
+    (0, import_react11.useEffect)(() => {
       if (typeof window === "undefined") return void 0;
       const root = rootRef.current;
       if (!root) return void 0;
@@ -20483,37 +20461,37 @@ void main() {
     };
   }
   function Intro({ onEnter, onGone }) {
-    const [stage, setStage] = (0, import_react13.useState)("box");
-    const [dragging, setDragging] = (0, import_react13.useState)(false);
-    const [ready, setReady] = (0, import_react13.useState)(false);
-    const [failed, setFailed] = (0, import_react13.useState)(false);
-    const [showLatin, setShowLatin] = (0, import_react13.useState)(false);
-    const [showConfirm, setShowConfirm] = (0, import_react13.useState)(false);
-    const [showFrom2, setShowFrom2] = (0, import_react13.useState)(false);
-    const videoRef = (0, import_react13.useRef)(null);
-    const barRef = (0, import_react13.useRef)(null);
-    const pctRef = (0, import_react13.useRef)(null);
-    const accRef = (0, import_react13.useRef)(0);
-    const dragRef = (0, import_react13.useRef)(null);
-    const seekRef = (0, import_react13.useRef)(-1);
-    const autoRef = (0, import_react13.useRef)(0);
-    const sealedRef = (0, import_react13.useRef)(false);
-    const timersRef = (0, import_react13.useRef)([]);
-    const soundRef = (0, import_react13.useRef)(null);
-    const later = (0, import_react13.useCallback)((fn, ms) => {
+    const [stage, setStage] = (0, import_react12.useState)("box");
+    const [dragging, setDragging] = (0, import_react12.useState)(false);
+    const [ready, setReady] = (0, import_react12.useState)(false);
+    const [failed, setFailed] = (0, import_react12.useState)(false);
+    const [showLatin, setShowLatin] = (0, import_react12.useState)(false);
+    const [showConfirm, setShowConfirm] = (0, import_react12.useState)(false);
+    const [showFrom2, setShowFrom2] = (0, import_react12.useState)(false);
+    const videoRef = (0, import_react12.useRef)(null);
+    const barRef = (0, import_react12.useRef)(null);
+    const pctRef = (0, import_react12.useRef)(null);
+    const accRef = (0, import_react12.useRef)(0);
+    const dragRef = (0, import_react12.useRef)(null);
+    const seekRef = (0, import_react12.useRef)(-1);
+    const autoRef = (0, import_react12.useRef)(0);
+    const sealedRef = (0, import_react12.useRef)(false);
+    const timersRef = (0, import_react12.useRef)([]);
+    const soundRef = (0, import_react12.useRef)(null);
+    const later = (0, import_react12.useCallback)((fn, ms) => {
       timersRef.current.push(window.setTimeout(fn, ms));
     }, []);
-    const sound = (0, import_react13.useCallback)(() => {
+    const sound = (0, import_react12.useCallback)(() => {
       if (!soundRef.current) soundRef.current = createTearSound();
       return soundRef.current;
     }, []);
-    const paint = (0, import_react13.useCallback)((v) => {
+    const paint = (0, import_react12.useCallback)((v) => {
       if (barRef.current) barRef.current.style.transform = `scaleX(${v})`;
       if (pctRef.current) {
         pctRef.current.textContent = v > 0 && v < 1 ? `\u5DF2\u6495\u5F00 ${Math.round(v * 100)}%` : "\u4E5F\u53EF\u4EE5\u76F4\u63A5\u6309 Enter / \u7A7A\u683C";
       }
     }, []);
-    (0, import_react13.useEffect)(() => {
+    (0, import_react12.useEffect)(() => {
       const video = videoRef.current;
       if (!video) return void 0;
       const onMeta = () => {
@@ -20533,7 +20511,7 @@ void main() {
         video.removeEventListener("error", onError);
       };
     }, []);
-    (0, import_react13.useEffect)(
+    (0, import_react12.useEffect)(
       () => () => {
         timersRef.current.forEach((t) => window.clearTimeout(t));
         if (autoRef.current) cancelAnimationFrame(autoRef.current);
@@ -20542,7 +20520,7 @@ void main() {
       },
       []
     );
-    (0, import_react13.useEffect)(() => {
+    (0, import_react12.useEffect)(() => {
       if (!ready) return void 0;
       let raf = 0;
       const tick = () => {
@@ -20562,13 +20540,13 @@ void main() {
       raf = requestAnimationFrame(tick);
       return () => cancelAnimationFrame(raf);
     }, [ready]);
-    (0, import_react13.useEffect)(() => {
+    (0, import_react12.useEffect)(() => {
       paint(accRef.current);
     }, [dragging, stage, failed, paint]);
-    (0, import_react13.useEffect)(() => {
+    (0, import_react12.useEffect)(() => {
       later(() => setShowFrom2(true), 320);
     }, [later]);
-    const seal = (0, import_react13.useCallback)(() => {
+    const seal = (0, import_react12.useCallback)(() => {
       if (sealedRef.current) return;
       sealedRef.current = true;
       accRef.current = 1;
@@ -20608,7 +20586,7 @@ void main() {
       setDragging(false);
       soundRef.current?.stop();
     };
-    const autoOpen = (0, import_react13.useCallback)(() => {
+    const autoOpen = (0, import_react12.useCallback)(() => {
       if (stage !== "box" || failed) return;
       const from = accRef.current;
       const start = performance.now();
@@ -20626,7 +20604,7 @@ void main() {
       };
       autoRef.current = requestAnimationFrame(step);
     }, [failed, paint, seal, stage]);
-    const enter = (0, import_react13.useCallback)(() => {
+    const enter = (0, import_react12.useCallback)(() => {
       if (stage === "leave") return;
       timersRef.current.forEach((t) => window.clearTimeout(t));
       timersRef.current = [];
@@ -20636,7 +20614,7 @@ void main() {
       setStage("leave");
       later(onGone, LEAVE_FADE);
     }, [later, onEnter, onGone, stage]);
-    (0, import_react13.useEffect)(() => {
+    (0, import_react12.useEffect)(() => {
       const onKey = (e) => {
         if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
           e.preventDefault();
@@ -20803,7 +20781,7 @@ void main() {
   }
 
   // src/components/ScrollFloat.jsx
-  var import_react14 = __toESM(require_react(), 1);
+  var import_react13 = __toESM(require_react(), 1);
   var import_jsx_runtime16 = __toESM(require_jsx_runtime(), 1);
   gsapWithCSS.registerPlugin(ScrollTrigger2);
   var refreshed = false;
@@ -20823,12 +20801,12 @@ void main() {
     scrollEnd = "bottom bottom-=40%",
     stagger = 0.03
   }) {
-    const containerRef = (0, import_react14.useRef)(null);
-    const splitText = (0, import_react14.useMemo)(() => {
+    const containerRef = (0, import_react13.useRef)(null);
+    const splitText = (0, import_react13.useMemo)(() => {
       const text = typeof children === "string" ? children : "";
       return text.split("").map((char, index) => /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("span", { className: "char", children: char === " " ? "\xA0" : char }, index));
     }, [children]);
-    (0, import_react14.useEffect)(() => {
+    (0, import_react13.useEffect)(() => {
       const el = containerRef.current;
       if (!el) return void 0;
       if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return void 0;
@@ -20895,9 +20873,9 @@ void main() {
   }
 
   // src/hooks/useReveal.js
-  var import_react15 = __toESM(require_react(), 1);
+  var import_react14 = __toESM(require_react(), 1);
   function useReveal() {
-    (0, import_react15.useEffect)(() => {
+    (0, import_react14.useEffect)(() => {
       const nodes = Array.from(document.querySelectorAll("[data-reveal]"));
       if (!("IntersectionObserver" in window)) {
         nodes.forEach((n) => n.classList.add("is-in"));
@@ -20920,10 +20898,10 @@ void main() {
   }
 
   // src/hooks/useScroll.js
-  var import_react16 = __toESM(require_react(), 1);
+  var import_react15 = __toESM(require_react(), 1);
   function useScrollProgress() {
-    const [p, setP] = (0, import_react16.useState)(0);
-    (0, import_react16.useEffect)(() => {
+    const [p, setP] = (0, import_react15.useState)(0);
+    (0, import_react15.useEffect)(() => {
       let raf = 0;
       const onScroll = () => {
         if (raf) return;
@@ -20945,10 +20923,10 @@ void main() {
     return p;
   }
   function useScrollState(ids) {
-    const [y, setY] = (0, import_react16.useState)(0);
-    const [active, setActive] = (0, import_react16.useState)(ids[0]);
-    const [dark, setDark] = (0, import_react16.useState)(true);
-    (0, import_react16.useEffect)(() => {
+    const [y, setY] = (0, import_react15.useState)(0);
+    const [active, setActive] = (0, import_react15.useState)(ids[0]);
+    const [dark, setDark] = (0, import_react15.useState)(true);
+    (0, import_react15.useEffect)(() => {
       let raf = 0;
       const measure = () => {
         raf = 0;
@@ -20982,13 +20960,13 @@ void main() {
   var import_jsx_runtime18 = __toESM(require_jsx_runtime(), 1);
   var skipIntro = () => typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches === true;
   function App() {
-    const ids = (0, import_react17.useMemo)(() => navItems.map((n) => n.id), []);
+    const ids = (0, import_react16.useMemo)(() => navItems.map((n) => n.id), []);
     const progress = useScrollProgress();
     const { y, active, dark } = useScrollState(ids);
-    const [introOn, setIntroOn] = (0, import_react17.useState)(() => !skipIntro());
-    const [locked, setLocked] = (0, import_react17.useState)(() => !skipIntro());
+    const [introOn, setIntroOn] = (0, import_react16.useState)(() => !skipIntro());
+    const [locked, setLocked] = (0, import_react16.useState)(() => !skipIntro());
     useReveal();
-    (0, import_react17.useEffect)(() => {
+    (0, import_react16.useEffect)(() => {
       document.body.classList.toggle("is-locked", locked);
     }, [locked]);
     return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(import_jsx_runtime18.Fragment, { children: [
@@ -21012,7 +20990,7 @@ void main() {
   // src/main.jsx
   var import_jsx_runtime19 = __toESM(require_jsx_runtime(), 1);
   (0, import_client.createRoot)(document.getElementById("root")).render(
-    /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(import_react18.default.StrictMode, { children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(App, {}) })
+    /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(import_react17.default.StrictMode, { children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(App, {}) })
   );
 })();
 /*! Bundled license information:
