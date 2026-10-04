@@ -78,6 +78,27 @@ export const likes = [
   },
 ]
 
+/**
+ * 个人经历里的照片墙（React Bits 的 InfiniteSpiral）。
+ * 源图在 素材与原件/个人图片/，用 .codex-build/build-people.py 压成
+ * public/media/me-01.webp … me-12.webp（长边 1000 / WebP q80）。
+ * label 是大图下面那行小注，alt 给读屏用。
+ */
+export const personalPhotos = [
+  { src: '/media/me-01.webp', label: '湖边', alt: '湖边：披着蓝绿色披肩的人抬头看天，身后是芦苇和水鸟' },
+  { src: '/media/me-02.webp', label: '花砖地板上', alt: '花砖地板上抬起头看镜头的一只黑白猫' },
+  { src: '/media/me-03.webp', label: '水边', alt: '站在水边石头上的人，头顶压着一棵大树' },
+  { src: '/media/me-04.webp', label: '白猫', alt: '藏在绿叶之间、戴着项圈的一只白猫' },
+  { src: '/media/me-05.webp', label: '生日', alt: '室内：一个人捧着插好蜡烛的生日蛋糕' },
+  { src: '/media/me-06.webp', label: '三花猫', alt: '石头上回头的三花猫，背后是枯枝与竹叶' },
+  { src: '/media/me-07.webp', label: '自拍', alt: '戴着圆框眼镜和绿色围巾的一张自拍' },
+  { src: '/media/me-08.webp', label: '窗台上', alt: '蓝色窗框的窗台上蹲着一只猫' },
+  { src: '/media/me-09.webp', label: '峡谷', alt: '穿黑色连帽衫、戴墨镜的人站在峡谷边' },
+  { src: '/media/me-10.webp', label: '星星毯子', alt: '躺在星星图案毯子上的虎斑猫' },
+  { src: '/media/me-11.webp', label: '木桌', alt: '坐在木桌前喝饮料、戴墨镜的人' },
+  { src: '/media/me-12.webp', label: '台阶上', alt: '坐在台阶上低头看手机的人' },
+]
+
 export const aboutStats = [
   { value: '20+', label: '项目经历', note: '2024.09 — 2026.06' },
   { value: '30+', label: '竞赛获奖', note: '国家级 / 省级' },

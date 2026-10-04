@@ -1,8 +1,22 @@
+import { useCallback, useState } from 'react'
 import SectionHead from './SectionHead.jsx'
-import { profile, aboutStats, education, experience, awards } from '../data/site.js'
+import InfiniteSpiral from './InfiniteSpiral.jsx'
+import PhotoLightbox from './PhotoLightbox.jsx'
+import { useMediaQuery } from '../hooks/useMediaQuery.js'
+import { profile, aboutStats, education, experience, awards, personalPhotos } from '../data/site.js'
 
 export default function About() {
   const rows = [...experience, ...education]
+  const [shot, setShot] = useState(null)
+  // 手机上换一套几何：卡片小一点、竖着拉开一点，屏幕上只留五六张，不然会糊成一堆
+  const narrow = useMediaQuery('(max-width: 768px)')
+  const stepShot = useCallback(
+    (delta) =>
+      setShot((i) =>
+        i == null ? i : (i + delta + personalPhotos.length) % personalPhotos.length,
+      ),
+    [],
+  )
 
   return (
     <section className="about" id="about">
@@ -89,6 +103,37 @@ export default function About() {
           </div>
         </div>
 
+        {/* 个人照片墙：React Bits 的 InfiniteSpiral。
+            源图在根目录 素材与原件/个人图片/，重出脚本 .codex-build/build-people.py */}
+        <figure className="wall">
+          <figcaption className="wall__head">
+            <h3>个人影像</h3>
+            <p>
+              Personal · {String(personalPhotos.length).padStart(2, '0')} 张 · 停住不动 · 拖动翻看 ·
+              点一张放大
+            </p>
+          </figcaption>
+
+          <div className="wall__stage">
+            <InfiniteSpiral
+              items={personalPhotos}
+              animationMode="all"
+              speed={0.5}
+              radius={narrow ? 240 : 380}
+              cardWidth={narrow ? 132 : 152}
+              cardHeight={narrow ? 132 : 152}
+              verticalSpacing={narrow ? 92 : 58}
+              perspective={1200}
+              cardsPerTurn={narrow ? 8 : 10}
+              cardRadius={narrow ? 14 : 16}
+              centerScale={1.2}
+              edgeFade={0.34}
+              edgeBlur={5}
+              onSelect={setShot}
+            />
+          </div>
+        </figure>
+
         <div className="timeline" data-reveal>
           <div className="timeline__label">
             <h3>经历与教育</h3>
@@ -149,6 +194,15 @@ export default function About() {
           </div>
         </div>
       </div>
+
+      {shot != null ? (
+        <PhotoLightbox
+          items={personalPhotos}
+          index={shot}
+          onClose={() => setShot(null)}
+          onStep={stepShot}
+        />
+      ) : null}
     </section>
   )
 }

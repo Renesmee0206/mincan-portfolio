@@ -32,7 +32,7 @@ pnpm preview
 | --- | --- | --- |
 | 00 开场动画 | `src/components/Intro.jsx` | 拖拽撕开牛皮纸快递箱 → 黑场折字 → 进站（每次进站都播） |
 | 01 全屏首页 | `src/components/Hero.jsx` | Prism 极光背景 + 大标题（压在作品流之上）+「What I like」可拖动画作流（`FlexCarousel.jsx`） |
-| 02 个人经历 | `src/components/About.jsx` | 人物图、头像名片、介绍、联系方式、数据、经历 / 教育 / 获奖时间轴 |
+| 02 个人经历 | `src/components/About.jsx` | 人物图、头像名片、介绍、联系方式、数据、**个人照片墙**（`InfiniteSpiral.jsx` + `PhotoLightbox.jsx`）、经历 / 教育 / 获奖时间轴 |
 | 03 精选项目 | `src/components/Projects.jsx` | 6 张大卡片 + 设计主张卡片 + 关键词跑马灯 + 成果集锦（`BounceCards.jsx`，可洗牌） |
 | 04 联系方式 | `src/components/Contact.jsx` | 整屏收尾页，大标题 + 邮箱 + 电话 + 简历下载 |
 | — 板块过场 | `src/components/ChapterDivider.jsx`（内用 `ScrollFloat.jsx`） | **一整屏的黑**，中间一行英文大字：`About & Experience` / `Selected Projects` / `Contact`，滚到跟前逐字浮上来，浮完跟着滚出上边 |
@@ -126,6 +126,7 @@ pnpm preview
 | `intro-open.mp4` | 开场动画：牛皮纸快递盒撕裂特写 |
 | `like-01 … like-07.webp` | 首页「What I like」作品流（源图在`素材与原件/首页图片/`，打包时内联进 bundle） |
 | `portrait.webp` / `avatar.webp` | 个人经历人物图 / 导航名片头像 |
+| `me-01 … me-12.webp` | 个人经历照片墙（源图在 `素材与原件/个人图片/`，脚本 `.codex-build/build-people.py`，长边 1000 / WebP q80） |
 | `p-01 … p-06.webp` | 精选项目大卡片 |
 | `d-01-1 … d-06-7.webp`（03 / 04 排到 `-8`） | 项目细节图（同时也是成果集锦的图片池，共 43 张） |
 
@@ -155,6 +156,25 @@ hover 把两边推开、当前那张摊平并放大一点点。**卡片是彩色
 
 ---
 
+## 个人照片墙（InfiniteSpiral）
+
+`src/components/InfiniteSpiral.jsx` —— React Bits 的 InfiniteSpiral（JS + CSS 变体）：
+12 张生活照排成一条缓慢自转的螺旋，鼠标停住会停下、按住可以上下拖着看，
+点一张由 `PhotoLightbox.jsx` 放大到屏幕中间，再点一下缩回。
+
+- 照片：`public/media/me-01…12.webp`，源图在 `素材与原件/个人图片/`，重出脚本
+  `.codex-build/build-people.py`（长边 1000 / WebP q80，顺带读 EXIF 转正）。顺序写在脚本的 `ORDER` 里。
+- 卡片形状和 hover：外层 `.infinite-spiral__item` 的 `transform` 每帧被 rAF 改写，
+  圆角 / 描边 / 略微放大只能挂在内层 `.infinite-spiral__frame` 上——写外层会被覆盖。
+- 拖动是「按下后移开 5px」才开始的：注册表原来在 `pointerdown` 就 `setPointerCapture`，
+  普通点击会被当成拖动、卡片上的 `onClick` 被改派走（点不开大图）。
+- 手机上 `touch-action` 保持 `auto`、不接拖动，否则手指在照片墙上划不动页面；
+  手机另有一套几何（`useMediaQuery('(max-width: 768px)')`：卡片 132、间距 92、每圈 8 张）。
+- 螺旋半径按 `width/2 - cardWidth*0.72` 收口，边上的卡片不会被舞台硬切；
+  舞台上下有一层渐隐遮罩（`.wall__stage` 的 `mask-image`），两头是淡出而不是切断。
+
+---
+
 ## 交互细节
 
 - 顶部滚动进度条、导航吸顶毛玻璃、右侧章节指示器（≥1360px 显示）
@@ -167,6 +187,10 @@ hover 把两边推开、当前那张摊平并放大一点点。**卡片是彩色
   一整屏的黑（`.chapter` 高 `100svh`），字滚到跟前逐字从下面浮上来
   （`scrub` 绑滚动进度，不是播完就完），浮到位时正好铺满一屏，再跟着滚出上边；
   系统开了「减少动态效果」时字直接显示
+- 个人经历里的**照片墙**（React Bits 的 InfiniteSpiral，JS+CSS 变体）：
+  12 张生活照排成一条缓慢自转的螺旋，鼠标停住就停、可以按住上下拖；
+  **悬停略微放大 + 浮出一圈描边**（圆角），**点一张放大到屏幕中间看、再点一下缩回**
+  （放大时 `← →` 换一张、`ESC` 收起）；手机上手指划过不挡页面滚动
 - 整页叠加极细胶片颗粒，避免纯色背景发"平"
 
 ---
@@ -185,12 +209,14 @@ portfolio-site/
    ├─ data/site.js          # 全部文案与数据
    ├─ hooks/
    │  ├─ useReveal.js       # 滚动入场
+   │  ├─ useMediaQuery.js   # 照片墙在手机上换一套几何
    │  └─ useScroll.js       # 滚动进度 / 当前章节
    ├─ components/
    │  ├─ Intro.jsx  FoldText.jsx     # 开场动画 + 折字
    │  ├─ Hero.jsx  FlexCarousel.jsx  # 首页 + 首页那条作品流（WebGL）
    │  ├─ Prism.jsx                   # 首页背景的极光（React Bits，WebGL）
    │  ├─ ChapterDivider.jsx  ScrollFloat.jsx  # 板块之间的英文过场（React Bits ScrollFloat）
+   │  ├─ InfiniteSpiral.jsx  PhotoLightbox.jsx  # 个人经历的照片墙 + 点开看大图
    │  ├─ BounceCards.jsx             # 成果集锦那一叠卡（洗牌 + 弹入）
    │  ├─ Nav.jsx  About.jsx  Projects.jsx  ProjectDetail.jsx  Contact.jsx
    │  ├─ SectionHead.jsx  Rail.jsx

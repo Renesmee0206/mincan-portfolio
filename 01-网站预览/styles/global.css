@@ -1033,6 +1033,301 @@ section[id] {
   color: var(--grey-500);
 }
 
+/* =========================================================
+   个人经历里的照片墙（React Bits 的 InfiniteSpiral，JS + CSS 变体）
+   —— 注册表的 .infinite-spiral* 规则原样抄一遍，
+      只多一层 .infinite-spiral__frame：外层的 transform 每帧被 rAF 改写，
+      hover 的放大 / 描边只能挂在内层，写外层会被覆盖
+   ========================================================= */
+
+.wall {
+  margin: 0;
+  margin-top: clamp(72px, 7.6vw, 118px);
+  border-top: 1px solid var(--line);
+  padding-top: clamp(24px, 2.4vw, 38px);
+}
+
+.wall__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.wall__head h3 {
+  font-size: clamp(20px, 1.6vw, 26px);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+.wall__head p {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--grey-500);
+  text-align: right;
+}
+
+.wall__stage {
+  position: relative;
+  height: clamp(430px, 33vw, 540px);
+  margin-top: 14px;
+  /* 上下用一层渐隐收掉：螺旋走到两头是「淡出」而不是被硬切一刀 */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    #000 15%,
+    #000 85%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(to bottom, transparent 0, #000 15%, #000 85%, transparent 100%);
+}
+
+.infinite-spiral {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.infinite-spiral__stage {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+/* 外层只负责 3D 定位（transform 每帧被 rAF 改写，别在这里写 hover） */
+.infinite-spiral__item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: var(--infinite-spiral-card-width);
+  height: var(--infinite-spiral-card-height);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, opacity, filter;
+}
+
+/* 内层负责形状和 hover：圆角、描边、略微放大 */
+.infinite-spiral__frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1.5px solid rgba(237, 231, 220, 0.09);
+  border-radius: var(--infinite-spiral-card-radius);
+  background: var(--bg-3);
+  box-shadow: 0 14px 38px rgba(8, 6, 18, 0.2);
+  cursor: zoom-in;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.45s var(--ease-out),
+    border-color 0.35s var(--ease),
+    box-shadow 0.45s var(--ease-out);
+}
+
+.infinite-spiral__item:hover .infinite-spiral__frame,
+.infinite-spiral__frame:focus-visible {
+  transform: scale(1.08);
+  border-color: rgba(237, 231, 220, 0.92);
+  box-shadow: 0 24px 52px -14px rgba(0, 0, 0, 0.82);
+}
+
+.infinite-spiral__frame:focus-visible {
+  outline: 2px solid var(--clay);
+  outline-offset: 3px;
+}
+
+.infinite-spiral__image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  user-select: none;
+}
+
+/* =========================================================
+   照片墙的大图层（点一张放大，再点一下缩小）
+   ========================================================= */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 340;
+  display: grid;
+  place-items: center;
+  padding: clamp(20px, 4vw, 56px);
+}
+
+.lightbox__scrim {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: 0;
+  cursor: zoom-out;
+  background: rgba(10, 11, 13, 0.9);
+  backdrop-filter: blur(16px) saturate(0.9);
+  -webkit-backdrop-filter: blur(16px) saturate(0.9);
+  animation: lightboxFade 0.32s var(--ease) both;
+}
+
+.lightbox__panel {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 0;
+  max-width: min(1120px, 92vw);
+  cursor: zoom-out;
+  animation: lightboxRise 0.42s var(--ease-out) both;
+}
+
+.lightbox__panel img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(1120px, 92vw);
+  max-height: min(76vh, 860px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  box-shadow: 0 50px 120px -40px rgba(0, 0, 0, 0.9);
+}
+
+.lightbox__cap {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--grey-500);
+}
+
+.lightbox__no {
+  color: var(--clay);
+}
+
+.lightbox__label {
+  color: var(--ink-3);
+  letter-spacing: 0.16em;
+}
+
+.lightbox__hint {
+  color: var(--grey-600);
+}
+
+.lightbox__nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  margin-top: -27px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(20, 21, 24, 0.6);
+  backdrop-filter: blur(10px);
+  font-size: 22px;
+  line-height: 1;
+  color: var(--ink);
+  transition: background 0.35s var(--ease), color 0.35s var(--ease);
+}
+
+.lightbox__nav.is-prev {
+  left: clamp(14px, 3vw, 46px);
+}
+
+.lightbox__nav.is-next {
+  right: clamp(14px, 3vw, 46px);
+}
+
+.lightbox__nav:hover {
+  background: var(--raise);
+  color: #141416;
+}
+
+.lightbox__close {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  bottom: clamp(20px, 4vw, 48px);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: rgba(20, 21, 24, 0.6);
+  backdrop-filter: blur(10px);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.85);
+  transform: translateX(-50%);
+  transition: background 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+
+.lightbox__close span {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.lightbox__close:hover {
+  background: var(--raise);
+  border-color: var(--raise);
+  color: #141416;
+}
+
+.lightbox__close:hover span {
+  color: rgba(20, 20, 22, 0.55);
+}
+
+/* 收起时先把「缩小」播完，再卸载 */
+.lightbox.is-leaving .lightbox__scrim {
+  animation: lightboxFade 0.24s var(--ease) reverse both;
+}
+
+.lightbox.is-leaving .lightbox__panel {
+  animation: lightboxRise 0.24s var(--ease) reverse both;
+}
+
+@keyframes lightboxFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lightboxRise {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* 时间轴 */
 .timeline {
   margin-top: clamp(80px, 8vw, 130px);
@@ -2963,6 +3258,37 @@ section[id] {
 
   /* 过场：仍然占满一屏，只是字号降一档、左右留窄一点，保证一行放得下。
      这段必须放在基础 .chapter 规则后面，否则会被上面的 clamp 盖掉。 */
+  .wall {
+    margin-top: clamp(56px, 14vw, 84px);
+  }
+
+  .wall__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .wall__head p {
+    text-align: left;
+  }
+
+  .wall__stage {
+    height: clamp(380px, 104vw, 460px);
+  }
+
+  .lightbox__nav {
+    width: 44px;
+    height: 44px;
+    margin-top: -22px;
+    font-size: 18px;
+  }
+
+  .lightbox__cap {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 12px;
+  }
+
   .chapter {
     padding: clamp(40px, 12vw, 72px) 0;
   }

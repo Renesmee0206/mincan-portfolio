@@ -7280,11 +7280,11 @@
   });
 
   // src/main.jsx
-  var import_react14 = __toESM(require_react(), 1);
+  var import_react18 = __toESM(require_react(), 1);
   var import_client = __toESM(require_client(), 1);
 
   // src/App.jsx
-  var import_react13 = __toESM(require_react(), 1);
+  var import_react17 = __toESM(require_react(), 1);
 
   // src/data/site.js
   var profile = {
@@ -7346,6 +7346,20 @@
       subtitle: "\u6749\u672C\u535A\u65AF Hiroshi Sugimoto \xB7 Theaters",
       alt: "\u300A\u5267\u9662\u300B\uFF1A\u6F06\u9ED1\u7684\u8001\u5267\u9662\u91CC\uFF0C\u821E\u53F0\u94F6\u5E55\u662F\u4E00\u6574\u5757\u8FC7\u66DD\u7684\u767D\u5149"
     }
+  ];
+  var personalPhotos = [
+    { src: "media/me-01.webp", label: "\u6E56\u8FB9", alt: "\u6E56\u8FB9\uFF1A\u62AB\u7740\u84DD\u7EFF\u8272\u62AB\u80A9\u7684\u4EBA\u62AC\u5934\u770B\u5929\uFF0C\u8EAB\u540E\u662F\u82A6\u82C7\u548C\u6C34\u9E1F" },
+    { src: "media/me-02.webp", label: "\u82B1\u7816\u5730\u677F\u4E0A", alt: "\u82B1\u7816\u5730\u677F\u4E0A\u62AC\u8D77\u5934\u770B\u955C\u5934\u7684\u4E00\u53EA\u9ED1\u767D\u732B" },
+    { src: "media/me-03.webp", label: "\u6C34\u8FB9", alt: "\u7AD9\u5728\u6C34\u8FB9\u77F3\u5934\u4E0A\u7684\u4EBA\uFF0C\u5934\u9876\u538B\u7740\u4E00\u68F5\u5927\u6811" },
+    { src: "media/me-04.webp", label: "\u767D\u732B", alt: "\u85CF\u5728\u7EFF\u53F6\u4E4B\u95F4\u3001\u6234\u7740\u9879\u5708\u7684\u4E00\u53EA\u767D\u732B" },
+    { src: "media/me-05.webp", label: "\u751F\u65E5", alt: "\u5BA4\u5185\uFF1A\u4E00\u4E2A\u4EBA\u6367\u7740\u63D2\u597D\u8721\u70DB\u7684\u751F\u65E5\u86CB\u7CD5" },
+    { src: "media/me-06.webp", label: "\u4E09\u82B1\u732B", alt: "\u77F3\u5934\u4E0A\u56DE\u5934\u7684\u4E09\u82B1\u732B\uFF0C\u80CC\u540E\u662F\u67AF\u679D\u4E0E\u7AF9\u53F6" },
+    { src: "media/me-07.webp", label: "\u81EA\u62CD", alt: "\u6234\u7740\u5706\u6846\u773C\u955C\u548C\u7EFF\u8272\u56F4\u5DFE\u7684\u4E00\u5F20\u81EA\u62CD" },
+    { src: "media/me-08.webp", label: "\u7A97\u53F0\u4E0A", alt: "\u84DD\u8272\u7A97\u6846\u7684\u7A97\u53F0\u4E0A\u8E72\u7740\u4E00\u53EA\u732B" },
+    { src: "media/me-09.webp", label: "\u5CE1\u8C37", alt: "\u7A7F\u9ED1\u8272\u8FDE\u5E3D\u886B\u3001\u6234\u58A8\u955C\u7684\u4EBA\u7AD9\u5728\u5CE1\u8C37\u8FB9" },
+    { src: "media/me-10.webp", label: "\u661F\u661F\u6BEF\u5B50", alt: "\u8EBA\u5728\u661F\u661F\u56FE\u6848\u6BEF\u5B50\u4E0A\u7684\u864E\u6591\u732B" },
+    { src: "media/me-11.webp", label: "\u6728\u684C", alt: "\u5750\u5728\u6728\u684C\u524D\u559D\u996E\u6599\u3001\u6234\u58A8\u955C\u7684\u4EBA" },
+    { src: "media/me-12.webp", label: "\u53F0\u9636\u4E0A", alt: "\u5750\u5728\u53F0\u9636\u4E0A\u4F4E\u5934\u770B\u624B\u673A\u7684\u4EBA" }
   ];
   var aboutStats = [
     { value: "20+", label: "\u9879\u76EE\u7ECF\u5386", note: "2024.09 \u2014 2026.06" },
@@ -12397,6 +12411,9 @@ void main() {
     ] });
   }
 
+  // src/components/About.jsx
+  var import_react7 = __toESM(require_react(), 1);
+
   // src/components/SectionHead.jsx
   var import_jsx_runtime5 = __toESM(require_jsx_runtime(), 1);
   function SectionHead({ no, title, en, note }) {
@@ -12418,140 +12435,549 @@ void main() {
     ] });
   }
 
-  // src/components/About.jsx
+  // src/components/InfiniteSpiral.jsx
+  var import_react4 = __toESM(require_react(), 1);
   var import_jsx_runtime6 = __toESM(require_jsx_runtime(), 1);
+  var clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+  var modulo = (value, divisor) => (value % divisor + divisor) % divisor;
+  var smoothstep = (min, max, value) => {
+    const x = clamp((value - min) / (max - min || 1), 0, 1);
+    return x * x * (3 - 2 * x);
+  };
+  var hasFinePointer = () => typeof window === "undefined" || !window.matchMedia ? true : window.matchMedia("(pointer: fine)").matches;
+  function InfiniteSpiral({
+    items = [],
+    speed = 0.55,
+    direction = "up",
+    animationMode = "auto",
+    radius = 170,
+    cardWidth = 100,
+    cardHeight = 100,
+    verticalSpacing = 60,
+    perspective: perspective2 = 1e3,
+    cardsPerTurn = 7,
+    rotation = 0,
+    cardTilt = 0,
+    cardRadius = 10,
+    centerScale = 1.2,
+    edgeFade = 0.3,
+    edgeBlur = 6,
+    pauseOnHover = true,
+    imageFit = "cover",
+    grayscale = 0,
+    className = "",
+    onSelect
+  }) {
+    const rootRef = (0, import_react4.useRef)(null);
+    const cardRefs = (0, import_react4.useRef)([]);
+    const progressRef = (0, import_react4.useRef)(0);
+    const targetProgressRef = (0, import_react4.useRef)(0);
+    const autoSpeedRef = (0, import_react4.useRef)(0);
+    const hoveredRef = (0, import_react4.useRef)(false);
+    const visibleRef = (0, import_react4.useRef)(true);
+    const draggingRef = (0, import_react4.useRef)(false);
+    const lastPointerYRef = (0, import_react4.useRef)(0);
+    const downAtRef = (0, import_react4.useRef)(null);
+    const normalizedItems = (0, import_react4.useMemo)(
+      () => items.map(
+        (item, index) => typeof item === "string" ? { src: item, alt: `\u7167\u7247 ${index + 1}` } : { alt: `\u7167\u7247 ${index + 1}`, ...item }
+      ),
+      [items]
+    );
+    (0, import_react4.useEffect)(() => {
+      const root = rootRef.current;
+      if (!root || normalizedItems.length === 0) return void 0;
+      let frameId;
+      let previousTime = performance.now();
+      let bounds = root.getBoundingClientRect();
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const scrollEnabled = animationMode === "scroll" || animationMode === "all";
+      const dragEnabled2 = (animationMode === "drag" || animationMode === "all") && hasFinePointer();
+      const scrollSpeedMultiplier = Math.max(speed, 0) / 0.55;
+      let lastScrollY = window.scrollY;
+      const resizeObserver = new ResizeObserver(() => {
+        bounds = root.getBoundingClientRect();
+      });
+      resizeObserver.observe(root);
+      const intersectionObserver = new IntersectionObserver(
+        ([entry]) => {
+          visibleRef.current = entry.isIntersecting;
+        },
+        { threshold: 0.02 }
+      );
+      intersectionObserver.observe(root);
+      const handleScroll = () => {
+        const nextScrollY = window.scrollY;
+        const scrollDelta = nextScrollY - lastScrollY;
+        lastScrollY = nextScrollY;
+        if (!scrollEnabled || !visibleRef.current || scrollDelta === 0) return;
+        targetProgressRef.current += clamp(
+          scrollDelta * scrollSpeedMultiplier / Math.max(verticalSpacing * 2, 1),
+          -1.5,
+          1.5
+        );
+      };
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      const render3 = (time) => {
+        const delta = Math.min((time - previousTime) / 1e3, 0.05);
+        previousTime = time;
+        const autoEnabled = animationMode === "auto" || animationMode === "all";
+        const motionPaused = draggingRef.current || pauseOnHover && hoveredRef.current;
+        const directionMultiplier = direction === "down" ? -1 : 1;
+        const desiredAutoSpeed = autoEnabled && visibleRef.current && !reducedMotion.matches && !motionPaused ? speed * directionMultiplier : 0;
+        const speedBlend = 1 - Math.exp(-delta * 7);
+        autoSpeedRef.current += (desiredAutoSpeed - autoSpeedRef.current) * speedBlend;
+        targetProgressRef.current += autoSpeedRef.current * delta;
+        const followBlend = 1 - Math.exp(-delta * (draggingRef.current ? 22 : 11));
+        progressRef.current += (targetProgressRef.current - progressRef.current) * followBlend;
+        const count = normalizedItems.length;
+        const half = count / 2;
+        const width = Math.max(bounds.width, 1);
+        const height = Math.max(bounds.height, 1);
+        const fit = Math.min(1, width / (cardWidth * 2.8), height / (cardHeight * 2.35));
+        const responsiveRadius = Math.min(radius, Math.max(72, width / 2 - cardWidth * 0.72)) * fit;
+        const fadeStart = clamp(1 - edgeFade, 0, 0.98);
+        const turnSize = Math.max(cardsPerTurn, 1);
+        cardRefs.current.forEach((card, index) => {
+          if (!card) return;
+          let offset = index - progressRef.current;
+          offset = modulo(offset + half, count) - half;
+          const edge = Math.min(Math.abs(offset) / Math.max(half, 1), 1);
+          const opacity = 1 - smoothstep(fadeStart, 1, edge);
+          const focus = 1 - Math.min(Math.abs(offset) / Math.max(turnSize * 0.65, 1), 1);
+          const scale5 = (1 + (centerScale - 1) * focus) * fit;
+          const angle2 = offset * (360 / turnSize) + rotation;
+          const angleRadians = angle2 * Math.PI / 180;
+          const x = Math.sin(angleRadians) * responsiveRadius;
+          const z = Math.cos(angleRadians) * responsiveRadius;
+          const depthScale = clamp(perspective2 / Math.max(perspective2 - z, 1), 0.72, 1.45);
+          const visualScale = scale5 * depthScale;
+          const depth = (z / Math.max(responsiveRadius, 1) + 1) / 2;
+          const blur = edgeBlur * smoothstep(0.35, 1, edge);
+          card.style.transform = `translate(-50%, -50%) translate3d(${x}px, ${offset * verticalSpacing * fit}px, 0) rotateZ(${cardTilt}deg) scale(${visualScale})`;
+          card.style.opacity = opacity.toFixed(3);
+          card.style.filter = blur > 0.01 ? `blur(${blur.toFixed(2)}px)` : "none";
+          card.style.zIndex = String(Math.round(depth * 1e5) + index);
+          card.style.pointerEvents = opacity > 0.25 ? "auto" : "none";
+        });
+        frameId = requestAnimationFrame(render3);
+      };
+      frameId = requestAnimationFrame(render3);
+      return () => {
+        cancelAnimationFrame(frameId);
+        resizeObserver.disconnect();
+        intersectionObserver.disconnect();
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, [
+      normalizedItems,
+      speed,
+      direction,
+      animationMode,
+      radius,
+      perspective2,
+      cardWidth,
+      cardHeight,
+      verticalSpacing,
+      cardsPerTurn,
+      rotation,
+      cardTilt,
+      centerScale,
+      edgeFade,
+      edgeBlur,
+      pauseOnHover
+    ]);
+    const dragEnabled = (animationMode === "drag" || animationMode === "all") && hasFinePointer();
+    const rootStyle = {
+      perspective: `${perspective2}px`,
+      "--infinite-spiral-card-width": `${cardWidth}px`,
+      "--infinite-spiral-card-height": `${cardHeight}px`,
+      "--infinite-spiral-card-radius": `${cardRadius}px`,
+      cursor: dragEnabled ? "grab" : "default",
+      touchAction: dragEnabled ? "pan-x" : "auto",
+      userSelect: dragEnabled ? "none" : "auto"
+    };
+    const stopDragging = (event) => {
+      if (!draggingRef.current) return;
+      draggingRef.current = false;
+      if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+        event.currentTarget.releasePointerCapture(event.pointerId);
+      }
+      event.currentTarget.style.cursor = dragEnabled ? "grab" : "default";
+    };
+    return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+      "div",
+      {
+        ref: rootRef,
+        className: `infinite-spiral ${className}`.trim(),
+        style: rootStyle,
+        onMouseEnter: () => {
+          hoveredRef.current = true;
+        },
+        onMouseLeave: () => {
+          hoveredRef.current = false;
+        },
+        onPointerDown: (event) => {
+          if (!dragEnabled || event.button !== 0) return;
+          downAtRef.current = { x: event.clientX, y: event.clientY };
+          lastPointerYRef.current = event.clientY;
+        },
+        onPointerMove: (event) => {
+          const down = downAtRef.current;
+          if (!down) return;
+          if (!draggingRef.current) {
+            if (Math.hypot(event.clientX - down.x, event.clientY - down.y) < 5) return;
+            draggingRef.current = true;
+            targetProgressRef.current = progressRef.current;
+            event.currentTarget.setPointerCapture(event.pointerId);
+            event.currentTarget.style.cursor = "grabbing";
+          }
+          const pointerDelta = event.clientY - lastPointerYRef.current;
+          lastPointerYRef.current = event.clientY;
+          targetProgressRef.current -= pointerDelta / Math.max(verticalSpacing, 1);
+        },
+        onPointerUp: stopDragging,
+        onPointerCancel: stopDragging,
+        onClickCapture: (event) => {
+          const down = downAtRef.current;
+          if (!down) return;
+          const moved = Math.hypot(event.clientX - down.x, event.clientY - down.y);
+          if (moved <= 6) return;
+          event.preventDefault();
+          event.stopPropagation();
+        },
+        children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "infinite-spiral__stage", role: "list", "aria-label": "\u4E2A\u4EBA\u7167\u7247\u5899", children: normalizedItems.map((item, index) => {
+          const Frame = onSelect ? "button" : "div";
+          return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+            "div",
+            {
+              ref: (node) => {
+                cardRefs.current[index] = node;
+              },
+              className: "infinite-spiral__item",
+              style: { width: cardWidth, height: cardHeight },
+              role: "listitem",
+              children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+                Frame,
+                {
+                  type: onSelect ? "button" : void 0,
+                  className: "infinite-spiral__frame",
+                  onClick: onSelect ? () => onSelect(index) : void 0,
+                  "aria-label": item.label ?? item.alt,
+                  children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
+                    "img",
+                    {
+                      className: "infinite-spiral__image",
+                      src: item.src,
+                      alt: item.alt,
+                      loading: index < 6 ? "eager" : "lazy",
+                      draggable: false,
+                      style: {
+                        width: cardWidth,
+                        height: cardHeight,
+                        maxWidth: "none",
+                        maxHeight: "none",
+                        objectFit: imageFit,
+                        filter: `grayscale(${Math.min(1, Math.max(0, grayscale))})`
+                      }
+                    }
+                  )
+                }
+              )
+            },
+            item.id ?? `${item.src}-${index}`
+          );
+        }) })
+      }
+    );
+  }
+
+  // src/components/PhotoLightbox.jsx
+  var import_react5 = __toESM(require_react(), 1);
+  var import_jsx_runtime7 = __toESM(require_jsx_runtime(), 1);
+  function PhotoLightbox({ items, index, onClose, onStep, returnFocusTo }) {
+    const [leaving, setLeaving] = (0, import_react5.useState)(false);
+    const leavingRef = (0, import_react5.useRef)(false);
+    const timerRef = (0, import_react5.useRef)(0);
+    const closeRef = (0, import_react5.useRef)(null);
+    (0, import_react5.useEffect)(() => {
+      leavingRef.current = false;
+      setLeaving(false);
+    }, [index]);
+    (0, import_react5.useEffect)(() => () => window.clearTimeout(timerRef.current), []);
+    const close = () => {
+      if (leavingRef.current) return;
+      leavingRef.current = true;
+      setLeaving(true);
+      timerRef.current = window.setTimeout(onClose, 230);
+    };
+    (0, import_react5.useEffect)(() => {
+      const onKey = (e) => {
+        if (e.key === "Escape") close();
+        else if (e.key === "ArrowRight") onStep(1);
+        else if (e.key === "ArrowLeft") onStep(-1);
+      };
+      window.addEventListener("keydown", onKey);
+      document.body.classList.add("is-locked");
+      closeRef.current?.focus();
+      return () => {
+        window.removeEventListener("keydown", onKey);
+        document.body.classList.remove("is-locked");
+        returnFocusTo?.current?.focus();
+      };
+    }, [index]);
+    if (index == null || !items[index]) return null;
+    const item = items[index];
+    const total = items.length;
+    const pad = (n) => String(n).padStart(2, "0");
+    return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
+      "div",
+      {
+        className: `lightbox${leaving ? " is-leaving" : ""}`,
+        role: "dialog",
+        "aria-modal": "true",
+        "aria-label": item.label ?? item.alt,
+        children: [
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("button", { className: "lightbox__scrim", "aria-label": "\u6536\u8D77\u5927\u56FE", tabIndex: -1, onClick: close }),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("figure", { className: "lightbox__panel", onClick: close, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("img", { src: item.src, alt: item.alt, draggable: false }),
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("figcaption", { className: "lightbox__cap", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { className: "lightbox__no", children: [
+                pad(index + 1),
+                " / ",
+                pad(total)
+              ] }),
+              item.label ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "lightbox__label", children: item.label }) : null,
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "lightbox__hint", children: "\u518D\u70B9\u4E00\u4E0B\u6536\u8D77 \xB7 \u2190 \u2192 \u6362\u4E00\u5F20 \xB7 ESC" })
+            ] })
+          ] }),
+          total > 1 ? /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(import_jsx_runtime7.Fragment, { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+              "button",
+              {
+                className: "lightbox__nav is-prev",
+                onClick: () => onStep(-1),
+                "aria-label": "\u4E0A\u4E00\u5F20",
+                children: "\u2039"
+              }
+            ),
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+              "button",
+              {
+                className: "lightbox__nav is-next",
+                onClick: () => onStep(1),
+                "aria-label": "\u4E0B\u4E00\u5F20",
+                children: "\u203A"
+              }
+            )
+          ] }) : null,
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("button", { className: "lightbox__close", ref: closeRef, onClick: close, children: [
+            "\u6536\u8D77",
+            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "ESC" })
+          ] })
+        ]
+      }
+    );
+  }
+
+  // src/hooks/useMediaQuery.js
+  var import_react6 = __toESM(require_react(), 1);
+  function useMediaQuery(query) {
+    const [matches, setMatches] = (0, import_react6.useState)(
+      () => typeof window === "undefined" ? false : window.matchMedia(query).matches
+    );
+    (0, import_react6.useEffect)(() => {
+      const mq = window.matchMedia(query);
+      const onChange = () => setMatches(mq.matches);
+      onChange();
+      mq.addEventListener("change", onChange);
+      return () => mq.removeEventListener("change", onChange);
+    }, [query]);
+    return matches;
+  }
+
+  // src/components/About.jsx
+  var import_jsx_runtime8 = __toESM(require_jsx_runtime(), 1);
   function About() {
     const rows = [...experience, ...education];
-    return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("section", { className: "about", id: "about", children: /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "wrap", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
-        SectionHead,
-        {
-          no: "01",
-          title: "\u4E2A\u4EBA\u7ECF\u5386",
-          en: "About & Experience",
-          note: "\u5174\u8DA3\u4ECE\u753B\u753B\u3001\u6E38\u620F\u548C\u4E3A\u559C\u6B22\u7684\u4F5C\u54C1\u505A\u5EF6\u4F38\u521B\u4F5C\u5F00\u59CB\uFF0C\u672C\u7855\u516D\u5E74\u628A\u5B83\u5E26\u8FDB\u7A7A\u95F4\u2014\u2014\u4ECE\u753B\u9762\u5230\u573A\u5730\uFF0C\u4ECE\u6982\u5FF5\u5230\u843D\u5730\u3002"
-        }
+    const [shot, setShot] = (0, import_react7.useState)(null);
+    const narrow = useMediaQuery("(max-width: 768px)");
+    const stepShot = (0, import_react7.useCallback)(
+      (delta) => setShot(
+        (i) => i == null ? i : (i + delta + personalPhotos.length) % personalPhotos.length
       ),
-      /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "about__body", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "about__visual", "data-reveal": true, children: /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("figure", { className: "about__photo", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("img", { src: "media/portrait.webp", alt: "\u95F5\u707F" }),
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("figcaption", { className: "about__photo-tag", children: "Portrait / 2026" })
-        ] }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "about__intro", "data-reveal": true, style: { transitionDelay: "120ms" }, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("h2", { children: [
-            "\u5148\u6709\u60F3\u8BB2\u7684\u4E8B\uFF0C",
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("br", {}),
-            "\u518D\u60F3\u7528\u4EC0\u4E48",
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("em", { children: "\u5F62\u5F0F" }),
-            "\u8BB2\u3002"
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "about__text", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "about__lead", children: profile.lede }),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("p", { children: [
-              "\u6211\u7684\u8D77\u70B9\u5176\u5B9E\u4E0D\u5728\u7A7A\u95F4\uFF0C\u800C\u5728\u753B\u9762\u3002\u5C0F\u65F6\u5019\u753B\u753B\u3001\u6253\u6E38\u620F\u3001\u4E3A\u559C\u6B22\u7684\u4F5C\u54C1\u505A\u5EF6\u4F38\u521B\u4F5C\u2014\u2014 \u8FD9\u4EF6\u4E8B\u8BA9\u6211\u7B2C\u4E00\u6B21\u8BA4\u771F\u53BB\u60F3\uFF1A\u4E00\u4E2A\u4E16\u754C\u662F\u600E\u4E48\u642D\u8D77\u6765\u7684\uFF0C\u89D2\u8272\u4E3A\u4EC0\u4E48\u957F\u6210\u8FD9\u6837\uFF0C \u573A\u666F\u548C\u8272\u5F69\u4E3A\u4EC0\u4E48\u8FD9\u6837\u914D\u3002\u90A3\u79CD",
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("strong", { children: "\u300C\u628A\u60F3\u8C61\u53D8\u6210\u770B\u5F97\u89C1\u7684\u4E1C\u897F\u300D" }),
-              "\u7684\u51B2\u52A8\uFF0C\u6BD4\u4EFB\u4F55\u4E00\u95E8\u5177\u4F53\u7684\u4E13\u4E1A\u90FD\u66F4\u65E9\u5438\u5F15\u6211\u3002"
+      []
+    );
+    return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("section", { className: "about", id: "about", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "wrap", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+          SectionHead,
+          {
+            no: "01",
+            title: "\u4E2A\u4EBA\u7ECF\u5386",
+            en: "About & Experience",
+            note: "\u5174\u8DA3\u4ECE\u753B\u753B\u3001\u6E38\u620F\u548C\u4E3A\u559C\u6B22\u7684\u4F5C\u54C1\u505A\u5EF6\u4F38\u521B\u4F5C\u5F00\u59CB\uFF0C\u672C\u7855\u516D\u5E74\u628A\u5B83\u5E26\u8FDB\u7A7A\u95F4\u2014\u2014\u4ECE\u753B\u9762\u5230\u573A\u5730\uFF0C\u4ECE\u6982\u5FF5\u5230\u843D\u5730\u3002"
+          }
+        ),
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "about__body", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "about__visual", "data-reveal": true, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("figure", { className: "about__photo", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("img", { src: "media/portrait.webp", alt: "\u95F5\u707F" }),
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("figcaption", { className: "about__photo-tag", children: "Portrait / 2026" })
+          ] }) }),
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "about__intro", "data-reveal": true, style: { transitionDelay: "120ms" }, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("h2", { children: [
+              "\u5148\u6709\u60F3\u8BB2\u7684\u4E8B\uFF0C",
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("br", {}),
+              "\u518D\u60F3\u7528\u4EC0\u4E48",
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("em", { children: "\u5F62\u5F0F" }),
+              "\u8BB2\u3002"
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("p", { children: [
-              "\u672C\u79D1\u5728\u6E56\u5317\u7F8E\u672F\u5B66\u9662\u8BFB\u73AF\u5883\u8BBE\u8BA1\uFF08\u5BA4\u5185\u8BBE\u8BA1\u65B9\u5411\uFF09\uFF0C\u7855\u58EB\u7EE7\u7EED\u8BFB\u73AF\u5883\u827A\u672F\u8BBE\u8BA1\u3002 \u4E13\u4E1A\u628A\u6211\u4ECE\u300C\u753B\u4E00\u4E2A\u753B\u9762\u300D\u63A8\u5230\u300C\u9020\u4E00\u4E2A\u7A7A\u95F4\u300D\u2014\u2014\u5C3A\u5EA6\u3001\u6784\u9020\u3001\u6750\u6599\u3001\u5149\u7EBF\u548C\u4EBA\u7684\u884C\u4E3A\uFF0C \u90FD\u8981\u843D\u5230\u80FD\u88AB\u5EFA\u9020\u3001\u88AB\u4F7F\u7528\u7684\u7A0B\u5EA6\u3002\u6211\u6CA1\u6709\u628A\u4ECE\u524D\u7684\u5174\u8DA3\u653E\u4E0B\uFF0C\u800C\u662F\u628A\u5B83\u4EEC\u5F53\u6210\u65B9\u6CD5\uFF1A",
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("strong", { children: "\u5148\u60F3\u6E05\u695A\u8981\u8BB2\u4EC0\u4E48\uFF0C\u518D\u51B3\u5B9A\u7528\u4EC0\u4E48\u624B\u6BB5\u8BB2" }),
-              "\u3002 \u751F\u6D3B\u91CC\u7684\u89C2\u5BDF\u548C\u60F3\u6CD5\uFF0C\u6700\u540E\u5927\u591A\u4F1A\u53D8\u6210\u65B9\u6848\u91CC\u7684\u67D0\u4E00\u4E2A\u8F6C\u6298\u3002 \u8FD9\u4E9B\u60F3\u6CD5\u540E\u6765\u90FD\u88AB\u653E\u8FDB\u4E86\u7ADE\u8D5B\u548C\u9879\u76EE\u91CC\uFF0C\u4E5F\u5728\u4E00\u8F6E\u8F6E\u7684\u5EFA\u6A21\u3001\u6548\u679C\u56FE\u4E0E\u65B9\u6848\u672C\u4E2D\u88AB\u53CD\u590D\u68C0\u9A8C\u3002"
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("p", { children: [
-              "\u6211\u4E60\u60EF\u5728\u591A\u4E2A\u5C3A\u5EA6\u4E4B\u95F4\u5207\u6362\uFF1A\u6982\u5FF5\u3001\u5E73\u9762\u3001\u63D2\u753B\uFF0C\u5230\u5BA4\u5185\u3001\u5EFA\u7B51\u3001\u666F\u89C2\uFF0C\u518D\u5230\u4E09\u7EF4\u53EF\u89C6\u5316\u3002 \u8FD9\u6B63\u662F\u6211\u5E0C\u671B\u5728\u6C42\u804C\u65F6\u88AB\u770B\u5230\u7684\u90E8\u5206\u2014\u2014\u4E0D\u662F\u67D0\u4E00\u6B3E\u8F6F\u4EF6\u6216\u67D0\u4E00\u5F20\u56FE\uFF0C \u800C\u662F\u80FD\u4ECE\u4E00\u4E2A\u5FF5\u5934\u51FA\u53D1\uFF0C\u4E00\u8DEF\u63A8\u5230\u5EFA\u6210\u4E0E\u8868\u8FBE\u7684",
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("strong", { children: "\u7EFC\u5408\u80FD\u529B" }),
-              "\u3002 \u4E0B\u9762\u7684\u9879\u76EE\u6BD4\u6211\u8BF4\u7684\u66F4\u6E05\u695A\u3002"
-            ] })
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("dl", { className: "about__contact", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("a", { href: `mailto:${profile.email}`, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("dt", { children: "Email \u90AE\u7BB1" }),
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("dd", { children: profile.email })
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("a", { href: profile.phoneHref, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("dt", { children: "Phone \u7535\u8BDD" }),
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("dd", { children: profile.phone })
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { children: [
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("dt", { children: "WeChat \u5FAE\u4FE1" }),
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("dd", { children: profile.wechat })
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { children: [
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("dt", { children: "Location \u6240\u5728\u5730" }),
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("dd", { children: profile.location })
-            ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { children: [
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("dt", { children: "\u7C4D\u8D2F" }),
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("dd", { children: profile.hometown })
-            ] })
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "about__stats", "data-reveal": true, children: aboutStats.map((s) => /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "about__stat", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("b", { children: s.value }),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { children: s.label }),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("i", { children: s.note })
-          ] }, s.label)) })
-        ] })
-      ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "timeline", "data-reveal": true, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "timeline__label", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("h3", { children: "\u7ECF\u5386\u4E0E\u6559\u80B2" }),
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("p", { children: [
-            "Experience",
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("br", {}),
-            "& Education",
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("br", {}),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("br", {}),
-            "2020 \u2014 \u81F3\u4ECA"
-          ] })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "timeline__rows", children: rows.map((row) => /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("article", { className: "timeline__row", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "timeline__period", children: row.period }),
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "timeline__main", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("h4", { children: [
-              row.org,
-              /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("span", { children: [
-                "\u3000/\u3000",
-                row.title
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "about__text", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "about__lead", children: profile.lede }),
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("p", { children: [
+                "\u6211\u7684\u8D77\u70B9\u5176\u5B9E\u4E0D\u5728\u7A7A\u95F4\uFF0C\u800C\u5728\u753B\u9762\u3002\u5C0F\u65F6\u5019\u753B\u753B\u3001\u6253\u6E38\u620F\u3001\u4E3A\u559C\u6B22\u7684\u4F5C\u54C1\u505A\u5EF6\u4F38\u521B\u4F5C\u2014\u2014 \u8FD9\u4EF6\u4E8B\u8BA9\u6211\u7B2C\u4E00\u6B21\u8BA4\u771F\u53BB\u60F3\uFF1A\u4E00\u4E2A\u4E16\u754C\u662F\u600E\u4E48\u642D\u8D77\u6765\u7684\uFF0C\u89D2\u8272\u4E3A\u4EC0\u4E48\u957F\u6210\u8FD9\u6837\uFF0C \u573A\u666F\u548C\u8272\u5F69\u4E3A\u4EC0\u4E48\u8FD9\u6837\u914D\u3002\u90A3\u79CD",
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("strong", { children: "\u300C\u628A\u60F3\u8C61\u53D8\u6210\u770B\u5F97\u89C1\u7684\u4E1C\u897F\u300D" }),
+                "\u7684\u51B2\u52A8\uFF0C\u6BD4\u4EFB\u4F55\u4E00\u95E8\u5177\u4F53\u7684\u4E13\u4E1A\u90FD\u66F4\u65E9\u5438\u5F15\u6211\u3002"
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("p", { children: [
+                "\u672C\u79D1\u5728\u6E56\u5317\u7F8E\u672F\u5B66\u9662\u8BFB\u73AF\u5883\u8BBE\u8BA1\uFF08\u5BA4\u5185\u8BBE\u8BA1\u65B9\u5411\uFF09\uFF0C\u7855\u58EB\u7EE7\u7EED\u8BFB\u73AF\u5883\u827A\u672F\u8BBE\u8BA1\u3002 \u4E13\u4E1A\u628A\u6211\u4ECE\u300C\u753B\u4E00\u4E2A\u753B\u9762\u300D\u63A8\u5230\u300C\u9020\u4E00\u4E2A\u7A7A\u95F4\u300D\u2014\u2014\u5C3A\u5EA6\u3001\u6784\u9020\u3001\u6750\u6599\u3001\u5149\u7EBF\u548C\u4EBA\u7684\u884C\u4E3A\uFF0C \u90FD\u8981\u843D\u5230\u80FD\u88AB\u5EFA\u9020\u3001\u88AB\u4F7F\u7528\u7684\u7A0B\u5EA6\u3002\u6211\u6CA1\u6709\u628A\u4ECE\u524D\u7684\u5174\u8DA3\u653E\u4E0B\uFF0C\u800C\u662F\u628A\u5B83\u4EEC\u5F53\u6210\u65B9\u6CD5\uFF1A",
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("strong", { children: "\u5148\u60F3\u6E05\u695A\u8981\u8BB2\u4EC0\u4E48\uFF0C\u518D\u51B3\u5B9A\u7528\u4EC0\u4E48\u624B\u6BB5\u8BB2" }),
+                "\u3002 \u751F\u6D3B\u91CC\u7684\u89C2\u5BDF\u548C\u60F3\u6CD5\uFF0C\u6700\u540E\u5927\u591A\u4F1A\u53D8\u6210\u65B9\u6848\u91CC\u7684\u67D0\u4E00\u4E2A\u8F6C\u6298\u3002 \u8FD9\u4E9B\u60F3\u6CD5\u540E\u6765\u90FD\u88AB\u653E\u8FDB\u4E86\u7ADE\u8D5B\u548C\u9879\u76EE\u91CC\uFF0C\u4E5F\u5728\u4E00\u8F6E\u8F6E\u7684\u5EFA\u6A21\u3001\u6548\u679C\u56FE\u4E0E\u65B9\u6848\u672C\u4E2D\u88AB\u53CD\u590D\u68C0\u9A8C\u3002"
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("p", { children: [
+                "\u6211\u4E60\u60EF\u5728\u591A\u4E2A\u5C3A\u5EA6\u4E4B\u95F4\u5207\u6362\uFF1A\u6982\u5FF5\u3001\u5E73\u9762\u3001\u63D2\u753B\uFF0C\u5230\u5BA4\u5185\u3001\u5EFA\u7B51\u3001\u666F\u89C2\uFF0C\u518D\u5230\u4E09\u7EF4\u53EF\u89C6\u5316\u3002 \u8FD9\u6B63\u662F\u6211\u5E0C\u671B\u5728\u6C42\u804C\u65F6\u88AB\u770B\u5230\u7684\u90E8\u5206\u2014\u2014\u4E0D\u662F\u67D0\u4E00\u6B3E\u8F6F\u4EF6\u6216\u67D0\u4E00\u5F20\u56FE\uFF0C \u800C\u662F\u80FD\u4ECE\u4E00\u4E2A\u5FF5\u5934\u51FA\u53D1\uFF0C\u4E00\u8DEF\u63A8\u5230\u5EFA\u6210\u4E0E\u8868\u8FBE\u7684",
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("strong", { children: "\u7EFC\u5408\u80FD\u529B" }),
+                "\u3002 \u4E0B\u9762\u7684\u9879\u76EE\u6BD4\u6211\u8BF4\u7684\u66F4\u6E05\u695A\u3002"
               ] })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { children: row.desc })
-          ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: `timeline__badge${row.current ? " is-now" : ""}`, children: row.current ? "Now" : row.period.slice(0, 4) })
-        ] }, row.title)) })
-      ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "timeline timeline--awards", "data-reveal": true, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "timeline__label", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("h3", { children: "\u8363\u8A89\u5956\u9879" }),
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("p", { children: [
-            "Awards",
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("br", {}),
-            awards.length,
-            " Items",
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("br", {}),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("br", {}),
-            "2024 \u2014 2026"
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("dl", { className: "about__contact", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("a", { href: `mailto:${profile.email}`, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("dt", { children: "Email \u90AE\u7BB1" }),
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("dd", { children: profile.email })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("a", { href: profile.phoneHref, children: [
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("dt", { children: "Phone \u7535\u8BDD" }),
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("dd", { children: profile.phone })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("dt", { children: "WeChat \u5FAE\u4FE1" }),
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("dd", { children: profile.wechat })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("dt", { children: "Location \u6240\u5728\u5730" }),
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("dd", { children: profile.location })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("dt", { children: "\u7C4D\u8D2F" }),
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("dd", { children: profile.hometown })
+              ] })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "about__stats", "data-reveal": true, children: aboutStats.map((s) => /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "about__stat", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("b", { children: s.value }),
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { children: s.label }),
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("i", { children: s.note })
+            ] }, s.label)) })
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("div", { className: "timeline__rows", children: awards.map((a) => /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("article", { className: "timeline__row", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "timeline__period", children: a.year }),
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "timeline__main", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("h4", { children: a.name }),
-            /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { children: a.award })
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("figure", { className: "wall", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("figcaption", { className: "wall__head", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("h3", { children: "\u4E2A\u4EBA\u5F71\u50CF" }),
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("p", { children: [
+              "Personal \xB7 ",
+              String(personalPhotos.length).padStart(2, "0"),
+              " \u5F20 \xB7 \u505C\u4F4F\u4E0D\u52A8 \xB7 \u62D6\u52A8\u7FFB\u770B \xB7 \u70B9\u4E00\u5F20\u653E\u5927"
+            ] })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "timeline__badge", children: "Award" })
-        ] }, a.name)) })
-      ] })
-    ] }) });
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "wall__stage", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+            InfiniteSpiral,
+            {
+              items: personalPhotos,
+              animationMode: "all",
+              speed: 0.5,
+              radius: narrow ? 240 : 380,
+              cardWidth: narrow ? 132 : 152,
+              cardHeight: narrow ? 132 : 152,
+              verticalSpacing: narrow ? 92 : 58,
+              perspective: 1200,
+              cardsPerTurn: narrow ? 8 : 10,
+              cardRadius: narrow ? 14 : 16,
+              centerScale: 1.2,
+              edgeFade: 0.34,
+              edgeBlur: 5,
+              onSelect: setShot
+            }
+          ) })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "timeline", "data-reveal": true, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "timeline__label", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("h3", { children: "\u7ECF\u5386\u4E0E\u6559\u80B2" }),
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("p", { children: [
+              "Experience",
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("br", {}),
+              "& Education",
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("br", {}),
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("br", {}),
+              "2020 \u2014 \u81F3\u4ECA"
+            ] })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "timeline__rows", children: rows.map((row) => /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("article", { className: "timeline__row", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "timeline__period", children: row.period }),
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "timeline__main", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("h4", { children: [
+                row.org,
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", { children: [
+                  "\u3000/\u3000",
+                  row.title
+                ] })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { children: row.desc })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: `timeline__badge${row.current ? " is-now" : ""}`, children: row.current ? "Now" : row.period.slice(0, 4) })
+          ] }, row.title)) })
+        ] }),
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "timeline timeline--awards", "data-reveal": true, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "timeline__label", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("h3", { children: "\u8363\u8A89\u5956\u9879" }),
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("p", { children: [
+              "Awards",
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("br", {}),
+              awards.length,
+              " Items",
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("br", {}),
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("br", {}),
+              "2024 \u2014 2026"
+            ] })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "timeline__rows", children: awards.map((a) => /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("article", { className: "timeline__row", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { className: "timeline__period", children: a.year }),
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "timeline__main", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("h4", { children: a.name }),
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { children: a.award })
+            ] }),
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "timeline__badge", children: "Award" })
+          ] }, a.name)) })
+        ] })
+      ] }),
+      shot != null ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+        PhotoLightbox,
+        {
+          items: personalPhotos,
+          index: shot,
+          onClose: () => setShot(null),
+          onStep: stepShot
+        }
+      ) : null
+    ] });
   }
 
   // src/components/Projects.jsx
-  var import_react6 = __toESM(require_react(), 1);
+  var import_react10 = __toESM(require_react(), 1);
 
   // src/components/ProjectDetail.jsx
-  var import_react4 = __toESM(require_react(), 1);
-  var import_jsx_runtime7 = __toESM(require_jsx_runtime(), 1);
+  var import_react8 = __toESM(require_react(), 1);
+  var import_jsx_runtime9 = __toESM(require_jsx_runtime(), 1);
   function ProjectDetail({ project, onClose, returnFocusTo }) {
-    const shots = (0, import_react4.useMemo)(
+    const shots = (0, import_react8.useMemo)(
       () => [
         { type: "image", src: project.image },
         ...project.video ? [{ type: "video", src: project.video }] : [],
@@ -12559,11 +12985,11 @@ void main() {
       ],
       [project]
     );
-    const [active, setActive] = (0, import_react4.useState)(0);
-    const closeRef = (0, import_react4.useRef)(null);
+    const [active, setActive] = (0, import_react8.useState)(0);
+    const closeRef = (0, import_react8.useRef)(null);
     const current = shots[active];
     const step = (delta) => setActive((i) => (i + delta + shots.length) % shots.length);
-    (0, import_react4.useEffect)(() => {
+    (0, import_react8.useEffect)(() => {
       const onKey = (e) => {
         if (e.target?.tagName === "VIDEO") return;
         if (e.key === "Escape") onClose();
@@ -12584,8 +13010,8 @@ void main() {
       { k: "\u65F6\u95F4 / Period", v: project.period },
       { k: "\u89D2\u8272 / Role", v: project.role }
     ].filter((m) => m.v);
-    return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "detail", role: "dialog", "aria-modal": "true", "aria-label": project.title, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "detail", role: "dialog", "aria-modal": "true", "aria-label": project.title, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
         "button",
         {
           className: "detail__scrim",
@@ -12594,40 +13020,40 @@ void main() {
           onClick: onClose
         }
       ),
-      /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "detail__panel", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("header", { className: "detail__bar", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "detail__heading", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { className: "detail__no", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "detail__panel", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("header", { className: "detail__bar", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "detail__heading", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "detail__no", children: [
               "(",
               project.index,
               ")"
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { children: [
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("h3", { children: project.title }),
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("p", { children: project.subtitle })
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { children: [
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("h3", { children: project.title }),
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { children: project.subtitle })
             ] })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("button", { className: "detail__close", ref: closeRef, onClick: onClose, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("button", { className: "detail__close", ref: closeRef, onClick: onClose, children: [
             "\u5173\u95ED",
-            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "ESC" })
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { children: "ESC" })
           ] })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "detail__body", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("aside", { className: "detail__meta", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("p", { className: "detail__desc", children: project.desc }),
-            /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("dl", { className: "detail__list", children: [
-              meta.map((m) => /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { children: [
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("dt", { children: m.k }),
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("dd", { children: m.v })
+        /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "detail__body", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("aside", { className: "detail__meta", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { className: "detail__desc", children: project.desc }),
+            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("dl", { className: "detail__list", children: [
+              meta.map((m) => /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("dt", { children: m.k }),
+                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("dd", { children: m.v })
               ] }, m.k)),
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { children: [
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("dt", { children: "\u5173\u952E\u8BCD / Tags" }),
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("dd", { className: "detail__tags", children: project.tags.map((t) => /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: t }, t)) })
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { children: [
+                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("dt", { children: "\u5173\u952E\u8BCD / Tags" }),
+                /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("dd", { className: "detail__tags", children: project.tags.map((t) => /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { children: t }, t)) })
               ] })
             ] })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "detail__viewer", children: [
-            current.type === "video" ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "detail__viewer", children: [
+            current.type === "video" ? /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
               "video",
               {
                 className: "detail__video",
@@ -12641,9 +13067,9 @@ void main() {
                 preload: "metadata"
               },
               current.src
-            ) : /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("img", { src: current.src, alt: `${project.title} \u2014 \u7B2C ${active + 1} \u5F20` }),
-            shots.length > 1 && /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(import_jsx_runtime7.Fragment, { children: [
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+            ) : /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("img", { src: current.src, alt: `${project.title} \u2014 \u7B2C ${active + 1} \u5F20` }),
+            shots.length > 1 && /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(import_jsx_runtime9.Fragment, { children: [
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
                 "button",
                 {
                   className: "detail__nav detail__nav--prev",
@@ -12652,7 +13078,7 @@ void main() {
                   children: "\u2190"
                 }
               ),
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
                 "button",
                 {
                   className: "detail__nav detail__nav--next",
@@ -12661,7 +13087,7 @@ void main() {
                   children: "\u2192"
                 }
               ),
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { className: "detail__counter", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "detail__counter", children: [
                 String(active + 1).padStart(2, "0"),
                 " / ",
                 String(shots.length).padStart(2, "0")
@@ -12669,15 +13095,15 @@ void main() {
             ] })
           ] })
         ] }),
-        shots.length > 1 && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("footer", { className: "detail__thumbs", children: shots.map((shot, i) => /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
+        shots.length > 1 && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("footer", { className: "detail__thumbs", children: shots.map((shot, i) => /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(
           "button",
           {
             className: `detail__thumb${i === active ? " is-on" : ""}${shot.type === "video" ? " is-video" : ""}`,
             onClick: () => setActive(i),
             "aria-label": shot.type === "video" ? "\u64AD\u653E\u9879\u76EE\u89C6\u9891" : `\u67E5\u770B\u7B2C ${i + 1} \u5F20`,
             children: [
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("img", { src: shot.type === "video" ? project.image : shot.src, alt: "" }),
-              shot.type === "video" && /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "detail__thumb-play", children: "\u25B6" })
+              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("img", { src: shot.type === "video" ? project.image : shot.src, alt: "" }),
+              shot.type === "video" && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "detail__thumb-play", children: "\u25B6" })
             ]
           },
           shot.src
@@ -12687,7 +13113,7 @@ void main() {
   }
 
   // src/components/BounceCards.jsx
-  var import_react5 = __toESM(require_react(), 1);
+  var import_react9 = __toESM(require_react(), 1);
 
   // node_modules/.pnpm/gsap@3.13.0/node_modules/gsap/gsap-core.js
   function _assertThisInitialized(self) {
@@ -13193,7 +13619,7 @@ void main() {
   var getUnit = function getUnit2(value, v) {
     return !_isString(value) || !(v = _unitExp.exec(value)) ? "" : v[1];
   };
-  var clamp = function clamp2(min, max, value) {
+  var clamp2 = function clamp3(min, max, value) {
     return _conditionalReturn(value, function(v) {
       return _clamp(min, max, v);
     });
@@ -15707,7 +16133,7 @@ void main() {
       snap,
       normalize: normalize4,
       getUnit,
-      clamp,
+      clamp: clamp2,
       splitColor,
       toArray,
       selector,
@@ -16963,7 +17389,7 @@ void main() {
   var TweenMaxWithCSS = gsapWithCSS.core.Tween;
 
   // src/components/BounceCards.jsx
-  var import_jsx_runtime8 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime10 = __toESM(require_jsx_runtime(), 1);
   var LAYOUTS = {
     5: [
       { x: -1.62, y: 0.06, r: 9 },
@@ -16979,12 +17405,12 @@ void main() {
     ]
   };
   var NARROW = 620;
-  var clamp3 = (min, value, max) => Math.min(max, Math.max(min, value));
+  var clamp4 = (min, value, max) => Math.min(max, Math.max(min, value));
   function BounceCards({ items = [], onPick, className = "" }) {
-    const wrapRef = (0, import_react5.useRef)(null);
-    const [width, setWidth] = (0, import_react5.useState)(0);
-    const [hovered, setHovered] = (0, import_react5.useState)(-1);
-    (0, import_react5.useLayoutEffect)(() => {
+    const wrapRef = (0, import_react9.useRef)(null);
+    const [width, setWidth] = (0, import_react9.useState)(0);
+    const [hovered, setHovered] = (0, import_react9.useState)(-1);
+    (0, import_react9.useLayoutEffect)(() => {
       const el = wrapRef.current;
       if (!el) return void 0;
       const measure = () => setWidth(el.clientWidth);
@@ -17000,9 +17426,9 @@ void main() {
     const narrow = width > 0 && width < NARROW;
     const layout = narrow ? LAYOUTS[3] : LAYOUTS[5];
     const cards = items.slice(0, layout.length);
-    const cardW = width ? clamp3(96, width / (narrow ? 3.3 : 4.5), 250) : 200;
+    const cardW = width ? clamp4(96, width / (narrow ? 3.3 : 4.5), 250) : 200;
     const push = cardW * 0.52;
-    (0, import_react5.useEffect)(() => {
+    (0, import_react9.useEffect)(() => {
       const el = wrapRef.current;
       if (!el) return void 0;
       const slots = el.querySelectorAll(".bounce__slot");
@@ -17044,14 +17470,14 @@ void main() {
       io.observe(el);
       return () => io.disconnect();
     }, [items]);
-    return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: `bounce${narrow ? " is-narrow" : ""} ${className}`.trim(), ref: wrapRef, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "bounce__stack", style: { width: cardW, height: cardW }, children: cards.map((item, i) => {
+    return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: `bounce${narrow ? " is-narrow" : ""} ${className}`.trim(), ref: wrapRef, children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "bounce__stack", style: { width: cardW, height: cardW }, children: cards.map((item, i) => {
       const seat = layout[i];
       const on = hovered === i;
       const shift = hovered < 0 || on ? 0 : i < hovered ? -push : push;
       const x = seat.x * cardW + shift;
       const y = seat.y * cardW + (on ? -cardW * 0.06 : 0);
       const rotate3 = on ? 0 : seat.r;
-      return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+      return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
         "div",
         {
           className: "bounce__slot",
@@ -17062,7 +17488,7 @@ void main() {
             marginTop: -cardW / 2,
             zIndex: on ? cards.length + 2 : i + 1
           },
-          children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
+          children: /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
             "button",
             {
               type: "button",
@@ -17077,11 +17503,11 @@ void main() {
               onClick: () => onPick?.(item),
               "aria-label": `${item.title} \u2014 \u56DE\u5230\u8FD9\u4E2A\u9879\u76EE`,
               children: [
-                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("img", { src: item.src, alt: "", loading: "lazy" }),
-                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "bounce__no", children: item.index }),
-                /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", { className: "bounce__say", children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("b", { children: item.title }),
-                  /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("i", { children: "\u56DE\u5230\u9879\u76EE \u2191" })
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("img", { src: item.src, alt: "", loading: "lazy" }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { className: "bounce__no", children: item.index }),
+                /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("span", { className: "bounce__say", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("b", { children: item.title }),
+                  /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("i", { children: "\u56DE\u5230\u9879\u76EE \u2191" })
                 ] })
               ]
             }
@@ -17093,7 +17519,7 @@ void main() {
   }
 
   // src/components/Projects.jsx
-  var import_jsx_runtime9 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime11 = __toESM(require_jsx_runtime(), 1);
   var HAND = 5;
   function drawHand() {
     const pool = galleryPool.slice();
@@ -17113,14 +17539,14 @@ void main() {
     return hand;
   }
   function Projects() {
-    const [openId, setOpenId] = (0, import_react6.useState)(null);
-    const [flashId, setFlashId] = (0, import_react6.useState)(null);
-    const [hand, setHand] = (0, import_react6.useState)(() => drawHand());
-    const [round, setRound] = (0, import_react6.useState)(0);
-    const openerRef = (0, import_react6.useRef)(null);
-    const flashTimer = (0, import_react6.useRef)(0);
+    const [openId, setOpenId] = (0, import_react10.useState)(null);
+    const [flashId, setFlashId] = (0, import_react10.useState)(null);
+    const [hand, setHand] = (0, import_react10.useState)(() => drawHand());
+    const [round, setRound] = (0, import_react10.useState)(0);
+    const openerRef = (0, import_react10.useRef)(null);
+    const flashTimer = (0, import_react10.useRef)(0);
     const openProject = projects.find((p) => p.id === openId) || null;
-    (0, import_react6.useEffect)(() => () => window.clearTimeout(flashTimer.current), []);
+    (0, import_react10.useEffect)(() => () => window.clearTimeout(flashTimer.current), []);
     const jumpToProject = (pid) => {
       const el = document.getElementById(pid);
       if (!el) return;
@@ -17139,9 +17565,9 @@ void main() {
       setHand(next);
       setRound((r) => r + 1);
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("section", { className: "projects", id: "projects", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "wrap", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+    return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("section", { className: "projects", id: "projects", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "wrap", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
           SectionHead,
           {
             no: "02",
@@ -17150,10 +17576,10 @@ void main() {
             note: "\u987A\u5E8F\u6309\u6700\u65B0\u4E00\u7248\u4F5C\u54C1\u96C6\u6574\u7406\uFF0C\u914D\u56FE\u4ECE\u300C\u9879\u76EE\u56FE\u7247\u300D\u91CD\u51FA\u2014\u2014\u6BCF\u5F20\u5361\u7247\u90FD\u53EF\u4EE5\u70B9\u5F00\uFF0C\u770B\u8BE5\u9879\u76EE\u7684\u5176\u4ED6\u56FE\u7EB8\u4E0E\u6548\u679C\u56FE\u3002"
           }
         ),
-        /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "projects__grid", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "projects__grid", children: [
           projects.map((p, i) => {
             const shotCount = p.detail.length + 1 + (p.video ? 1 : 0);
-            return /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(
+            return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
               "article",
               {
                 className: `pcard${flashId === p.id ? " is-flash" : ""}`,
@@ -17171,27 +17597,27 @@ void main() {
                   }
                 },
                 children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("figure", { className: "pcard__figure", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("img", { src: p.image, alt: p.title, loading: "lazy" }),
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "pcard__index", children: p.index }),
-                    p.period && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "pcard__period", children: p.period }),
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "pcard__open", children: [
+                  /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("figure", { className: "pcard__figure", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("img", { src: p.image, alt: p.title, loading: "lazy" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { className: "pcard__index", children: p.index }),
+                    p.period && /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { className: "pcard__period", children: p.period }),
+                    /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("span", { className: "pcard__open", children: [
                       "\u67E5\u770B\u8BE6\u60C5",
-                      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("b", { children: shotCount }),
+                      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("b", { children: shotCount }),
                       "\u5F20"
                     ] })
                   ] }),
-                  /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "pcard__body", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("h3", { className: "pcard__title", children: p.title }),
-                      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { className: "pcard__sub", children: p.subtitle })
+                  /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "pcard__body", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("h3", { className: "pcard__title", children: p.title }),
+                      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "pcard__sub", children: p.subtitle })
                     ] }),
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { className: "pcard__desc", children: p.desc }),
-                    /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "pcard__foot", children: [
-                      /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "pcard__tags", children: p.tags.map((t) => /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { children: t }, t)) }),
-                      /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("p", { className: "pcard__role", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "pcard__desc", children: p.desc }),
+                    /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "pcard__foot", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "pcard__tags", children: p.tags.map((t) => /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { children: t }, t)) }),
+                      /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("p", { className: "pcard__role", children: [
                         p.org,
-                        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("br", {}),
+                        /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("br", {}),
                         p.role
                       ] })
                     ] })
@@ -17201,30 +17627,30 @@ void main() {
               p.id
             );
           }),
-          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("article", { className: "pcard pcard--quote", "data-reveal": true, style: { transitionDelay: "110ms" }, children: /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "quote", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "quote__label", children: "Statement / \u8BBE\u8BA1\u4E3B\u5F20" }),
-            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("p", { className: "quote__text", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("article", { className: "pcard pcard--quote", "data-reveal": true, style: { transitionDelay: "110ms" }, children: /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "quote", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { className: "quote__label", children: "Statement / \u8BBE\u8BA1\u4E3B\u5F20" }),
+            /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("p", { className: "quote__text", children: [
               "\u300C",
               profile.tagline,
               "\u300D"
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { className: "quote__note", children: "\u73AF\u5883\u827A\u672F\u3001\u89C6\u89C9\u8868\u8FBE\u4E0E\u6982\u5FF5\u63A8\u6F14\u5728\u6211\u8FD9\u91CC\u662F\u540C\u4E00\u4EF6\u4E8B\u7684\u4E09\u9762\u2014\u2014 \u5148\u628A\u95EE\u9898\u770B\u6E05\u695A\uFF0C\u518D\u51B3\u5B9A\u7528\u4EC0\u4E48\u65B9\u5F0F\u8BA9\u5B83\u88AB\u7406\u89E3\u3002" }),
-            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("a", { className: "quote__link", href: "#contact", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "quote__note", children: "\u73AF\u5883\u827A\u672F\u3001\u89C6\u89C9\u8868\u8FBE\u4E0E\u6982\u5FF5\u63A8\u6F14\u5728\u6211\u8FD9\u91CC\u662F\u540C\u4E00\u4EF6\u4E8B\u7684\u4E09\u9762\u2014\u2014 \u5148\u628A\u95EE\u9898\u770B\u6E05\u695A\uFF0C\u518D\u51B3\u5B9A\u7528\u4EC0\u4E48\u65B9\u5F0F\u8BA9\u5B83\u88AB\u7406\u89E3\u3002" }),
+            /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("a", { className: "quote__link", href: "#contact", children: [
               "\u804A\u804A\u5408\u4F5C",
-              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { children: "\u2192" })
+              /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { children: "\u2192" })
             ] })
           ] }) })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "marquee", "aria-hidden": "true", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "marquee__track", children: [0, 1].map((dup) => /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { style: { display: "flex" }, children: marqueeWords.map((w) => /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "marquee__item", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "marquee", "aria-hidden": "true", children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { className: "marquee__track", children: [0, 1].map((dup) => /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { style: { display: "flex" }, children: marqueeWords.map((w) => /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("span", { className: "marquee__item", children: [
           w,
-          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("i", {})
+          /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("i", {})
         ] }, dup + w)) }, dup)) }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "gallery", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "gallery__head", "data-reveal": true, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("h3", { children: "\u6210\u679C\u96C6\u9526" }),
-            /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("p", { children: "Gallery / \u6BCF\u6B21\u968F\u673A\u62BD\u4E00\u7EC4\uFF0C\u70B9\u4E00\u5F20\u56DE\u5230\u5BF9\u5E94\u9879\u76EE" })
+        /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "gallery", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "gallery__head", "data-reveal": true, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("h3", { children: "\u6210\u679C\u96C6\u9526" }),
+            /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { children: "Gallery / \u6BCF\u6B21\u968F\u673A\u62BD\u4E00\u7EC4\uFF0C\u70B9\u4E00\u5F20\u56DE\u5230\u5BF9\u5E94\u9879\u76EE" })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
             BounceCards,
             {
               items: hand,
@@ -17233,12 +17659,12 @@ void main() {
             },
             round
           ),
-          /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "gallery__foot", "data-reveal": true, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("button", { type: "button", className: "btn btn--ghost gallery__shuffle", onClick: shuffle3, children: [
-              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { children: "\u6D17\u724C\u6362\u4E00\u7EC4" }),
-              /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "btn__arrow", children: "\u21BA" })
+          /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { className: "gallery__foot", "data-reveal": true, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("button", { type: "button", className: "btn btn--ghost gallery__shuffle", onClick: shuffle3, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { children: "\u6D17\u724C\u6362\u4E00\u7EC4" }),
+              /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { className: "btn__arrow", children: "\u21BA" })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("p", { className: "gallery__now", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("p", { className: "gallery__now", children: [
               "\u9879\u76EE\u56FE\u7247 ",
               galleryPool.length,
               " \u5F20 \xB7 \u6BCF\u6B21\u968F\u673A\u62BD\u4E00\u7EC4"
@@ -17246,7 +17672,7 @@ void main() {
           ] })
         ] })
       ] }),
-      openProject && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+      openProject && /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(
         ProjectDetail,
         {
           project: openProject,
@@ -17259,8 +17685,8 @@ void main() {
   }
 
   // src/components/Contact.jsx
-  var import_react7 = __toESM(require_react(), 1);
-  var import_jsx_runtime10 = __toESM(require_jsx_runtime(), 1);
+  var import_react11 = __toESM(require_react(), 1);
+  var import_jsx_runtime12 = __toESM(require_jsx_runtime(), 1);
   async function writeClipboard(text) {
     try {
       if (navigator.clipboard?.writeText) {
@@ -17284,66 +17710,66 @@ void main() {
     }
   }
   function Contact() {
-    const [toast, setToast] = (0, import_react7.useState)("");
-    const timer = (0, import_react7.useRef)(0);
-    (0, import_react7.useEffect)(() => () => window.clearTimeout(timer.current), []);
+    const [toast, setToast] = (0, import_react11.useState)("");
+    const timer = (0, import_react11.useRef)(0);
+    (0, import_react11.useEffect)(() => () => window.clearTimeout(timer.current), []);
     const copy6 = async (text, label) => {
       const ok = await writeClipboard(text);
       setToast(ok ? `${label}\u5DF2\u590D\u5236` : "\u590D\u5236\u5931\u8D25\uFF0C\u8BF7\u624B\u52A8\u9009\u62E9");
       window.clearTimeout(timer.current);
       timer.current = window.setTimeout(() => setToast(""), 2200);
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("section", { className: "contact", id: "contact", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "contact__glow" }),
-      /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "contact__grid" }),
-      /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "wrap", style: { flex: 1, display: "flex", flexDirection: "column" }, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("p", { className: "eyebrow", style: { color: "rgba(255,255,255,.5)" }, children: "Get in touch \u2014 03 / 03" }),
-        /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__body", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { "data-reveal": true, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("h2", { className: "contact__title", children: [
+    return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("section", { className: "contact", id: "contact", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "contact__glow" }),
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "contact__grid" }),
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "wrap", style: { flex: 1, display: "flex", flexDirection: "column" }, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "eyebrow", style: { color: "rgba(255,255,255,.5)" }, children: "Get in touch \u2014 03 / 03" }),
+        /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "contact__body", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { "data-reveal": true, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("h2", { className: "contact__title", children: [
               "\u4E00\u8D77\u628A\u4E0B\u4E00\u4E2A\u8BBE\u8BA1",
-              /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("br", {}),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("br", {}),
               "\u505A\u6210",
-              /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("em", { children: "\u53EF\u4EE5\u6D41\u901A\u7684\u6545\u4E8B" }),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("em", { children: "\u53EF\u4EE5\u6D41\u901A\u7684\u6545\u4E8B" }),
               "\u3002"
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { className: "contact__title-latin", children: "Let's build something spatial" }),
-            /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("a", { className: "contact__mail", href: `mailto:${profile.email}`, children: profile.email }),
-            /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__actions", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "contact__title-latin", children: "Let's build something spatial" }),
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("a", { className: "contact__mail", href: `mailto:${profile.email}`, children: profile.email }),
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "contact__actions", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
                 "button",
                 {
                   type: "button",
                   className: "btn btn--solid",
                   onClick: () => copy6(profile.email, "\u90AE\u7BB1"),
                   children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { children: "\u590D\u5236\u90AE\u7BB1" }),
-                    /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { className: "btn__arrow", children: "\u29C9" })
+                    /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { children: "\u590D\u5236\u90AE\u7BB1" }),
+                    /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "btn__arrow", children: "\u29C9" })
                   ]
                 }
               ),
-              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
                 "button",
                 {
                   type: "button",
                   className: "btn btn--ghost",
                   onClick: () => copy6(profile.phone, "\u7535\u8BDD"),
                   children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { children: profile.phone }),
-                    /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { className: "btn__arrow", children: "\u29C9" })
+                    /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { children: profile.phone }),
+                    /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "btn__arrow", children: "\u29C9" })
                   ]
                 }
               ),
-              /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("a", { className: "btn btn--ghost", href: "resume.pdf", target: "_blank", rel: "noreferrer", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { children: "\u4E0B\u8F7D\u7B80\u5386 PDF" }) })
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("a", { className: "btn btn--ghost", href: "resume.pdf", target: "_blank", rel: "noreferrer", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { children: "\u4E0B\u8F7D\u7B80\u5386 PDF" }) })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("p", { className: "contact__hint", children: "\u70B9\u6309\u94AE\u5373\u53EF\u590D\u5236\uFF0C\u4E5F\u53EF\u4EE5\u76F4\u63A5\u70B9\u4E0A\u9762\u7684\u90AE\u7BB1\u53D1\u4FE1\u3002" })
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "contact__hint", children: "\u70B9\u6309\u94AE\u5373\u53EF\u590D\u5236\uFF0C\u4E5F\u53EF\u4EE5\u76F4\u63A5\u70B9\u4E0A\u9762\u7684\u90AE\u7BB1\u53D1\u4FE1\u3002" })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__side", id: "contact-info", "data-reveal": true, style: { transitionDelay: "120ms" }, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__qr", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("img", { src: profile.wechatQr, alt: "\u5FAE\u4FE1\u4E8C\u7EF4\u7801" }),
-              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__qr-text", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { className: "contact__qr-label", children: "\u5FAE\u4FE1 / WeChat" }),
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
+          /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "contact__side", id: "contact-info", "data-reveal": true, style: { transitionDelay: "120ms" }, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "contact__qr", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("img", { src: profile.wechatQr, alt: "\u5FAE\u4FE1\u4E8C\u7EF4\u7801" }),
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "contact__qr-text", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "contact__qr-label", children: "\u5FAE\u4FE1 / WeChat" }),
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)(
                   "button",
                   {
                     type: "button",
@@ -17352,74 +17778,74 @@ void main() {
                     title: "\u70B9\u51FB\u590D\u5236\u5FAE\u4FE1\u53F7",
                     children: [
                       profile.wechat,
-                      /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("i", { children: "\u29C9" })
+                      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("i", { children: "\u29C9" })
                     ]
                   }
                 ),
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("p", { children: "\u626B\u7801\u6216\u70B9\u5FAE\u4FE1\u53F7\u590D\u5236\uFF0C\u90AE\u4EF6\u56DE\u590D\u4F1A\u66F4\u5FEB\u4E00\u4E9B\u3002" }),
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("a", { href: `mailto:${profile.email}`, children: profile.email })
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { children: "\u626B\u7801\u6216\u70B9\u5FAE\u4FE1\u53F7\u590D\u5236\uFF0C\u90AE\u4EF6\u56DE\u590D\u4F1A\u66F4\u5FEB\u4E00\u4E9B\u3002" }),
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("a", { href: `mailto:${profile.email}`, children: profile.email })
               ] })
             ] }),
-            /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("dl", { className: "contact__list", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__item", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dt", { children: "Phone" }),
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dd", { children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("a", { href: profile.phoneHref, children: profile.phone }) })
+            /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("dl", { className: "contact__list", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "contact__item", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("dt", { children: "Phone" }),
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("dd", { children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("a", { href: profile.phoneHref, children: profile.phone }) })
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__item", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dt", { children: "Location" }),
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dd", { children: profile.location })
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "contact__item", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("dt", { children: "Location" }),
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("dd", { children: profile.location })
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__item", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dt", { children: "\u6C42\u804C\u610F\u5411" }),
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dd", { children: profile.intent })
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "contact__item", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("dt", { children: "\u6C42\u804C\u610F\u5411" }),
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("dd", { children: profile.intent })
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__item", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dt", { children: "\u6559\u80B2\u80CC\u666F" }),
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dd", { children: "\u6E56\u5317\u7F8E\u672F\u5B66\u9662 \xB7 \u73AF\u5883\u827A\u672F\u8BBE\u8BA1 \u7855\u58EB" })
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "contact__item", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("dt", { children: "\u6559\u80B2\u80CC\u666F" }),
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("dd", { children: "\u6E56\u5317\u7F8E\u672F\u5B66\u9662 \xB7 \u73AF\u5883\u827A\u672F\u8BBE\u8BA1 \u7855\u58EB" })
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__item", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dt", { children: "Status" }),
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dd", { children: profile.status })
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "contact__item", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("dt", { children: "Status" }),
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("dd", { children: profile.status })
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "contact__item", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dt", { children: "\u7B80\u5386" }),
-                /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("dd", { children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("a", { href: "resume.pdf", target: "_blank", rel: "noreferrer", children: "\u4E0B\u8F7D PDF" }) })
+              /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { className: "contact__item", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("dt", { children: "\u7B80\u5386" }),
+                /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("dd", { children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("a", { href: "resume.pdf", target: "_blank", rel: "noreferrer", children: "\u4E0B\u8F7D PDF" }) })
               ] })
             ] })
           ] })
         ] })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "wrap", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("footer", { className: "contact__foot", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("span", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "wrap", children: /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("footer", { className: "contact__foot", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("span", { children: [
           "\xA9 2026 ",
           profile.latin,
           " \xB7 \u73AF\u5883\u827A\u672F / AI \u8BBE\u8BA1 / \u6982\u5FF5\u827A\u672F"
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { children: "Designed & Built with React + Vite" }),
-        /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("a", { className: "contact__top", href: "#home", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { children: "Designed & Built with React + Vite" }),
+        /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("a", { className: "contact__top", href: "#home", children: [
           "Back to top",
-          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("i", { children: "\u2191" })
+          /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("i", { children: "\u2191" })
         ] })
       ] }) }),
-      toast && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "toast", role: "status", "aria-live": "polite", children: toast })
+      toast && /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { className: "toast", role: "status", "aria-live": "polite", children: toast })
     ] });
   }
 
   // src/components/Rail.jsx
-  var import_jsx_runtime11 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime13 = __toESM(require_jsx_runtime(), 1);
   function Rail({ active, dark }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("nav", { className: `rail${dark ? " is-dark" : ""}`, "aria-label": "\u7AE0\u8282\u5BFC\u822A", children: navItems.map((item, i) => /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)(
+    return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("nav", { className: `rail${dark ? " is-dark" : ""}`, "aria-label": "\u7AE0\u8282\u5BFC\u822A", children: navItems.map((item, i) => /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(
       "a",
       {
         href: `#${item.id}`,
         className: active === item.id ? "is-active" : "",
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("span", { children: [
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("span", { children: [
             String(i + 1).padStart(2, "0"),
             " ",
             item.label
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("i", {})
+          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("i", {})
         ]
       },
       item.id
@@ -17427,10 +17853,10 @@ void main() {
   }
 
   // src/components/Intro.jsx
-  var import_react9 = __toESM(require_react(), 1);
+  var import_react13 = __toESM(require_react(), 1);
 
   // src/components/FoldText.jsx
-  var import_react8 = __toESM(require_react(), 1);
+  var import_react12 = __toESM(require_react(), 1);
 
   // node_modules/.pnpm/gsap@3.13.0/node_modules/gsap/Observer.js
   function _defineProperties(target, props) {
@@ -17956,12 +18382,12 @@ void main() {
   var _lastScrollTime = 0;
   var _enabled = 0;
   var _parseClamp = function _parseClamp2(value, type, self) {
-    var clamp6 = _isString3(value) && (value.substr(0, 6) === "clamp(" || value.indexOf("max") > -1);
-    self["_" + type + "Clamp"] = clamp6;
-    return clamp6 ? value.substr(6, value.length - 7) : value;
+    var clamp7 = _isString3(value) && (value.substr(0, 6) === "clamp(" || value.indexOf("max") > -1);
+    self["_" + type + "Clamp"] = clamp7;
+    return clamp7 ? value.substr(6, value.length - 7) : value;
   };
-  var _keepClamp = function _keepClamp2(value, clamp6) {
-    return clamp6 && (!_isString3(value) || value.substr(0, 6) !== "clamp(") ? "clamp(" + value + ")" : value;
+  var _keepClamp = function _keepClamp2(value, clamp7) {
+    return clamp7 && (!_isString3(value) || value.substr(0, 6) !== "clamp(") ? "clamp(" + value + ")" : value;
   };
   var _rafBugFix = function _rafBugFix2() {
     return _enabled && requestAnimationFrame(_rafBugFix2);
@@ -19815,7 +20241,7 @@ void main() {
   _getGSAP3() && gsap3.registerPlugin(ScrollTrigger2);
 
   // src/components/FoldText.jsx
-  var import_jsx_runtime12 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime14 = __toESM(require_jsx_runtime(), 1);
   gsapWithCSS.registerPlugin(ScrollTrigger2);
   var HINGE_CONFIG = {
     top: { origin: "50% 0%", rotateX: -92, rotateY: 0 },
@@ -19823,11 +20249,11 @@ void main() {
     left: { origin: "0% 50%", rotateX: 0, rotateY: 92 },
     right: { origin: "100% 50%", rotateX: 0, rotateY: -92 }
   };
-  var clamp4 = (value, min, max) => Math.min(max, Math.max(min, value));
+  var clamp5 = (value, min, max) => Math.min(max, Math.max(min, value));
   var renderWhitespace = (value, key) => value.split(/(\n)/).map((part, index) => {
-    if (part === "\n") return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("br", {}, `${key}-br-${index}`);
+    if (part === "\n") return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("br", {}, `${key}-br-${index}`);
     if (!part) return null;
-    return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "fold-text-whitespace", children: part.replace(/ /g, "\xA0") }, `${key}-space-${index}`);
+    return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: "fold-text-whitespace", children: part.replace(/ /g, "\xA0") }, `${key}-space-${index}`);
   });
   var FoldText = ({
     text = "Design unfolds",
@@ -19845,22 +20271,22 @@ void main() {
     className = "",
     style = {}
   }) => {
-    const rootRef = (0, import_react8.useRef)(null);
-    const timelineRef = (0, import_react8.useRef)(null);
+    const rootRef = (0, import_react12.useRef)(null);
+    const timelineRef = (0, import_react12.useRef)(null);
     const hingeConfig = HINGE_CONFIG[hinge] || HINGE_CONFIG.top;
-    const safeCrease = clamp4(creaseShading, 0, 1);
+    const safeCrease = clamp5(creaseShading, 0, 1);
     const safePerspective = Math.max(120, perspective2);
-    const segments = (0, import_react8.useMemo)(() => {
+    const segments = (0, import_react12.useMemo)(() => {
       let segmentIndex = 0;
       const renderSegment = (content, key, split = splitBy) => {
         segmentIndex += 1;
-        return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+        return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
           "span",
           {
             className: "fold-text-segment",
             "data-fold-split": split,
             style: { "--fold-perspective": `${safePerspective}px` },
-            children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(
+            children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(
               "span",
               {
                 className: "fold-text-piece",
@@ -19874,7 +20300,7 @@ void main() {
         );
       };
       if (splitBy === "line") {
-        return text.split("\n").map((line, index) => /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "fold-text-line", children: renderSegment(line || "\xA0", `segment-line-${index}`, "line") }, `line-${index}`));
+        return text.split("\n").map((line, index) => /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: "fold-text-line", children: renderSegment(line || "\xA0", `segment-line-${index}`, "line") }, `line-${index}`));
       }
       if (splitBy === "word") {
         return text.split(/(\s+)/).flatMap((part, index) => {
@@ -19884,11 +20310,11 @@ void main() {
         });
       }
       return Array.from(text).map((char, index) => {
-        if (char === "\n") return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("br", {}, `br-${index}`);
+        if (char === "\n") return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("br", {}, `br-${index}`);
         return renderSegment(char === " " ? "\xA0" : char, `segment-char-${index}`);
       });
     }, [text, splitBy, hinge, hingeConfig.origin, safePerspective]);
-    (0, import_react8.useEffect)(() => {
+    (0, import_react12.useEffect)(() => {
       if (typeof window === "undefined") return void 0;
       const root = rootRef.current;
       if (!root) return void 0;
@@ -19970,20 +20396,20 @@ void main() {
       "--fold-text-color": color,
       ...style
     };
-    return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("span", { ref: rootRef, className: `fold-text ${className}`.trim(), style: rootStyle, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "fold-text-sr-only", children: text }),
-      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { className: "fold-text-visual", "aria-hidden": "true", children: segments })
+    return /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("span", { ref: rootRef, className: `fold-text ${className}`.trim(), style: rootStyle, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: "fold-text-sr-only", children: text }),
+      /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: "fold-text-visual", "aria-hidden": "true", children: segments })
     ] });
   };
   var FoldText_default = FoldText;
 
   // src/components/Intro.jsx
-  var import_jsx_runtime13 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime15 = __toESM(require_jsx_runtime(), 1);
   var VEIL_FADE = 600;
   var TEXT_DELAY = 220;
   var CONFIRM_DELAY = 900;
   var LEAVE_FADE = 700;
-  var clamp5 = (v, min, max) => Math.min(max, Math.max(min, v));
+  var clamp6 = (v, min, max) => Math.min(max, Math.max(min, v));
   function createTearSound() {
     let ctx = null;
     let gain = null;
@@ -20057,37 +20483,37 @@ void main() {
     };
   }
   function Intro({ onEnter, onGone }) {
-    const [stage, setStage] = (0, import_react9.useState)("box");
-    const [dragging, setDragging] = (0, import_react9.useState)(false);
-    const [ready, setReady] = (0, import_react9.useState)(false);
-    const [failed, setFailed] = (0, import_react9.useState)(false);
-    const [showLatin, setShowLatin] = (0, import_react9.useState)(false);
-    const [showConfirm, setShowConfirm] = (0, import_react9.useState)(false);
-    const [showFrom2, setShowFrom2] = (0, import_react9.useState)(false);
-    const videoRef = (0, import_react9.useRef)(null);
-    const barRef = (0, import_react9.useRef)(null);
-    const pctRef = (0, import_react9.useRef)(null);
-    const accRef = (0, import_react9.useRef)(0);
-    const dragRef = (0, import_react9.useRef)(null);
-    const seekRef = (0, import_react9.useRef)(-1);
-    const autoRef = (0, import_react9.useRef)(0);
-    const sealedRef = (0, import_react9.useRef)(false);
-    const timersRef = (0, import_react9.useRef)([]);
-    const soundRef = (0, import_react9.useRef)(null);
-    const later = (0, import_react9.useCallback)((fn, ms) => {
+    const [stage, setStage] = (0, import_react13.useState)("box");
+    const [dragging, setDragging] = (0, import_react13.useState)(false);
+    const [ready, setReady] = (0, import_react13.useState)(false);
+    const [failed, setFailed] = (0, import_react13.useState)(false);
+    const [showLatin, setShowLatin] = (0, import_react13.useState)(false);
+    const [showConfirm, setShowConfirm] = (0, import_react13.useState)(false);
+    const [showFrom2, setShowFrom2] = (0, import_react13.useState)(false);
+    const videoRef = (0, import_react13.useRef)(null);
+    const barRef = (0, import_react13.useRef)(null);
+    const pctRef = (0, import_react13.useRef)(null);
+    const accRef = (0, import_react13.useRef)(0);
+    const dragRef = (0, import_react13.useRef)(null);
+    const seekRef = (0, import_react13.useRef)(-1);
+    const autoRef = (0, import_react13.useRef)(0);
+    const sealedRef = (0, import_react13.useRef)(false);
+    const timersRef = (0, import_react13.useRef)([]);
+    const soundRef = (0, import_react13.useRef)(null);
+    const later = (0, import_react13.useCallback)((fn, ms) => {
       timersRef.current.push(window.setTimeout(fn, ms));
     }, []);
-    const sound = (0, import_react9.useCallback)(() => {
+    const sound = (0, import_react13.useCallback)(() => {
       if (!soundRef.current) soundRef.current = createTearSound();
       return soundRef.current;
     }, []);
-    const paint = (0, import_react9.useCallback)((v) => {
+    const paint = (0, import_react13.useCallback)((v) => {
       if (barRef.current) barRef.current.style.transform = `scaleX(${v})`;
       if (pctRef.current) {
         pctRef.current.textContent = v > 0 && v < 1 ? `\u5DF2\u6495\u5F00 ${Math.round(v * 100)}%` : "\u4E5F\u53EF\u4EE5\u76F4\u63A5\u6309 Enter / \u7A7A\u683C";
       }
     }, []);
-    (0, import_react9.useEffect)(() => {
+    (0, import_react13.useEffect)(() => {
       const video = videoRef.current;
       if (!video) return void 0;
       const onMeta = () => {
@@ -20107,7 +20533,7 @@ void main() {
         video.removeEventListener("error", onError);
       };
     }, []);
-    (0, import_react9.useEffect)(
+    (0, import_react13.useEffect)(
       () => () => {
         timersRef.current.forEach((t) => window.clearTimeout(t));
         if (autoRef.current) cancelAnimationFrame(autoRef.current);
@@ -20116,7 +20542,7 @@ void main() {
       },
       []
     );
-    (0, import_react9.useEffect)(() => {
+    (0, import_react13.useEffect)(() => {
       if (!ready) return void 0;
       let raf = 0;
       const tick = () => {
@@ -20136,13 +20562,13 @@ void main() {
       raf = requestAnimationFrame(tick);
       return () => cancelAnimationFrame(raf);
     }, [ready]);
-    (0, import_react9.useEffect)(() => {
+    (0, import_react13.useEffect)(() => {
       paint(accRef.current);
     }, [dragging, stage, failed, paint]);
-    (0, import_react9.useEffect)(() => {
+    (0, import_react13.useEffect)(() => {
       later(() => setShowFrom2(true), 320);
     }, [later]);
-    const seal = (0, import_react9.useCallback)(() => {
+    const seal = (0, import_react13.useCallback)(() => {
       if (sealedRef.current) return;
       sealedRef.current = true;
       accRef.current = 1;
@@ -20171,7 +20597,7 @@ void main() {
       if (!drag || drag.id !== e.pointerId || stage !== "box" || failed) return;
       const dx = e.clientX - drag.x;
       drag.x = e.clientX;
-      accRef.current = clamp5(accRef.current + dx / dragSpan(), 0, 1);
+      accRef.current = clamp6(accRef.current + dx / dragSpan(), 0, 1);
       paint(accRef.current);
       if (dx !== 0) sound().move(dx);
       if (accRef.current >= 1) seal();
@@ -20182,7 +20608,7 @@ void main() {
       setDragging(false);
       soundRef.current?.stop();
     };
-    const autoOpen = (0, import_react9.useCallback)(() => {
+    const autoOpen = (0, import_react13.useCallback)(() => {
       if (stage !== "box" || failed) return;
       const from = accRef.current;
       const start = performance.now();
@@ -20200,7 +20626,7 @@ void main() {
       };
       autoRef.current = requestAnimationFrame(step);
     }, [failed, paint, seal, stage]);
-    const enter = (0, import_react9.useCallback)(() => {
+    const enter = (0, import_react13.useCallback)(() => {
       if (stage === "leave") return;
       timersRef.current.forEach((t) => window.clearTimeout(t));
       timersRef.current = [];
@@ -20210,7 +20636,7 @@ void main() {
       setStage("leave");
       later(onGone, LEAVE_FADE);
     }, [later, onEnter, onGone, stage]);
-    (0, import_react9.useEffect)(() => {
+    (0, import_react13.useEffect)(() => {
       const onKey = (e) => {
         if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") {
           e.preventDefault();
@@ -20224,7 +20650,7 @@ void main() {
       return () => window.removeEventListener("keydown", onKey);
     }, [autoOpen, enter, stage]);
     const isDragging = dragging && stage === "box";
-    return /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(
+    return /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(
       "div",
       {
         className: `intro${stage === "seal" || stage === "text" ? " is-sealing" : ""}${stage === "leave" ? " is-leaving" : ""}`,
@@ -20236,7 +20662,7 @@ void main() {
         onPointerUp: endDrag,
         onPointerCancel: endDrag,
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "intro__stage", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "intro__stage", children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
             "video",
             {
               ref: videoRef,
@@ -20249,10 +20675,10 @@ void main() {
               "aria-hidden": "true"
             }
           ) }),
-          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: `intro__veil${stage === "seal" || stage === "text" ? " is-on" : ""}` }),
-          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "intro__scrim" }),
-          /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "intro__from", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: `intro__veil${stage === "seal" || stage === "text" ? " is-on" : ""}` }),
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "intro__scrim" }),
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { className: "intro__from", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
               FoldText_default,
               {
                 text: "FROM: MIN CAN.",
@@ -20270,7 +20696,7 @@ void main() {
                 className: "intro__from-main"
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "intro__from-sub", children: showFrom2 && /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+            /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("span", { className: "intro__from-sub", children: showFrom2 && /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
               FoldText_default,
               {
                 text: "Please claim your exclusive parcel.",
@@ -20288,16 +20714,16 @@ void main() {
               }
             ) })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("p", { className: "intro__sr", children: "\u5F00\u573A\u52A8\u753B\uFF1A\u62D6\u52A8\u6495\u5F00\u4E00\u4E2A\u725B\u76AE\u7EB8\u5FEB\u9012\u7BB1\uFF0C\u7136\u540E\u8FDB\u5165\u7F51\u7AD9\u3002\u4E5F\u53EF\u4EE5\u76F4\u63A5\u6309 Enter \u6216\u7A7A\u683C\u3002" }),
-          /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("button", { type: "button", className: "intro__skip", onClick: enter, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("p", { className: "intro__sr", children: "\u5F00\u573A\u52A8\u753B\uFF1A\u62D6\u52A8\u6495\u5F00\u4E00\u4E2A\u725B\u76AE\u7EB8\u5FEB\u9012\u7BB1\uFF0C\u7136\u540E\u8FDB\u5165\u7F51\u7AD9\u3002\u4E5F\u53EF\u4EE5\u76F4\u63A5\u6309 Enter \u6216\u7A7A\u683C\u3002" }),
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("button", { type: "button", className: "intro__skip", onClick: enter, children: [
             "\u8DF3\u8FC7",
-            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("svg", { width: "12", height: "12", viewBox: "0 0 13 13", fill: "none", "aria-hidden": "true", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("path", { d: "M1 12 12 1M12 1H4M12 1v8", stroke: "currentColor", strokeWidth: "1.2" }) })
+            /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("svg", { width: "12", height: "12", viewBox: "0 0 13 13", fill: "none", "aria-hidden": "true", children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("path", { d: "M1 12 12 1M12 1H4M12 1v8", stroke: "currentColor", strokeWidth: "1.2" }) })
           ] }),
-          stage === "box" && /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: `intro__hint${isDragging ? " is-dragging" : ""}${failed ? " is-failed" : ""}`, children: failed ? /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("button", { type: "button", className: "btn btn--solid intro__enter", onClick: enter, children: [
-            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { children: "\u8FDB\u5165\u7F51\u7AD9" }),
-            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "btn__arrow", children: "\u2192" })
-          ] }) : /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(import_jsx_runtime13.Fragment, { children: [
-            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "intro__hint-line", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+          stage === "box" && /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: `intro__hint${isDragging ? " is-dragging" : ""}${failed ? " is-failed" : ""}`, children: failed ? /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("button", { type: "button", className: "btn btn--solid intro__enter", onClick: enter, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("span", { children: "\u8FDB\u5165\u7F51\u7AD9" }),
+            /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("span", { className: "btn__arrow", children: "\u2192" })
+          ] }) : /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(import_jsx_runtime15.Fragment, { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("span", { className: "intro__hint-line", children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
               FoldText_default,
               {
                 text: isDragging ? "\u7EE7\u7EED\u5411\u53F3\u62D6 \xB7 \u6495\u5F00" : "\u6309\u4F4F\u5411\u53F3\u62D6\u52A8 \xB7 \u6495\u5F00\u7EB8\u7BB1",
@@ -20315,12 +20741,12 @@ void main() {
                 className: "intro__hint-fold"
               }
             ) }),
-            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "intro__hint-arrow", "aria-hidden": "true", children: "\u2192" }),
-            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "intro__hint-sub", ref: pctRef })
+            /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("span", { className: "intro__hint-arrow", "aria-hidden": "true", children: "\u2192" }),
+            /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("span", { className: "intro__hint-sub", ref: pctRef })
           ] }) }),
-          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "intro__bar", "aria-hidden": "true", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("i", { ref: barRef }) }),
-          stage === "text" || stage === "leave" ? /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "intro__text", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+          /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "intro__bar", "aria-hidden": "true", children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("i", { ref: barRef }) }),
+          stage === "text" || stage === "leave" ? /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { className: "intro__text", children: [
+            /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
               FoldText_default,
               {
                 text: "\u6B22\u8FCE\u6765\u5230\u95F5\u707F\u7684\u9891\u9053",
@@ -20339,7 +20765,7 @@ void main() {
                 style: { letterSpacing: "0.01em", textWrap: "balance" }
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "intro__latin", children: showLatin && /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(
+            /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "intro__latin", children: showLatin && /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
               FoldText_default,
               {
                 text: "WELCOME TO MY CHANNEL",
@@ -20357,19 +20783,19 @@ void main() {
                 style: { letterSpacing: "0.34em" }
               }
             ) }),
-            /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)(
+            /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)(
               "button",
               {
                 type: "button",
                 className: `intro__confirm${showConfirm ? " is-on" : ""}`,
                 onClick: enter,
                 children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { children: "\u786E\u5B9A" }),
-                  /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "intro__confirm-arrow", children: "\u2193" })
+                  /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("span", { children: "\u786E\u5B9A" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("span", { className: "intro__confirm-arrow", children: "\u2193" })
                 ]
               }
             ),
-            /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("p", { className: `intro__confirm-hint${showConfirm ? " is-on" : ""}`, children: "\u8FDB\u5165\u7F51\u7AD9 \xB7 \u6216\u6309 Enter" })
+            /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("p", { className: `intro__confirm-hint${showConfirm ? " is-on" : ""}`, children: "\u8FDB\u5165\u7F51\u7AD9 \xB7 \u6216\u6309 Enter" })
           ] }) : null
         ]
       }
@@ -20377,8 +20803,8 @@ void main() {
   }
 
   // src/components/ScrollFloat.jsx
-  var import_react10 = __toESM(require_react(), 1);
-  var import_jsx_runtime14 = __toESM(require_jsx_runtime(), 1);
+  var import_react14 = __toESM(require_react(), 1);
+  var import_jsx_runtime16 = __toESM(require_jsx_runtime(), 1);
   gsapWithCSS.registerPlugin(ScrollTrigger2);
   var refreshed = false;
   var scheduleRefresh = () => {
@@ -20397,12 +20823,12 @@ void main() {
     scrollEnd = "bottom bottom-=40%",
     stagger = 0.03
   }) {
-    const containerRef = (0, import_react10.useRef)(null);
-    const splitText = (0, import_react10.useMemo)(() => {
+    const containerRef = (0, import_react14.useRef)(null);
+    const splitText = (0, import_react14.useMemo)(() => {
       const text = typeof children === "string" ? children : "";
-      return text.split("").map((char, index) => /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: "char", children: char === " " ? "\xA0" : char }, index));
+      return text.split("").map((char, index) => /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("span", { className: "char", children: char === " " ? "\xA0" : char }, index));
     }, [children]);
-    (0, import_react10.useEffect)(() => {
+    (0, import_react14.useEffect)(() => {
       const el = containerRef.current;
       if (!el) return void 0;
       if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return void 0;
@@ -20441,18 +20867,18 @@ void main() {
         tween.kill();
       };
     }, [scrollContainerRef, animationDuration, ease, scrollStart, scrollEnd, stagger]);
-    return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("h2", { ref: containerRef, className: `scroll-float ${containerClassName}`.trim(), children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: `scroll-float-text ${textClassName}`.trim(), children: splitText }) });
+    return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("h2", { ref: containerRef, className: `scroll-float ${containerClassName}`.trim(), children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("span", { className: `scroll-float-text ${textClassName}`.trim(), children: splitText }) });
   }
 
   // src/components/ChapterDivider.jsx
-  var import_jsx_runtime15 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime17 = __toESM(require_jsx_runtime(), 1);
   function ChapterDivider({ no, en, cn }) {
-    return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "chapter", children: /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { className: "wrap chapter__inner", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("p", { className: "chapter__meta", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("span", { children: no }),
+    return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("div", { className: "chapter", children: /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("div", { className: "wrap chapter__inner", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)("p", { className: "chapter__meta", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("span", { children: no }),
         cn
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(
+      /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(
         ScrollFloat,
         {
           containerClassName: "chapter__float",
@@ -20469,9 +20895,9 @@ void main() {
   }
 
   // src/hooks/useReveal.js
-  var import_react11 = __toESM(require_react(), 1);
+  var import_react15 = __toESM(require_react(), 1);
   function useReveal() {
-    (0, import_react11.useEffect)(() => {
+    (0, import_react15.useEffect)(() => {
       const nodes = Array.from(document.querySelectorAll("[data-reveal]"));
       if (!("IntersectionObserver" in window)) {
         nodes.forEach((n) => n.classList.add("is-in"));
@@ -20494,10 +20920,10 @@ void main() {
   }
 
   // src/hooks/useScroll.js
-  var import_react12 = __toESM(require_react(), 1);
+  var import_react16 = __toESM(require_react(), 1);
   function useScrollProgress() {
-    const [p, setP] = (0, import_react12.useState)(0);
-    (0, import_react12.useEffect)(() => {
+    const [p, setP] = (0, import_react16.useState)(0);
+    (0, import_react16.useEffect)(() => {
       let raf = 0;
       const onScroll = () => {
         if (raf) return;
@@ -20519,10 +20945,10 @@ void main() {
     return p;
   }
   function useScrollState(ids) {
-    const [y, setY] = (0, import_react12.useState)(0);
-    const [active, setActive] = (0, import_react12.useState)(ids[0]);
-    const [dark, setDark] = (0, import_react12.useState)(true);
-    (0, import_react12.useEffect)(() => {
+    const [y, setY] = (0, import_react16.useState)(0);
+    const [active, setActive] = (0, import_react16.useState)(ids[0]);
+    const [dark, setDark] = (0, import_react16.useState)(true);
+    (0, import_react16.useEffect)(() => {
       let raf = 0;
       const measure = () => {
         raf = 0;
@@ -20553,40 +20979,40 @@ void main() {
   }
 
   // src/App.jsx
-  var import_jsx_runtime16 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime18 = __toESM(require_jsx_runtime(), 1);
   var skipIntro = () => typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches === true;
   function App() {
-    const ids = (0, import_react13.useMemo)(() => navItems.map((n) => n.id), []);
+    const ids = (0, import_react17.useMemo)(() => navItems.map((n) => n.id), []);
     const progress = useScrollProgress();
     const { y, active, dark } = useScrollState(ids);
-    const [introOn, setIntroOn] = (0, import_react13.useState)(() => !skipIntro());
-    const [locked, setLocked] = (0, import_react13.useState)(() => !skipIntro());
+    const [introOn, setIntroOn] = (0, import_react17.useState)(() => !skipIntro());
+    const [locked, setLocked] = (0, import_react17.useState)(() => !skipIntro());
     useReveal();
-    (0, import_react13.useEffect)(() => {
+    (0, import_react17.useEffect)(() => {
       document.body.classList.toggle("is-locked", locked);
     }, [locked]);
-    return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(import_jsx_runtime16.Fragment, { children: [
-      introOn && /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Intro, { onEnter: () => setLocked(false), onGone: () => setIntroOn(false) }),
-      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className: "progress", style: { width: `${progress}%` } }),
-      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Nav, { stuck: y > 60, active }),
-      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Rail, { active, dark }),
-      /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("main", { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Hero, {}),
-        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(ChapterDivider, { no: "01", en: "About & Experience", cn: "\u4E2A\u4EBA\u7ECF\u5386" }),
-        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(About, {}),
-        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(ChapterDivider, { no: "02", en: "Selected Projects", cn: "\u7CBE\u9009\u9879\u76EE" }),
-        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Projects, {}),
-        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(ChapterDivider, { no: "03", en: "Contact", cn: "\u8054\u7CFB\u65B9\u5F0F" }),
-        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Contact, {})
+    return /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)(import_jsx_runtime18.Fragment, { children: [
+      introOn && /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(Intro, { onEnter: () => setLocked(false), onGone: () => setIntroOn(false) }),
+      /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { className: "progress", style: { width: `${progress}%` } }),
+      /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(Nav, { stuck: y > 60, active }),
+      /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(Rail, { active, dark }),
+      /* @__PURE__ */ (0, import_jsx_runtime18.jsxs)("main", { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(Hero, {}),
+        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(ChapterDivider, { no: "01", en: "About & Experience", cn: "\u4E2A\u4EBA\u7ECF\u5386" }),
+        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(About, {}),
+        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(ChapterDivider, { no: "02", en: "Selected Projects", cn: "\u7CBE\u9009\u9879\u76EE" }),
+        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(Projects, {}),
+        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(ChapterDivider, { no: "03", en: "Contact", cn: "\u8054\u7CFB\u65B9\u5F0F" }),
+        /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(Contact, {})
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className: "grain", "aria-hidden": "true" })
+      /* @__PURE__ */ (0, import_jsx_runtime18.jsx)("div", { className: "grain", "aria-hidden": "true" })
     ] });
   }
 
   // src/main.jsx
-  var import_jsx_runtime17 = __toESM(require_jsx_runtime(), 1);
+  var import_jsx_runtime19 = __toESM(require_jsx_runtime(), 1);
   (0, import_client.createRoot)(document.getElementById("root")).render(
-    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(import_react14.default.StrictMode, { children: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(App, {}) })
+    /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(import_react18.default.StrictMode, { children: /* @__PURE__ */ (0, import_jsx_runtime19.jsx)(App, {}) })
   );
 })();
 /*! Bundled license information:
