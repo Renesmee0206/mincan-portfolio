@@ -12,7 +12,8 @@
 //   4) 点一张走 onSelect(index)。拖动是「按下后移开 5px」才开始的——注册表在
 //      pointerdown 就 setPointerCapture，普通点击也会被当成拖动、指针被抢走，
 //      卡片上的 onClick 收不到（点不开大图）。拖动结束后浏览器补的那一次 click
-//      按「按下点 / 松开点的距离」判掉；注册表用的是布尔标记，拖完第一下点不开
+//      按「按下点 / 松开点的距离」判掉；注册表用的是布尔标记，拖完第一下点不开。
+//      另外拖动只在「按着」的时候有效：手指/鼠标松开后划过照片墙，它不该跟着走
 import { useEffect, useMemo, useRef } from 'react'
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max)
@@ -61,6 +62,7 @@ export default function InfiniteSpiral({
   const draggingRef = useRef(false)
   const lastPointerYRef = useRef(0)
   const downAtRef = useRef(null)
+  const pointerDownRef = useRef(false)
 
   const normalizedItems = useMemo(
     () =>
@@ -209,6 +211,7 @@ export default function InfiniteSpiral({
   }
 
   const stopDragging = (event) => {
+    pointerDownRef.current = false
     if (!draggingRef.current) return
     draggingRef.current = false
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
@@ -230,6 +233,7 @@ export default function InfiniteSpiral({
       }}
       onPointerDown={(event) => {
         if (!dragEnabled || event.button !== 0) return
+        pointerDownRef.current = true
         downAtRef.current = { x: event.clientX, y: event.clientY }
         lastPointerYRef.current = event.clientY
         /* 先不 setPointerCapture、也不进入拖动：等真的移开 5px 再开始。
@@ -237,6 +241,9 @@ export default function InfiniteSpiral({
            卡片上的 onClick 会被指针捕获改派走，点不开大图。 */
       }}
       onPointerMove={(event) => {
+        /* 必须「按着」才可能拖：松开之后鼠标在墙上划来划去不该带着它走
+           （按下那一下的位置只留给 onClickCapture 判「这是点击还是拖动的尾巴」）。 */
+        if (!pointerDownRef.current) return
         const down = downAtRef.current
         if (!down) return
         if (!draggingRef.current) {
@@ -286,7 +293,10 @@ export default function InfiniteSpiral({
                   className="infinite-spiral__image"
                   src={item.src}
                   alt={item.alt}
-                  loading={index < 6 ? 'eager' : 'lazy'}
+                  /* 一律 eager：螺旋两头那些卡片被 overflow 裁在框外，
+                     lazy 的话浏览器判定它们永远不会进视口，转到中间时还是灰的。
+                     12 张一共 1.4MB，值。 */
+                  loading="eager"
                   draggable={false}
                   style={{
                     width: cardWidth,

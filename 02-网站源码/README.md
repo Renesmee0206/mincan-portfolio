@@ -32,7 +32,7 @@ pnpm preview
 | --- | --- | --- |
 | 00 开场动画 | `src/components/Intro.jsx` | 拖拽撕开牛皮纸快递箱 → 黑场折字 → 进站（每次进站都播） |
 | 01 全屏首页 | `src/components/Hero.jsx` | Prism 极光背景 + 大标题（压在作品流之上）+「What I like」可拖动画作流（`FlexCarousel.jsx`） |
-| 02 个人经历 | `src/components/About.jsx` | **左栏 = 个人照片墙**（`InfiniteSpiral.jsx` + `PhotoLightbox.jsx`，占满这一栏、自己在转）、右栏介绍 / 联系方式 / 数据、经历 / 教育 / 获奖时间轴 |
+| 02 个人经历 | `src/components/About.jsx` | **左栏 = 个人照片墙**（13 张，`InfiniteSpiral.jsx` + `PhotoLightbox.jsx`，一直在自己转）、右栏介绍 / 联系方式 / 数据、经历 / 教育 / 获奖时间轴 |
 | 03 精选项目 | `src/components/Projects.jsx` | 6 张大卡片 + 设计主张卡片 + 关键词跑马灯 + 成果集锦（`BounceCards.jsx`，可洗牌） |
 | 04 联系方式 | `src/components/Contact.jsx` | 整屏收尾页，大标题 + 邮箱 + 电话 + 简历下载 |
 | — 板块过场 | `src/components/ChapterDivider.jsx`（内用 `ScrollFloat.jsx`） | **一整屏的黑**，中间一行英文大字：`About & Experience` / `Selected Projects` / `Contact`，滚到跟前逐字浮上来，浮完跟着滚出上边 |
@@ -125,7 +125,7 @@ pnpm preview
 | --- | --- |
 | `intro-open.mp4` | 开场动画：牛皮纸快递盒撕裂特写 |
 | `like-01 … like-07.webp` | 首页「What I like」作品流（源图在`素材与原件/首页图片/`，打包时内联进 bundle） |
-| `avatar.webp` | 导航名片头像（`portrait.webp` 是原来个人经历左栏那张肖像，换照片墙后没再上页面，文件留着） |
+| `portrait.webp` / `avatar.webp` | 照片墙里那张拿相机的肖像 / 导航名片头像 |
 | `me-01 … me-12.webp` | 个人经历照片墙（源图在 `素材与原件/个人图片/`，脚本 `.codex-build/build-people.py`，长边 1000 / WebP q80） |
 | `p-01 … p-06.webp` | 精选项目大卡片 |
 | `d-01-1 … d-06-7.webp`（03 / 04 排到 `-8`） | 项目细节图（同时也是成果集锦的图片池，共 43 张） |
@@ -159,16 +159,21 @@ hover 把两边推开、当前那张摊平并放大一点点。**卡片是彩色
 ## 个人照片墙（InfiniteSpiral）
 
 `src/components/InfiniteSpiral.jsx` —— React Bits 的 InfiniteSpiral（JS + CSS 变体）：
-**就放在个人经历左栏**（`.about__wall`，原来那张 `portrait.webp` 肖像的位置，
-跟着右栏文字的高度撑满）：12 张生活照排成一条缓慢自转的螺旋，鼠标停住会停下、
-按住可以上下拖着看，点一张由 `PhotoLightbox.jsx` 放大到屏幕中间，再点一下缩回。
+**就放在个人经历左栏**（`.about__wall`）：**13 张**（第一张是拿相机那张
+`portrait.webp`，后面 12 张生活照）排成一条一直在自转的螺旋，按住可以上下拖着看，
+点一张由 `PhotoLightbox.jsx` 放大到屏幕中间，再点一下缩回。
 
 - 照片：`public/media/me-01…12.webp`，源图在 `素材与原件/个人图片/`，重出脚本
   `.codex-build/build-people.py`（长边 1000 / WebP q80，顺带读 EXIF 转正）。顺序写在脚本的 `ORDER` 里。
+  拿相机那张不在这儿——它复用站里早就有的 `portrait.webp`（`site.js` 里排在 `personalPhotos` 第一位）。
 - 卡片形状和 hover：外层 `.infinite-spiral__item` 的 `transform` 每帧被 rAF 改写，
   圆角 / 描边 / 略微放大只能挂在内层 `.infinite-spiral__frame` 上——写外层会被覆盖。
 - 拖动是「按下后移开 5px」才开始的：注册表原来在 `pointerdown` 就 `setPointerCapture`，
   普通点击会被当成拖动、卡片上的 `onClick` 被改派走（点不开大图）。
+  **而且必须「按着」才算拖**（`pointerDownRef`）：只记按下点位置的话，松手后鼠标划过
+  照片墙会把它带走、自动流动也一起停掉（点开大图退出来最容易触发）。
+- `pauseOnHover={false}` 是刻意的：要一直自动流动，鼠标停在墙上也不停；
+  悬停哪一张，那一张才放大 + 描边。想「停住方便点」改成 `true`。
 - 手机上 `touch-action` 保持 `auto`、不接拖动，否则手指在照片墙上划不动页面
   （手机和桌面共用一套几何，半径按栏宽自动收口，手机上只留五六张）。
 - 螺旋半径按 `width/2 - cardWidth*0.72` 收口，边上的卡片不会被舞台硬切；

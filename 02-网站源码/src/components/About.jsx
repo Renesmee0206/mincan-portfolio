@@ -26,10 +26,13 @@ export default function About() {
         />
 
         <div className="about__body">
-          {/* 左栏：个人照片墙（React Bits 的 InfiniteSpiral），占满这一栏、自己慢慢转。
-              源图在根目录 素材与原件/个人图片/，重出脚本 .codex-build/build-people.py */}
+          {/* 左栏：个人照片墙（React Bits 的 InfiniteSpiral），占满这一栏、一直在自己转。
+              拿相机那张肖像也在里面（personalPhotos 的第一张）。
+              源图在 素材与原件/个人图片/，重出脚本 .codex-build/build-people.py */}
           <figure className="about__wall" data-reveal>
             <div className="about__wall-stage">
+              {/* 它得一直在流：鼠标停在墙上不该把它停住（悬停哪一张，那一张照样放大）。
+                  想改成「停住方便点」，把 pauseOnHover 换成 true。 */}
               <InfiniteSpiral
                 items={personalPhotos}
                 animationMode="all"
@@ -44,12 +47,13 @@ export default function About() {
                 centerScale={1.2}
                 edgeFade={0.34}
                 edgeBlur={5}
+                pauseOnHover={false}
                 onSelect={setShot}
               />
             </div>
             <figcaption className="about__wall-tag">
               <span>Personal / {personalPhotos.length}</span>
-              <span>自动流动 · 停住看 · 点一张放大</span>
+              <span>自动流动 · 悬停看 · 点一张放大</span>
             </figcaption>
           </figure>
 

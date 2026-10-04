@@ -80,11 +80,17 @@ export const likes = [
 
 /**
  * 个人经历里的照片墙（React Bits 的 InfiniteSpiral）。
- * 源图在 素材与原件/个人图片/，用 .codex-build/build-people.py 压成
+ * 13 张：第一张是原来个人经历左栏那张拿相机的肖像（`/media/portrait.webp`，早已在站里），
+ * 其余 12 张源图在 素材与原件/个人图片/，用 .codex-build/build-people.py 压成
  * public/media/me-01.webp … me-12.webp（长边 1000 / WebP q80）。
  * label 是大图下面那行小注，alt 给读屏用。
  */
 export const personalPhotos = [
+  {
+    src: '/media/portrait.webp',
+    label: '拿相机',
+    alt: '闵灿举着一台相机、抬头往上看的一张自拍',
+  },
   { src: '/media/me-01.webp', label: '湖边', alt: '湖边：披着蓝绿色披肩的人抬头看天，身后是芦苇和水鸟' },
   { src: '/media/me-02.webp', label: '花砖地板上', alt: '花砖地板上抬起头看镜头的一只黑白猫' },
   { src: '/media/me-03.webp', label: '水边', alt: '站在水边石头上的人，头顶压着一棵大树' },

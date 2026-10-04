@@ -7348,6 +7348,11 @@
     }
   ];
   var personalPhotos = [
+    {
+      src: "media/portrait.webp",
+      label: "\u62FF\u76F8\u673A",
+      alt: "\u95F5\u707F\u4E3E\u7740\u4E00\u53F0\u76F8\u673A\u3001\u62AC\u5934\u5F80\u4E0A\u770B\u7684\u4E00\u5F20\u81EA\u62CD"
+    },
     { src: "media/me-01.webp", label: "\u6E56\u8FB9", alt: "\u6E56\u8FB9\uFF1A\u62AB\u7740\u84DD\u7EFF\u8272\u62AB\u80A9\u7684\u4EBA\u62AC\u5934\u770B\u5929\uFF0C\u8EAB\u540E\u662F\u82A6\u82C7\u548C\u6C34\u9E1F" },
     { src: "media/me-02.webp", label: "\u82B1\u7816\u5730\u677F\u4E0A", alt: "\u82B1\u7816\u5730\u677F\u4E0A\u62AC\u8D77\u5934\u770B\u955C\u5934\u7684\u4E00\u53EA\u9ED1\u767D\u732B" },
     { src: "media/me-03.webp", label: "\u6C34\u8FB9", alt: "\u7AD9\u5728\u6C34\u8FB9\u77F3\u5934\u4E0A\u7684\u4EBA\uFF0C\u5934\u9876\u538B\u7740\u4E00\u68F5\u5927\u6811" },
@@ -12478,6 +12483,7 @@ void main() {
     const draggingRef = (0, import_react4.useRef)(false);
     const lastPointerYRef = (0, import_react4.useRef)(0);
     const downAtRef = (0, import_react4.useRef)(null);
+    const pointerDownRef = (0, import_react4.useRef)(false);
     const normalizedItems = (0, import_react4.useMemo)(
       () => items.map(
         (item, index) => typeof item === "string" ? { src: item, alt: `\u7167\u7247 ${index + 1}` } : { alt: `\u7167\u7247 ${index + 1}`, ...item }
@@ -12598,6 +12604,7 @@ void main() {
       userSelect: dragEnabled ? "none" : "auto"
     };
     const stopDragging = (event) => {
+      pointerDownRef.current = false;
       if (!draggingRef.current) return;
       draggingRef.current = false;
       if (event.currentTarget.hasPointerCapture(event.pointerId)) {
@@ -12619,10 +12626,12 @@ void main() {
         },
         onPointerDown: (event) => {
           if (!dragEnabled || event.button !== 0) return;
+          pointerDownRef.current = true;
           downAtRef.current = { x: event.clientX, y: event.clientY };
           lastPointerYRef.current = event.clientY;
         },
         onPointerMove: (event) => {
+          if (!pointerDownRef.current) return;
           const down = downAtRef.current;
           if (!down) return;
           if (!draggingRef.current) {
@@ -12670,7 +12679,7 @@ void main() {
                       className: "infinite-spiral__image",
                       src: item.src,
                       alt: item.alt,
-                      loading: index < 6 ? "eager" : "lazy",
+                      loading: "eager",
                       draggable: false,
                       style: {
                         width: cardWidth,
@@ -12820,6 +12829,7 @@ void main() {
                 centerScale: 1.2,
                 edgeFade: 0.34,
                 edgeBlur: 5,
+                pauseOnHover: false,
                 onSelect: setShot
               }
             ) }),
@@ -12828,7 +12838,7 @@ void main() {
                 "Personal / ",
                 personalPhotos.length
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { children: "\u81EA\u52A8\u6D41\u52A8 \xB7 \u505C\u4F4F\u770B \xB7 \u70B9\u4E00\u5F20\u653E\u5927" })
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { children: "\u81EA\u52A8\u6D41\u52A8 \xB7 \u60AC\u505C\u770B \xB7 \u70B9\u4E00\u5F20\u653E\u5927" })
             ] })
           ] }),
           /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "about__intro", "data-reveal": true, style: { transitionDelay: "120ms" }, children: [
