@@ -452,6 +452,11 @@
       指针序列里没有 `pointercancel`、控制台干净；探针固化成
       `.codex-build/site-check/intro-touch.mjs`（以后改开场先跑它）。
 - [x] 桌面端不受影响：`shot.mjs intro` 四个阶段重出，撕开到 55% 那张照旧。
+- [x] **国内站同步**：腾讯云 CloudBase 那个站不跟仓库联动，这轮装了 CloudBase CLI、
+      你授权登录一次之后，用 `tcb hosting deploy 01-网站预览 / -e renesmee0206-… --safe`
+      直接把修好的版本传上去（74 个文件 / 65MB，约 20 秒，带自动备份回滚）；
+      线上 `media/intro-poster.webp` 200、`bundle.js` 里已带 poster 与 autoPlay。
+      以后 Codex 可以自己部署了，流程记在 `网页端/部署手册.md` 二·五。
 
 ## 上线前必须处理
 
