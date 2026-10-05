@@ -458,6 +458,23 @@
       线上 `media/intro-poster.webp` 200、`bundle.js` 里已带 poster 与 autoPlay。
       以后 Codex 可以自己部署了，流程记在 `网页端/部署手册.md` 二·五。
 
+## 已完成 · 第二十五轮（2026-10-05 · 手机端开场取景：盒子左边缘离屏幕左边 1cm）
+
+- [x] **现象**：竖屏手机上开场是 `object-fit: cover` + 居中，素材 1112×834（4:3）比屏幕宽得多，
+      左右各裁掉一大块 —— 盒子左边缘和印字「LET IT RIP」被切掉，看着像「盒子没显示全」。
+- [x] **改法**：竖屏（`max-aspect-ratio: 4/3`）不再居中裁：
+      视频按高度铺满（宽度自动 = 4/3 高），再整体左移**自身宽度的 22.3%**
+      （这个 22.3% 是从 `intro-poster.webp` 里量出来的盒子左边缘位置），
+      这样盒子左边缘正好落在屏幕左边 **1cm** 处，右边照材料本身的取景。
+      ⚠️ 这个 max-aspect 块必须排在 `.intro.is-sealing .intro__video` **之后**——
+      同优先级后写的赢，否则撕到底放大那一下会把 `translateX` 覆盖掉、画面跳一下。
+- [x] **踩的坑**：第一版只写 `width: auto` 没生效，视频还是被压成屏幕宽、右边留黑边。
+      原因是样式表顶部全局重置里有 `img, video { max-width: 100% }`，
+      必须同时写 `max-width: none` 才放得开。
+- [x] 新增探针 `.codex-build/site-check/intro-geom.mjs`：拿 390×664 / 360×740 / 414×896
+      三种手机尺寸读视频的 `getBoundingClientRect()` + 计算样式，验证盒子左边缘都落在 1cm。
+- [x] 已用 CloudBase CLI 部署到国内站（74 个文件，约 18 秒），线上 `styles/global.css` 已核对。
+
 ## 上线前必须处理
 
 - [x] 视频体积：已换成 25.4MB / 21.1MB 的版本，总大小从 385MB 降到 46MB

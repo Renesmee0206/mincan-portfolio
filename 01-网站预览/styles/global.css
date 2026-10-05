@@ -2885,6 +2885,31 @@ section[id] {
   filter: brightness(0.6) saturate(0.9);
 }
 
+/* 竖屏（屏幕比素材 4:3 更窄）：素材宽 1112，盒子左边缘在画面的 22.3% 处，
+   以前 cover 居中会把左边那一大块连同「LET IT RIP」一起裁掉。
+   现在改成「盒子左边缘离屏幕左边框 1cm」：
+   视频按高度铺满（宽度自动 = 4/3 高），再整体左移自身宽度的 22.3%，
+   盒子左边缘就正好落在 1cm 上；右边照材料本身的取景（材料右侧本来就是盒身）。
+   ⚠️ 这两条必须排在上面那条 .intro.is-sealing 之后：同优先级时后写的赢，
+   不然撕到底放大那一下会把位移覆盖掉、画面跳一下。 */
+@media (max-aspect-ratio: 4/3) {
+  .intro__video {
+    right: auto;
+    bottom: auto;
+    width: auto;
+    height: 100%;
+    /* ⚠️ 顶部全局重置里有 `img, video { max-width: 100% }`，
+       不放开的话视频宽度会被卡成屏幕宽，「按 4:3 撑开再左移」就失效了 */
+    max-width: none;
+    left: 1cm;
+    transform: translateX(-22.3%);
+  }
+
+  .intro.is-sealing .intro__video {
+    transform: translateX(-22.3%) scale(1.04);
+  }
+}
+
 /* 左边黑边上的「快递单」：FROM: MIN CAN. / Please claim your exclusive parcel.
    只在真的有黑边的宽屏上出现（窄屏视频铺满，没地方放）。 */
 .intro__from {
