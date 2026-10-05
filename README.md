@@ -7,7 +7,10 @@
 线上地址：
 
 - GitHub Pages：`https://renesmee0206.github.io/mincan-portfolio/`
-- 国内正式站（腾讯云 EdgeOne Pages）：见控制台里的 `xxx.edgeone.app` 域名
+- 国内正式站（腾讯云开发 CloudBase 静态网站托管）：
+  `https://renesmee0206-d5gv71t4idf3cd3e2-1498270266.tcloudbaseapp.com`
+  ⚠️ 这个站不跟 GitHub 联动，**push 不会让它更新**——要把 `02-网站源码/dist` 重新传一次，
+  详见 [`网页端/部署手册.md`](网页端/部署手册.md)
 
 > 两个站点的配置、差异、踩过的坑和日常更新流程，都记在 **[`网页端/部署手册.md`](网页端/部署手册.md)** 里。
 
