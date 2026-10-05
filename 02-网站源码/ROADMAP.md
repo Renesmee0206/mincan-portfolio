@@ -437,8 +437,10 @@
 ## 上线前必须处理
 
 - [x] 视频体积：已换成 25.4MB / 21.1MB 的版本，总大小从 385MB 降到 46MB
-- [ ] **需要你操作**：在 GitHub 建一个 **Public** 仓库 → 推送 → Settings → Pages →
-      Source 选「GitHub Actions」（详细步骤见根目录 `README.md`）
+- [x] **仓库与发布已就绪**（2026-10-05 首次推送）：`origin/main` = `d005fd5`，
+      GitHub Pages 的 Actions 部署成功、线上已是新版。
+      ⚠️ 本机直连 GitHub 会被重置，push 要带代理：
+      `git -c http.proxy=http://127.0.0.1:7897 push origin main`。
 - 可选：第一支视频是 960×544，投到全屏详情层会略软；想更清晰的话可以重新导出
   1080p / 2–3 Mbps（约 40–70MB）再替换一次
 
