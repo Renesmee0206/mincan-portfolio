@@ -20488,6 +20488,7 @@ void main() {
     const seekRef = (0, import_react12.useRef)(-1);
     const autoRef = (0, import_react12.useRef)(0);
     const sealedRef = (0, import_react12.useRef)(false);
+    const wokenRef = (0, import_react12.useRef)(false);
     const timersRef = (0, import_react12.useRef)([]);
     const soundRef = (0, import_react12.useRef)(null);
     const later = (0, import_react12.useCallback)((fn, ms) => {
@@ -20496,6 +20497,27 @@ void main() {
     const sound = (0, import_react12.useCallback)(() => {
       if (!soundRef.current) soundRef.current = createTearSound();
       return soundRef.current;
+    }, []);
+    const wakeVideo = (0, import_react12.useCallback)(() => {
+      const video = videoRef.current;
+      if (!video || wokenRef.current) return;
+      wokenRef.current = true;
+      const park = () => {
+        try {
+          video.pause();
+        } catch {
+        }
+        seekRef.current = -1;
+      };
+      try {
+        const played = video.play();
+        if (played && typeof played.then === "function") played.then(park).catch(() => {
+          wokenRef.current = false;
+        });
+        else park();
+      } catch {
+        wokenRef.current = false;
+      }
     }, []);
     const paint = (0, import_react12.useCallback)((v) => {
       if (barRef.current) barRef.current.style.transform = `scaleX(${v})`;
@@ -20512,6 +20534,7 @@ void main() {
           video.currentTime = 1e-3;
         } catch {
         }
+        wakeVideo();
       };
       const onError = () => setFailed(true);
       video.addEventListener("loadedmetadata", onMeta);
@@ -20522,7 +20545,7 @@ void main() {
         video.removeEventListener("loadeddata", onMeta);
         video.removeEventListener("error", onError);
       };
-    }, []);
+    }, [wakeVideo]);
     (0, import_react12.useEffect)(
       () => () => {
         timersRef.current.forEach((t) => window.clearTimeout(t));
@@ -20574,6 +20597,7 @@ void main() {
     const onPointerDown = (e) => {
       if (stage !== "box" || failed) return;
       if (e.target?.closest?.("button")) return;
+      wakeVideo();
       dragRef.current = { id: e.pointerId, x: e.clientX };
       try {
         e.currentTarget.setPointerCapture(e.pointerId);
@@ -20658,9 +20682,11 @@ void main() {
               ref: videoRef,
               className: "intro__video",
               src: "media/intro-open.mp4",
+              poster: "media/intro-poster.webp",
               muted: true,
               playsInline: true,
               preload: "auto",
+              autoPlay: true,
               disablePictureInPicture: true,
               "aria-hidden": "true"
             }

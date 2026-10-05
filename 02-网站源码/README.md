@@ -68,6 +68,12 @@ pnpm preview
 - 文案：「欢迎来到闵灿的频道」+ `WELCOME TO MY CHANNEL`，都在 `Intro.jsx` 里。
 - 撕纸音效是浏览器现场合成的（Web Audio，白噪声 + 带通滤波），没有音频文件；
   不想要就删掉 `Intro.jsx` 里的 `createTearSound()` 和它的 3 处调用。
+- ⚠️ **`poster` + `wakeVideo()` 不能删**：iOS / 微信内置浏览器的 webview 里，
+  **没播放过的 `<video>` 一帧都不画**（整屏黑），只 seek 也没用 —— 手机上进开场会全黑，
+  拖了看不到纸箱。所以：`poster="media/intro-poster.webp"`（视频第 0 帧，抽帧脚本
+  `.codex-build/make-intro-poster.mjs`）负责「还没出画面时显示纸箱」；
+  `autoPlay` + `wakeVideo()`（播一下立刻暂停）负责把解码器叫醒，
+  自动播被拦时等 `onPointerDown` 那次真手势再试。回归探针：`.codex-build/site-check/intro-touch.mjs`。
 - **拖拽不要改回 state 驱动**：进度是 `pointermove` 里直接写 DOM（拉条 + 百分比），
   视频 seek 由一条常驻 rAF 循环每帧最多写一次；`.intro__bar i` 也**不加 transition**。
   这两处任何一处改回「setState + useEffect」或加缓动，拉条就会明显慢半拍。

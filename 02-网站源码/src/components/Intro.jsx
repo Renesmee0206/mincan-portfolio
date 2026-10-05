@@ -112,6 +112,7 @@ export default function Intro({ onEnter, onGone }) {
   const seekRef = useRef(-1)
   const autoRef = useRef(0)
   const sealedRef = useRef(false)
+  const wokenRef = useRef(false)
   const timersRef = useRef([])
   const soundRef = useRef(null)
 
@@ -122,6 +123,36 @@ export default function Intro({ onEnter, onGone }) {
   const sound = useCallback(() => {
     if (!soundRef.current) soundRef.current = createTearSound()
     return soundRef.current
+  }, [])
+
+  /**
+   * 把解码器「叫醒」：iOS / 微信内置浏览器的 webview 里，
+   * 没播放过的 <video> 一帧都不画（整屏黑），只 seek 也没用 ——
+   * 所以开场在手机上一直是黑的，用户拖了也看不到纸箱被撕开。
+   * 这里播一下马上暂停：解码器一启动，后面 seek 才能画出画面。
+   * 自动播被拦（还没用户手势）就把标记清掉，等第一次按下屏幕时再来一次。
+   */
+  const wakeVideo = useCallback(() => {
+    const video = videoRef.current
+    if (!video || wokenRef.current) return
+    wokenRef.current = true
+    const park = () => {
+      try {
+        video.pause()
+      } catch {
+        /* 忽略 */
+      }
+      seekRef.current = -1 // 让下面那条 rAF 循环把时间对回当前撕开进度
+    }
+    try {
+      const played = video.play()
+      if (played && typeof played.then === 'function') played.then(park).catch(() => {
+        wokenRef.current = false
+      })
+      else park()
+    } catch {
+      wokenRef.current = false
+    }
   }, [])
 
   /**
@@ -148,6 +179,7 @@ export default function Intro({ onEnter, onGone }) {
       } catch {
         /* 忽略 */
       }
+      wakeVideo()
     }
     const onError = () => setFailed(true)
     video.addEventListener('loadedmetadata', onMeta)
@@ -158,7 +190,7 @@ export default function Intro({ onEnter, onGone }) {
       video.removeEventListener('loadeddata', onMeta)
       video.removeEventListener('error', onError)
     }
-  }, [])
+  }, [wakeVideo])
 
   useEffect(
     () => () => {
@@ -223,6 +255,7 @@ export default function Intro({ onEnter, onGone }) {
   const onPointerDown = (e) => {
     if (stage !== 'box' || failed) return
     if (e.target?.closest?.('button')) return // 「跳过」等按钮不触发撕扯
+    wakeVideo() // 真的是用户手势，iOS / 微信里这一次最容易成功
     dragRef.current = { id: e.pointerId, x: e.clientX }
     try {
       e.currentTarget.setPointerCapture(e.pointerId)
@@ -317,9 +350,11 @@ export default function Intro({ onEnter, onGone }) {
           ref={videoRef}
           className="intro__video"
           src="/media/intro-open.mp4"
+          poster="/media/intro-poster.webp"
           muted
           playsInline
           preload="auto"
+          autoPlay
           disablePictureInPicture
           aria-hidden="true"
         />
