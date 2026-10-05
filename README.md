@@ -47,6 +47,15 @@ node scripts/build-preview.mjs
 它会重新打包 `01-网站预览`（打包 + 资源路径处理 + 复制图片视频，一步到位）。
 第一次使用前如果 `node_modules` 不存在，先在 `02-网站源码` 里执行 `pnpm install`。
 
+**想换简历** → 网站上的「下载简历 PDF」读的是 `02-网站源码/public/resume.pdf`。
+把新简历放到仓库根目录、命名 `简历-闵灿.pdf`，先在仓库根目录执行一次
+
+```bash
+python .codex-build/compress-resume.py
+```
+
+（它会压到 300 DPI / 约 0.9MB 再写进 `public/resume.pdf`，源文件不动），然后重新打包预览。
+
 ---
 
 ## 二·五、作品集的 PDF / PPT 是怎么来的

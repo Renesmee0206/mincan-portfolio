@@ -7300,8 +7300,9 @@
     phoneHref: "tel:+8615172720275",
     wechat: "Renesmee0206",
     wechatQr: "media/wechat-qr.png",
-    status: "\u7855\u58EB\u5728\u8BFB \xB7 \u53EF\u5B9E\u4E60",
-    intent: "\u8BBE\u8BA1\u5E08 \xB7 \u6B66\u6C49 \xB7 \u968F\u65F6\u5230\u5C97"
+    status: "27 \u5C4A\u7814\u7A76\u751F \xB7 \u5E94\u5C4A\u6BD5\u4E1A\u751F",
+    intent: "\u8BBE\u8BA1\u5E08 \xB7 \u6B66\u6C49 \xB7 \u676D\u5DDE \xB7 \u4E0A\u6D77 \xB7 \u9762\u8BAE",
+    motto: "Seeking opportunities, embracing challenges."
   };
   var likes = [
     {
@@ -12358,7 +12359,8 @@ void main() {
               /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { className: "btn__arrow", children: "\u2192" })
             ] }),
             /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("a", { className: "btn btn--ghost", href: "#projects", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("span", { children: "\u67E5\u770B\u7CBE\u9009\u9879\u76EE" }) })
-          ] })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("p", { className: "hero__tagline", children: profile.motto })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)("div", { className: "hero__likes", children: [
           /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { className: "hero__rail", children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(

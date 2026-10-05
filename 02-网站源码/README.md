@@ -31,10 +31,10 @@ pnpm preview
 | 区块 | 组件 | 说明 |
 | --- | --- | --- |
 | 00 开场动画 | `src/components/Intro.jsx` | 拖拽撕开牛皮纸快递箱 → 黑场折字 → 进站（每次进站都播） |
-| 01 全屏首页 | `src/components/Hero.jsx` | Prism 极光背景 + 大标题（压在作品流之上）+「What I like」可拖动画作流（`FlexCarousel.jsx`） |
+| 01 全屏首页 | `src/components/Hero.jsx` | Prism 极光背景 + 大标题（压在作品流之上）+ 按钮下一行英文 motto（`profile.motto`）+「What I like」可拖动画作流（`FlexCarousel.jsx`） |
 | 02 个人经历 | `src/components/About.jsx` | **左栏 = 个人照片墙**（13 张，`InfiniteSpiral.jsx` + `PhotoLightbox.jsx`，一直在自己转）、右栏介绍 / 联系方式 / 数据、经历 / 教育 / 获奖时间轴 |
 | 03 精选项目 | `src/components/Projects.jsx` | 6 张大卡片 + 设计主张卡片 + 关键词跑马灯 + 成果集锦（`BounceCards.jsx`，可洗牌） |
-| 04 联系方式 | `src/components/Contact.jsx` | 整屏收尾页，大标题 + 邮箱 + 电话 + 简历下载 |
+| 04 联系方式 | `src/components/Contact.jsx` | 整屏收尾页，大标题 + 邮箱 + 电话 + 简历下载；右侧信息卡是「电话 / 所在地 / 求职意向 / 教育背景 / Status / 简历」六格，值都取 `profile` |
 | — 板块过场 | `src/components/ChapterDivider.jsx`（内用 `ScrollFloat.jsx`） | **一整屏的黑**，中间一行英文大字：`About & Experience` / `Selected Projects` / `Contact`，滚到跟前逐字浮上来，浮完跟着滚出上边 |
 
 配色为**暗色**：近黑留暖调（页面底 `--bg` `#0E0E10`、交替区块 `--bg-2` `#131316`、
@@ -112,7 +112,7 @@ pnpm preview
 
 所有文案、时间轴、项目与奖项数据集中在 **`src/data/site.js`**，改文字不用碰组件。
 
-- `profile` 姓名 / 身份 / 邮箱 / 电话 / 所在地 / 求职意向
+- `profile` 姓名 / 身份 / 邮箱 / 电话 / 所在地 / 求职意向（`intent`）/ 状态（`status`）/ 首页那句话（`motto`）
 - `likes` 首页「What I like」的 7 件作品 / 影像（`heroStats` 已不在首页使用，留给以后）
 - `education` `experience` `awards` 经历与荣誉
 - `projects` 精选项目（标题、副标题、标签、年份、图片、描述；`detail` 就是该项目的细节图）
@@ -134,6 +134,11 @@ pnpm preview
 
 > 项目图（`p-*` / `d-*`）是从`素材与原件/项目图片/` 里重出的：长边 1800、WebP q82，
 > 六个项目各一个文件夹。重出脚本是 `.codex-build/rebuild-media.py`（不在仓库里）。
+
+> 网站上的「下载简历 / 下载 PDF」指向 `public/resume.pdf`（重新打包会复制到
+> `01-网站预览/resume.pdf`）。换简历：把新的 PDF 放到仓库根目录、命名 `简历-闵灿.pdf`，
+> 再跑 `.codex-build/compress-resume.py`——它会缩到 300 DPI（A4）重新嵌回去，
+> 4.5MB 的原文件能压到 0.9MB 左右，打印依然清楚。源文件不会被改动。
 
 ---
 

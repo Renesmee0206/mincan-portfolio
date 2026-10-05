@@ -12,8 +12,9 @@ export const profile = {
   phoneHref: 'tel:+8615172720275',
   wechat: 'Renesmee0206',
   wechatQr: '/media/wechat-qr.png',
-  status: '硕士在读 · 可实习',
-  intent: '设计师 · 武汉 · 随时到岗',
+  status: '27 届研究生 · 应届毕业生',
+  intent: '设计师 · 武汉 · 杭州 · 上海 · 面议',
+  motto: 'Seeking opportunities, embracing challenges.',
 }
 
 /**

@@ -80,6 +80,9 @@ export default function Hero() {
               <span>查看精选项目</span>
             </a>
           </div>
+
+          {/* 按钮下面那句话：不做按钮、不做卡片，就是一行字 */}
+          <p className="hero__tagline">{profile.motto}</p>
         </div>
 
         <div className="hero__likes">

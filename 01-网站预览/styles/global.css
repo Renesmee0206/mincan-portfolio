@@ -2089,6 +2089,9 @@ section[id] {
   font-size: 15px;
   letter-spacing: 0.04em;
   color: rgba(255, 255, 255, 0.9);
+  /* 中文默认按字断行，「上海」「硕士」会被拆成两行；
+     这里只允许在「·」两边的空格处换行，词是整的。 */
+  word-break: keep-all;
 }
 
 .contact__item dd a:hover {
@@ -3929,6 +3932,28 @@ section[id] {
   font-size: 13.5px;
 }
 
+/* 按钮下面那一行：一句英文，配一小段暖调短线。
+   不抢按钮的注意力，所以用等宽小字 + 半透明，靠字距撑出排版感。 */
+.hero__tagline {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 22px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.hero__tagline::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  flex: none;
+  background: var(--clay);
+  opacity: 0.85;
+}
+
 /* 作品流 */
 .hero__likes {
   position: relative;
@@ -4178,6 +4203,18 @@ section[id] {
     height: 44px;
     padding: 0 20px;
     font-size: 13px;
+  }
+
+  /* 手机上这句会折行，短线和字距都收一点，别顶到右边 */
+  .hero__tagline {
+    display: block;
+    margin-top: 16px;
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+  }
+
+  .hero__tagline::before {
+    display: none;
   }
 
   .hero__likes {
